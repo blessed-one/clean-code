@@ -6,6 +6,7 @@ namespace MarkdownRealisation.TagsAndTokens
     {
         public readonly string htmlTag;
         public readonly string mdTag;
+        public new bool isTag = true;
         public TagType type;
         public bool IsHTML { get; private set; }
         public bool IsOpen { get; set; }
@@ -27,10 +28,6 @@ namespace MarkdownRealisation.TagsAndTokens
             IsHTML = false;
             IsOpen = true;
             Position = pos;
-        }
-
-        public TagToken()
-        {
         }
 
         public void Convert()
