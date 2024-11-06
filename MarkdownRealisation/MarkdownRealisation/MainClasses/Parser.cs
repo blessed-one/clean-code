@@ -6,8 +6,6 @@ namespace MarkdownRealisation.MainClasses
 {
     public class Parser : IParse, ITagsResolve
     {
-        public List<Token> tokens = new List<Token>();
-
         public Token[] Parse(string text)
         {
             var result = new List<Token>();
@@ -88,9 +86,78 @@ namespace MarkdownRealisation.MainClasses
             return result.ToArray();
         }
 
-        public List<Token> ResolveTokens(List<Token> tokens)
+        public Token[] ResolveTokens(Token[] tokens)
         {
-            throw new NotImplementedException();
+            var tokenStack = new Stack<Token>();
+            foreach (var token in tokens)
+            {
+                if (token.isTag)
+                {
+                    if (!tokenStack.Any())
+                    {
+                        tokenStack.Push(token);
+                    }
+                    else
+                    {
+                        TagToken current = (TagToken)token;
+                        TagToken previous = (TagToken)tokenStack.Peek();
+
+                        if (previous.type == TagType.Header) tokenStack.Push(current);
+                        else if (previous.type == current.type)
+                        {
+                            /// ()
+                            if (previous.Position == TagPosition.Start && current.Position == TagPosition.End)
+                            {
+                                previous.IsOpen = false;
+                                current.IsOpen = false;
+                                tokenStack.Pop();
+                            }
+                            /// )(
+                            else if (previous.Position == TagPosition.End && current.Position == TagPosition.Start)
+                            {
+                                tokenStack.Pop();
+                                tokenStack.Push(token);
+                            }
+                            /// ))
+                            else if (previous.Position == TagPosition.End && current.Position == TagPosition.End)
+                            {
+                                tokenStack.Pop();
+                            }
+                            /// ((
+                            else if (previous.Position == TagPosition.Start && current.Position == TagPosition.Start)
+                            {
+                                tokenStack.Push(token);
+                            }
+                        }
+                        else
+                        {
+                            /// {)
+                            if (previous.Position == TagPosition.Start && current.Position == TagPosition.End)
+                            {
+                                continue;
+                            }
+                            /// }(
+                            else if (previous.Position == TagPosition.End && current.Position == TagPosition.Start)
+                            {
+                                tokenStack.Pop();
+                                tokenStack.Push(token);
+                            }
+                            /// })
+                            else if (previous.Position == TagPosition.End && current.Position == TagPosition.End)
+                            {
+                                tokenStack.Pop();
+                            }
+                            /// {(
+                            else if (previous.Position == TagPosition.Start && current.Position == TagPosition.Start)
+                            {
+                                tokenStack.Push(token);
+                            }
+                        }
+                    }
+                }
+            }
+
+            return tokenStack.ToArray();
         }
     }
 }
