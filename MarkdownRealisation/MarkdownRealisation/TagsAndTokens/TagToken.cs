@@ -1,49 +1,57 @@
-﻿using MarkdownRealisation.Enums;
+﻿ using MarkdownRealisation.Enums;
 
 namespace MarkdownRealisation.TagsAndTokens
 {
     public class TagToken : Token
     {
-        public readonly string htmlTag;
-        public readonly string mdTag;
-        public new bool isTag = true;
-        public TagType type;
-        public bool IsHTML { get; private set; }
+        private readonly string _htmlTag;
+        private readonly string _mdTag;
+        public override bool IsTag => true;
+        public readonly TagType Type;
+        private bool IsHtml { get; set; }
         public bool IsOpen { get; set; }
         public TagPosition Position { get; set; }
+        public TagToken? Pair {  get; set; }
 
         public TagToken(string md, string html, TagType type)
         {
-            mdTag = md;
-            htmlTag = html;
-            this.type = type;
-            IsHTML = false;
+            _mdTag = md;
+            _htmlTag = html;
+            Type = type;
+            IsHtml = false;
             IsOpen = true;
         }
         public TagToken(string md, string html, TagType type, TagPosition pos)
         {
-            mdTag = md;
-            htmlTag = html;
-            this.type = type;
-            IsHTML = false;
+            _mdTag = md;
+            _htmlTag = html;
+            Type = type;
+            IsHtml = false;
             IsOpen = true;
             Position = pos;
         }
 
         public void Convert()
         {
-            IsHTML = !IsHTML;
+            IsHtml = !IsHtml;
         }
         public override string ToString()
         {
-            return IsHTML ? htmlTag : mdTag;
+            if (!IsHtml) return _mdTag;
+
+            return Position switch
+            {
+                TagPosition.Start => $"<{_htmlTag}>",
+                TagPosition.End => $"</{_htmlTag}>",
+                _ => _mdTag
+            };
         }
 
         public override TagToken Copy()
         {
-            var copy = new TagToken(mdTag, htmlTag, type, Position)
+            var copy = new TagToken(_mdTag, _htmlTag, Type, Position)
             {
-                IsHTML = IsHTML,
+                IsHtml = IsHtml,
                 IsOpen = IsOpen
             };
             return copy;

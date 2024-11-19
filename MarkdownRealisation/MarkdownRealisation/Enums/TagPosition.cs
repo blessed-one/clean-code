@@ -3,7 +3,6 @@
     public enum TagPosition
     {
         Start,
-        End,
-        Single
+        End
     }
 }

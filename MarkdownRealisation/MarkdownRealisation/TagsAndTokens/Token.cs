@@ -2,7 +2,8 @@
 {
     public abstract class Token
     {
-        public bool isTag = false;
+        public abstract bool IsTag { get; }
         public abstract Token Copy();
+        public abstract override string ToString();
     }
 }
