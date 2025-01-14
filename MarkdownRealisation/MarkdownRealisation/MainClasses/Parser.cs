@@ -41,7 +41,9 @@ namespace MarkdownRealisation.MainClasses
                 
                 foreach (var word in words)
                 {
-                    if (word != words.First()) lineResult.Add(new TextToken(" "));
+                    if (word != words.First()) 
+                        lineResult.Add(new TextToken(" "));
+                    
                     string tempWord = word;
                     foreach (var tag in TagLibrary.Tags)
                     {

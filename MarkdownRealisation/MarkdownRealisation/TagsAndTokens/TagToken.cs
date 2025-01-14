@@ -10,6 +10,7 @@ namespace MarkdownRealisation.TagsAndTokens
         public readonly TagType Type;
         private bool IsHtml { get; set; }
         public bool IsOpen { get; set; }
+        public bool IsDisabled { get; set; } = false;
         public TagPosition Position { get; set; }
         public TagToken? Pair {  get; set; }
 
