@@ -2,15 +2,14 @@
 
 namespace MarkdownRealisation.TagsAndTokens
 {
-    public class TagToken : Token
+    public abstract class TagToken : Token, ICloneable
     {
-        private readonly string _htmlTag;
-        private readonly string _mdTag;
-        public override bool IsTag => true;
+        protected readonly string _htmlTag;
+        protected readonly string _mdTag;
+
         public readonly TagType Type;
         private bool IsHtml { get; set; }
         public bool IsOpen { get; set; }
-        public bool IsDisabled { get; set; } = false;
         public TagPosition Position { get; set; }
         public TagToken? Pair {  get; set; }
 
@@ -32,6 +31,10 @@ namespace MarkdownRealisation.TagsAndTokens
             Position = pos;
         }
 
+        protected TagToken()
+        {
+        }
+
         public void Convert()
         {
             IsHtml = !IsHtml;
@@ -48,14 +51,6 @@ namespace MarkdownRealisation.TagsAndTokens
             };
         }
 
-        public override TagToken Copy()
-        {
-            var copy = new TagToken(_mdTag, _htmlTag, Type, Position)
-            {
-                IsHtml = IsHtml,
-                IsOpen = IsOpen
-            };
-            return copy;
-        }
+        public abstract object Clone();
     }
 }

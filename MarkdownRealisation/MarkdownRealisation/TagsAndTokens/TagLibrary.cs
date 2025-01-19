@@ -10,14 +10,14 @@ namespace MarkdownRealisation.TagsAndTokens
         {
             return mdTag switch
             {
-                "######" => new TagToken("######", "h6", TagType.Header, TagPosition.Start),
-                "#####"  => new TagToken("#####", "h5", TagType.Header, TagPosition.Start),
-                "####"   => new TagToken("####", "h4", TagType.Header, TagPosition.Start),
-                "###"    => new TagToken("###", "h3", TagType.Header, TagPosition.Start),
-                "##"     => new TagToken("##", "h2", TagType.Header, TagPosition.Start),
-                "#"      => new TagToken("#", "h1", TagType.Header, TagPosition.Start),
-                "__"     => new TagToken("__", "strong", TagType.Bold, TagPosition.Start),
-                "_"      => new TagToken("_", "em", TagType.Italic, TagPosition.Start),
+                "######" => new HeaderToken(6),
+                "#####"  => new HeaderToken(5),
+                "####"   => new HeaderToken(4),
+                "###"    => new HeaderToken(3),
+                "##"     => new HeaderToken(2),
+                "#"      => new HeaderToken(1),
+                "__"     => new BoldToken(),
+                "_"      => new ItalicToken(),
                 _        => throw new Exception($"Unknown tag: {mdTag}")
             };
         }

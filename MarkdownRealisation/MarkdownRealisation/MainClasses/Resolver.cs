@@ -7,16 +7,15 @@ namespace MarkdownRealisation.MainClasses;
 public class Resolver : ITagsResolve
 {
     /// <summary>
-    /// Первая обработка, просто обозначает теги закрытыми если у них есть пара без пересечений
+    /// Обозначает теги закрытыми если у них есть пара без пересечений
     /// </summary>
     /// <param name="tokens">Массив токенов на обработку</param>
     /// <returns>Массив обработанных токенов</returns>
-    private Token[] FirstResolve(Token[] tokens)
+    private Token[] ResolvePairs(Token[] tokens)
     {
         var tokenStack = new Stack<TagToken>();
         var tokensToResolve = tokens
-            .Where(token => token.IsTag)
-            .Select(token => (TagToken)token)
+            .OfType<TagToken>()
             .Where(token => token.IsOpen)
             .ToArray();
 
@@ -52,15 +51,14 @@ public class Resolver : ITagsResolve
     }
 
     /// <summary>
-    /// Вторая обработка, обозначает теги открытыми если они не удовдетворяют пункту "Взаимодействие тегов" из спецификации
+    /// Обозначает теги открытыми если они не удовлетворяют пункту "Взаимодействие тегов" из спецификации
     /// </summary>
     /// <param name="tokens"></param>
     /// <returns></returns>
-    private Token[] SecondResolve(Token[] tokens)
+    private Token[] ResolveTagsInteractions(Token[] tokens)
     {
         var tokensToResolve = tokens
-            .Where(token => token.IsTag)
-            .Select(token => (TagToken)token)
+            .OfType<TagToken>()
             .ToList();
 
         for (var i = 0; i < tokensToResolve.Count; i++)
@@ -89,6 +87,6 @@ public class Resolver : ITagsResolve
 
     public Token[] ResolveTokens(Token[] tokens)
     {
-        return SecondResolve(FirstResolve(tokens));
+        return ResolveTagsInteractions(ResolvePairs(tokens));
     }
 }

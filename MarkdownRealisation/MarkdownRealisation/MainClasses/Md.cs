@@ -6,8 +6,8 @@ namespace MarkdownRealisation.MainClasses
 {
     public class Md : IRender
     {
-        private readonly Parser _parser = new Parser();
-        private readonly Resolver _resolver = new Resolver();
+        private readonly Parser _parser = new();
+        private readonly Resolver _resolver = new();
         public string Render(string text)
         {
             var result = new StringBuilder();
@@ -16,12 +16,12 @@ namespace MarkdownRealisation.MainClasses
             
             foreach ( var token in tokens )
             {
-                if (token.IsTag)
+                if (token is TagToken)
                 {
                     var tag = (TagToken)token;
                     if (!tag.IsOpen) tag.Convert();
                 }
-                result.Append(token.ToString());
+                result.Append(token);
             }
 
             return result.ToString();
