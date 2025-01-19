@@ -21,15 +21,11 @@ namespace MarkdownRealisation.MainClasses
                 case "##":
                 case "#":
                     var headerTag = TagLibrary.GetTagToken(firstWord);
-                    headerTag.IsOpen = false;
                     result.OpeningTag = headerTag;
                     result.RemainingWords = words.Skip(1).ToArray();
                     break;
                 default:
-                    var paragraphTag = new ParagraphToken()
-                    {
-                        IsOpen = false
-                    };
+                    var paragraphTag = new ParagraphToken();
                     result.OpeningTag = paragraphTag;
                     result.RemainingWords = words;
                     break;

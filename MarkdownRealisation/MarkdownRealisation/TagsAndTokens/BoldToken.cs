@@ -4,13 +4,14 @@ namespace MarkdownRealisation.TagsAndTokens;
 
 public class BoldToken : TagToken
 {
-    public string HtmlTag => "strong";
-    public string MarkdownTag => "__";
-    public TagType Type => TagType.Bold;
-    public TagPosition Position { get; set; }
+    public override string HtmlTag => "strong";
+    public override string MarkdownTag => "__";
+    public override TagType Type => TagType.Bold;
+    public override TagPosition Position { get; set; }
+    public override TagToken? Pair { get; set; }
 
-    public override object Clone()
+    public override object Clone() => new BoldToken()
     {
-        return new BoldToken();
-    }
+        Pair = (TagToken?)Pair?.Clone(),
+    };
 }

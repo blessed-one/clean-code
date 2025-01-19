@@ -3,10 +3,10 @@
     public interface IRender
     {
         /// <summary>
-        /// Конвертирует текст из одной разметки в другую
+        /// Конвертирует текст в html разметку
         /// </summary>
         /// <param name="text">Текст с исходной разметкой</param>
-        /// <returns>Текст с изменённой разметкой</returns>
-        public string Render(string text);
+        /// <returns>Текст с html разметкой</returns>
+        public string RenderHtml(string text);
     }
 }

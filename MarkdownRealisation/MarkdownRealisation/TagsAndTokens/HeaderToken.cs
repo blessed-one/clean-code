@@ -4,11 +4,12 @@ namespace MarkdownRealisation.TagsAndTokens;
 
 public class HeaderToken : TagToken
 {
-    public string HtmlTag { get; private set; }
-    public string MarkdownTag { get; private set; }
-    public TagType Type => TagType.Italic;
-    public TagPosition Position { get; set; }
-    public int HeaderLevel { get; init; }
+    public override string HtmlTag { get; }
+    public override string MarkdownTag { get; }
+    public override TagType Type => TagType.Header;
+    public override TagPosition Position { get; set; }
+    public override TagToken? Pair { get; set; }
+    private int HeaderLevel { get; init; }
 
     public HeaderToken(int headerLevel)
     {
@@ -50,8 +51,8 @@ public class HeaderToken : TagToken
         }
     }
     
-    public override object Clone()
+    public override object Clone() => new HeaderToken(HeaderLevel)
     {
-        return new HeaderToken(HeaderLevel);
-    }
+        Pair = (TagToken?)Pair?.Clone(),
+    };
 }

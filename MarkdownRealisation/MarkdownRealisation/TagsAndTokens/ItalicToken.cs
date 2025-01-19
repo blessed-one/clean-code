@@ -4,13 +4,14 @@ namespace MarkdownRealisation.TagsAndTokens;
 
 public class ItalicToken : TagToken
 {
-    public string HtmlTag => "em";
-    public string MarkdownTag => "_";
-    public TagType Type => TagType.Italic;
-    public TagPosition Position { get; set; }
-    
-    public override object Clone()
+    public override string HtmlTag => "em";
+    public override string MarkdownTag => "_";
+    public override TagType Type => TagType.Italic;
+    public override TagPosition Position { get; set; }
+    public override TagToken? Pair { get; set; }
+
+    public override object Clone() => new ItalicToken()
     {
-        return new ItalicToken();
-    }
+        Pair = (TagToken?)Pair?.Clone(),
+    };
 }

@@ -6,6 +6,8 @@ namespace MarkdownRealisation.MainClasses;
 
 public class Resolver : ITagsResolve
 {
+    private List<TagToken> _closedTagTokens = new List<TagToken>();
+
     /// <summary>
     /// Обозначает теги закрытыми если у них есть пара без пересечений
     /// </summary>
@@ -16,7 +18,6 @@ public class Resolver : ITagsResolve
         var tokenStack = new Stack<TagToken>();
         var tokensToResolve = tokens
             .OfType<TagToken>()
-            .Where(token => token.IsOpen)
             .ToArray();
 
         foreach (var token in tokensToResolve)
@@ -33,10 +34,10 @@ public class Resolver : ITagsResolve
             if (previous.Type == current.Type &&
                 previous.Position == TagPosition.Start && current.Position == TagPosition.End)
             {
-                previous.IsOpen = false;
+                _closedTagTokens.Add(previous);
                 previous.Pair = current;
 
-                current.IsOpen = false;
+                _closedTagTokens.Add(current);
                 current.Pair = previous;
 
                 tokenStack.Pop();
@@ -66,18 +67,18 @@ public class Resolver : ITagsResolve
             var tokenA = tokensToResolve[i];
             if (tokenA.Type == TagType.Header || tokenA.Type == TagType.Paragraph) continue;
 
-            if (tokenA is { IsOpen: false, Position: TagPosition.Start })
+            if (_closedTagTokens.Contains(tokenA) && tokenA.Position == TagPosition.Start)
             {
                 for (var j = i + 1; j < tokensToResolve.Count; j++)
                 {
                     var tokenB = tokensToResolve[j];
                     if (tokenA.Pair == tokenB) break;
 
-                    if (tokenB.IsOpen) continue;
+                    if (!_closedTagTokens.Contains(tokenB)) continue;
                     if (tokenA.Type == TagType.Bold && tokenB.Type == TagType.Italic) continue;
 
-                    tokenB.IsOpen = true;
-                    tokenB.Pair!.IsOpen = true;
+                    _closedTagTokens.Remove(tokenB);
+                    _closedTagTokens.Remove(tokenB.Pair!);
                 }
             }
         }
@@ -85,8 +86,27 @@ public class Resolver : ITagsResolve
         return tokens;
     }
 
+    private Token[] OpenedTagsToText(Token[] tokens)
+    {
+        var result = new List<Token>();
+
+        foreach (var token in tokens)
+        {
+            if (token is TagToken && !_closedTagTokens.Contains(token))
+            {
+                result.Add(new TextToken(((TagToken)token).MarkdownTag));
+            }
+            else
+            {
+                result.Add(token);
+            }
+        }
+        
+        return result.ToArray();
+    }
+
     public Token[] ResolveTokens(Token[] tokens)
     {
-        return ResolveTagsInteractions(ResolvePairs(tokens));
+        return OpenedTagsToText(ResolveTagsInteractions(ResolvePairs(tokens)));
     }
 }

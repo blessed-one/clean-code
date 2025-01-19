@@ -4,13 +4,14 @@ namespace MarkdownRealisation.TagsAndTokens;
 
 public class ParagraphToken : TagToken
 {
-    public string HtmlTag => "em";
-    public string MarkdownTag => "_";
-    public TagType Type => TagType.Italic;
-    public TagPosition Position { get; set; }
-    
-    public override object Clone()
+    public override string HtmlTag => "p";
+    public override string MarkdownTag => "paragraph";
+    public override TagType Type => TagType.Paragraph;
+    public override TagPosition Position { get; set; }
+    public override TagToken? Pair { get; set; }
+
+    public override object Clone() => new ParagraphToken()
     {
-        return new ParagraphToken();
-    }
+        Pair = (TagToken?)Pair?.Clone(),
+    };
 }

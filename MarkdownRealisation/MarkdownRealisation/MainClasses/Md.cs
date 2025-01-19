@@ -1,6 +1,7 @@
 ﻿using MarkdownRealisation.Interfaces;
 using MarkdownRealisation.TagsAndTokens;
 using System.Text;
+using MarkdownRealisation.Enums;
 
 namespace MarkdownRealisation.MainClasses
 {
@@ -8,7 +9,7 @@ namespace MarkdownRealisation.MainClasses
     {
         private readonly Parser _parser = new();
         private readonly Resolver _resolver = new();
-        public string Render(string text)
+        public string RenderHtml(string text)
         {
             var result = new StringBuilder();
             
@@ -19,8 +20,19 @@ namespace MarkdownRealisation.MainClasses
                 if (token is TagToken)
                 {
                     var tag = (TagToken)token;
-                    if (!tag.IsOpen) tag.Convert();
+                    switch (tag.Position)
+                    {
+                        case TagPosition.Start:
+                            result.Append($"<{tag.HtmlTag}>");
+                            continue;
+                        case TagPosition.End:
+                            result.Append($"</{tag.HtmlTag}>");
+                            continue;
+                        default:
+                            throw new Exception($"Unknown tag position: {tag.Position}");
+                    }
                 }
+                
                 result.Append(token);
             }
 
