@@ -13,42 +13,12 @@ public class HeaderToken : TagToken
 
     public HeaderToken(int headerLevel)
     {
+        if (headerLevel is < 1 or > 6)
+            throw new ArgumentException("Header level must be between 1 and 6", nameof(headerLevel));
+        
+        MarkdownTag = new string('#', headerLevel);
+        HtmlTag = $"h{headerLevel}";
         HeaderLevel = headerLevel;
-        switch (headerLevel)
-        {
-            case 1:
-                HtmlTag = "h1";
-                MarkdownTag = "##";
-                break;
-
-            case 2:
-                HtmlTag = "h1";
-                MarkdownTag = "##";
-                break;
-            
-            case 3:
-                HtmlTag = "h1";
-                MarkdownTag = "##";
-                break;
-            
-            case 4:
-                HtmlTag = "h1";
-                MarkdownTag = "##";
-                break;
-            
-            case 5:
-                HtmlTag = "h1";
-                MarkdownTag = "##";
-                break;
-            
-            case 6:
-                HtmlTag = "h1";
-                MarkdownTag = "##";
-                break;
-            
-            default:
-                throw new Exception("Invalid header level");
-        }
     }
     
     public override object Clone() => new HeaderToken(HeaderLevel)
