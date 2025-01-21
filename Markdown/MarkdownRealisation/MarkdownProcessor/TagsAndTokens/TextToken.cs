@@ -1,4 +1,6 @@
-﻿namespace MarkdownRealisation.TagsAndTokens
+﻿using MarkdownRealisation.Abstractions;
+
+namespace MarkdownRealisation.TagsAndTokens
 {
     public class TextToken(string content) : Token
     {

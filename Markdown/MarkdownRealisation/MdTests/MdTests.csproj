@@ -23,7 +23,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\MarkdownRealisation\MarkdownRealisation.csproj" />
+      <ProjectReference Include="..\MarkdownProcessor\MarkdownProcessor.csproj" />
     </ItemGroup>
 
 </Project>

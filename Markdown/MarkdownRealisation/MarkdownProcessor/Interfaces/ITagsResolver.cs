@@ -1,8 +1,8 @@
-﻿using MarkdownRealisation.TagsAndTokens;
+﻿using MarkdownRealisation.Abstractions;
 
 namespace MarkdownRealisation.Interfaces
 {
-    public interface ITagsResolve
+    public interface ITagsResolver
     {
         /// <summary>
         /// Обрабатывает теги, обозначает их как открытые/закрытые

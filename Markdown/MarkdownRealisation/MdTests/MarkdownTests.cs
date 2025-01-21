@@ -1,4 +1,4 @@
-using MarkdownRealisation.MainClasses;
+using MarkdownRealisation.Classes;
 
 namespace MdTests;
 

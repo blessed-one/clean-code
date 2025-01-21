@@ -1,10 +1,11 @@
+using MarkdownRealisation.Abstractions;
 using MarkdownRealisation.Enums;
 using MarkdownRealisation.Interfaces;
 using MarkdownRealisation.TagsAndTokens;
 
-namespace MarkdownRealisation.MainClasses;
+namespace MarkdownRealisation.Classes;
 
-public class Resolver : ITagsResolve
+public class Resolver : ITagsResolver
 {
     private List<TagToken> _closedTagTokens = new List<TagToken>();
 
