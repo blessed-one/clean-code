@@ -11,7 +11,12 @@ public class Parser : IParser
     {
 
         (string[] RemainingWords, TagToken OpeningTag) result;
-            
+
+        if (words.Length == 0)
+        {
+            return ([" "], new ParagraphToken());
+        }
+        
         var firstWord = words.First();
         switch (firstWord)
         {

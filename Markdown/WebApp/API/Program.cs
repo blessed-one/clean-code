@@ -1,24 +1,23 @@
 using API.Extensions;
-using MarkdownRealisation.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 var services = builder.Services;
 
+services.AddEndpointsApiExplorer();
+services.AddSwaggerGen();
+
 
 services.AddMdProcessor();
+services.AddControllers();
 
 var app = builder.Build();
 
-app.Run(async context =>
+if (app.Environment.IsDevelopment())
 {
-    var mdService = app.Services.GetService<IRender>();
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
 
-    var md = "_aaa_";
-    var html = mdService.RenderHtml(md);
-    
-    context.Response.ContentType = "text/html; charset=utf-8";
-    await context.Response.WriteAsync(html);
-});
-
+app.MapControllers();
 
 app.Run();
