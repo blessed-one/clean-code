@@ -2,6 +2,7 @@ using API.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 var services = builder.Services;
+builder.Logging.AddFile("logs.txt");
 
 services.AddEndpointsApiExplorer();
 services.AddSwaggerGen();
@@ -20,5 +21,11 @@ if (app.Environment.IsDevelopment())
 
 app.MapControllers();
 app.UseStaticFiles();
+
+app.Run(async (context) =>
+{
+    app.Logger.LogInformation($"Path: {context.Request.Path}, Method: {context.Request.Method}");
+    await context.Response.WriteAsync("Hello World!");
+});
 
 app.Run();

@@ -1,0 +1,8 @@
+Now listening on: http://localhost:5163
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: D:\inf\clean-code\Markdown\WebApp\API
+Path: /Page, Method: GET
+Path: /Page/Convertor, Method: GET
+Path: /Processor/Convert, Method: POST
+Application is shutting down...
