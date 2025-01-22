@@ -10,5 +10,6 @@ namespace MarkdownRealisation.Interfaces
         /// <param name="tokens">Массив тегов на обработку</param>
         /// <returns>Обработанный массив тегов</returns>
         public Token[] ResolveTokens(Token[] tokens);
+        public Token[] ResolveTokensLines(Token[][] tokensLines);
     }
 }

@@ -2,6 +2,7 @@
 using MarkdownRealisation.Abstractions;
 using MarkdownRealisation.Enums;
 using MarkdownRealisation.Interfaces;
+using MarkdownRealisation.TagsAndTokens;
 
 namespace MarkdownRealisation.Classes;
 
@@ -13,27 +14,29 @@ public class Md : IRender
     {
         var result = new StringBuilder();
             
-        var tokens = _resolver.ResolveTokens(_parser.Parse(text));
+        var tokens = _resolver.ResolveTokensLines(_parser.Parse(text));
             
         foreach ( var token in tokens )
         {
-            if (token is TagToken)
+            if (token is not TagToken)
             {
-                var tag = (TagToken)token;
-                switch (tag.Position)
-                {
-                    case TagPosition.Start:
-                        result.Append($"<{tag.HtmlTag}>");
-                        continue;
-                    case TagPosition.End:
-                        result.Append($"</{tag.HtmlTag}>");
-                        continue;
-                    default:
-                        throw new Exception($"Unknown tag position: {tag.Position}");
-                }
+                result.Append(token);
+                continue;
             }
-                
-            result.Append(token);
+
+            var tag = (TagToken)token;
+            switch (tag.Position)
+            {
+                case TagPosition.Start:
+                    result.Append($"<{tag.HtmlTag}>");
+                    break;
+                case TagPosition.End:
+                    result.Append($"</{tag.HtmlTag}>");
+                    //if (tag is HeaderToken or ParagraphToken) result.Append('\n');
+                    break;
+                default:
+                    throw new Exception($"Unknown tag position: {tag.Position}");
+            }
         }
 
         return result.ToString();

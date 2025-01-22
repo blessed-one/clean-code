@@ -9,6 +9,14 @@ public class Resolver : ITagsResolver
 {
     private List<TagToken> _closedTagTokens = new List<TagToken>();
 
+
+    private void CloseFirstToken(Token[] tokens)
+    {
+        var firstToken = tokens.First() as TagToken;
+        _closedTagTokens.Add(firstToken);
+        _closedTagTokens.Add(firstToken.Pair);
+    }
+
     /// <summary>
     /// Обозначает теги закрытыми если у них есть пара без пересечений
     /// </summary>
@@ -23,6 +31,8 @@ public class Resolver : ITagsResolver
 
         foreach (var token in tokensToResolve)
         {
+            if (_closedTagTokens.Contains(token)) continue;
+
             if (!tokenStack.Any())
             {
                 tokenStack.Push(token);
@@ -102,12 +112,23 @@ public class Resolver : ITagsResolver
                 result.Add(token);
             }
         }
-        
+
         return result.ToArray();
     }
 
     public Token[] ResolveTokens(Token[] tokens)
     {
         return OpenedTagsToText(ResolveTagsInteractions(ResolvePairs(tokens)));
+    }
+
+    public Token[] ResolveTokensLines(Token[][] tokensLines)
+    {
+        return tokensLines
+            .Select(x =>
+            {
+                CloseFirstToken(x);
+                return ResolveTokens(x);
+            })
+            .SelectMany(x => x).ToArray();
     }
 }

@@ -12,10 +12,7 @@ public class Parser : IParser
 
         (string[] RemainingWords, TagToken OpeningTag) result;
 
-        if (words.Length == 0)
-        {
-            return ([" "], new ParagraphToken());
-        }
+        if (words.Length == 0) return ([" "], new ParagraphToken());
         
         var firstWord = words.First();
         switch (firstWord)
@@ -84,9 +81,9 @@ public class Parser : IParser
         return result.ToArray();
     }
         
-    public Token[] Parse(string text)
+    public Token[][] Parse(string text)
     {
-        var result = new List<Token>();
+        var result = new List<Token[]>();
 
         var lines = text.Split('\n', StringSplitOptions.RemoveEmptyEntries);
         foreach (var line in lines)
@@ -113,8 +110,10 @@ public class Parser : IParser
             lastLineTagToken.Pair = firstLineTagToken;
             firstLineTagToken.Pair = lastLineTagToken;
             lineResult.Add(lastLineTagToken);
+            
+            lineResult.Add(new TextToken("\n"));
                 
-            result.AddRange(lineResult);
+            result.Add(lineResult.ToArray());
         }
 
         return result.ToArray();

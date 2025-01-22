@@ -5,9 +5,9 @@ namespace MarkdownRealisation.Interfaces;
 public interface IParser
 {
     /// <summary>
-    /// Приводит исходный массив строк в массив токенов
+    /// Приводит исходный массив строк в массив массивов токенов, по массиву на каждую строчку
     /// </summary>
     /// <param name="text">Массив строк .md файла</param>
-    /// <returns>Массив токенов</returns>
-    public Token[] Parse(string text);
+    /// <returns>Массив массивов токенов</returns>
+    public Token[][] Parse(string text);
 }
