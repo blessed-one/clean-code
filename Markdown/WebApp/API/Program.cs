@@ -2,13 +2,21 @@ using API.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 var services = builder.Services;
+
+// logging
 builder.Logging.AddFile("logs.txt");
 
+// db
+builder.AddPostgresDb();
+
+// swagger
 services.AddEndpointsApiExplorer();
 services.AddSwaggerGen();
 
-
+// business logic
 services.AddMdProcessor();
+
+// controllers
 services.AddControllers();
 
 var app = builder.Build();
