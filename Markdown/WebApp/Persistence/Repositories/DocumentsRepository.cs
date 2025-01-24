@@ -1,126 +1,121 @@
-using System.Reflection.Metadata;
+using Core.Models;
+using Application;
+using Application.Interfaces.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Persistence.Entities;
 
 namespace Persistence.Repositories;
 
-public class DocumentsRepository
+public class DocumentsRepository(AppDbContext dbContext) : IDocumentRepository
 {
-    private readonly AppDbContext _dbContext;
-
-    public DocumentsRepository(AppDbContext dbContext)
+    public async Task<Result<List<Document>>> GetAll()
     {
-        _dbContext = dbContext;
-    }
-
-    public async Task<List<DocumentEntity>> GetAll()
-    {
-        return await _dbContext.Documents
+        var documentEntities = await dbContext.Documents
             .AsNoTracking()
             .ToListAsync();
+        
+        return Result<List<Document>>.Success(
+            documentEntities
+                .Select(
+                    dEntity => Document.Create(dEntity.Id, dEntity.Name, dEntity.AuthorId, dEntity.CreationDateTime))
+                .ToList());
     }
 
-    public async Task<DocumentEntity?> GetById(Guid id)
+    public async Task<Result<Document>> GetById(Guid id)
     {
-        return await _dbContext.Documents
+        var documentEntity = await dbContext.Documents
             .AsNoTracking()
             .FirstOrDefaultAsync(doc => doc.Id == id);
+        
+        if (documentEntity == null)
+            return Result<Document>.Failure("Document not found.");
+
+        var document = Document.Create(documentEntity.Id, documentEntity.Name, documentEntity.AuthorId, documentEntity.CreationDateTime);
+        return Result<Document>.Success(document);
     }
 
-    public async Task<List<DocumentEntity>> GetByAuthor(string author)
+    public async Task<Result<List<Document>>> GetByAuthor(string author)
     {
-        return await _dbContext.Documents
+        var documentEntities = await dbContext.Documents
             .AsNoTracking()
             .Where(doc => doc.Author.Equals(author))
             .ToListAsync();
+        
+        return Result<List<Document>>.Success(
+            documentEntities
+                .Select(
+                    dEntity => Document.Create(dEntity.Id, dEntity.Name, dEntity.AuthorId, dEntity.CreationDateTime))
+                .ToList());
     }
 
-    public async Task<List<DocumentEntity>> GetByPage(int page, int pageSize)
+    public async Task<Result<List<Document>>> GetByPage(int page, int pageSize)
     {
-        return await _dbContext.Documents
+        var documentEntities = await dbContext.Documents
             .AsNoTracking()
             .Skip((page - 1) * pageSize)
             .Take(pageSize)
             .ToListAsync();
+        
+        return Result<List<Document>>.Success(
+            documentEntities
+                .Select(
+                    dEntity => Document.Create(dEntity.Id, dEntity.Name, dEntity.AuthorId, dEntity.CreationDateTime))
+                .ToList());
     }
 
-    public async Task Add(Guid documentId, string documentName, Guid authorId)
+    public async Task<Result<Guid>> Create(string documentName, Guid authorId)
     {
         var documentEntity = new DocumentEntity
         {
-            Id = documentId,
+            Id = Guid.NewGuid(),
             Name = documentName,
             AuthorId = authorId,
             CreationDateTime = DateTime.Now,
         };
-        
-        await _dbContext.Documents.AddAsync(documentEntity);
-        await _dbContext.SaveChangesAsync();
+
+        try
+        {
+            await dbContext.Documents.AddAsync(documentEntity);
+            await dbContext.SaveChangesAsync();
+            
+            return Result<Guid>.Success(documentEntity.Id);
+        }
+        catch (Exception ex)
+        {
+            return Result<Guid>.Failure($"Failed to create document: {ex.Message}");
+        }
     } 
     
-    public async Task Update(Guid documentId, string documentName)
+    public async Task<Result> Update(Guid documentId, string documentName)
     {
-        await _dbContext.Documents
-            .Where(doc => doc.Id == documentId)
-            .ExecuteUpdateAsync(doc => doc
-                .SetProperty(document => document.Name, documentName));
+        try
+        {
+            await dbContext.Documents
+                .Where(doc => doc.Id == documentId)
+                .ExecuteUpdateAsync(doc => doc
+                    .SetProperty(document => document.Name, documentName));
+
+            return Result.Success();
+        }
+        catch (Exception ex)
+        {
+            return Result.Failure($"Failed to update document: {ex.Message}");
+        }
     } 
     
-    public async Task Delete(Guid documentId)
+    public async Task<Result> Delete(Guid documentId)
     {
-        await _dbContext.Documents
-            .Where(doc => doc.Id == documentId)
-            .ExecuteDeleteAsync();
+        try
+        {
+            await dbContext.Documents
+                .Where(doc => doc.Id == documentId)
+                .ExecuteDeleteAsync();
+            
+            return Result.Success();
+        }
+        catch (Exception ex)
+        {
+            return Result.Failure($"Failed to delete document: {ex.Message}");
+        }
     } 
-}
-
-public class UsersRepository
-{
-    private readonly AppDbContext _dbContext;
-
-    public UsersRepository(AppDbContext dbContext)
-    {
-        _dbContext = dbContext;
-    }
-
-    public async Task<List<UserEntity>> GetAll()
-    {
-        return await _dbContext.Users
-            .AsNoTracking()
-            .ToListAsync();
-    }
-
-    public async Task<UserEntity?> GetById(Guid id)
-    {
-        return await _dbContext.Users
-            .AsNoTracking()
-            .FirstOrDefaultAsync(user => user.Id == id);
-    }
-
-    public async Task Add(Guid userId, string userName, string passwordHash)
-    {
-        var userEntity = new UserEntity
-        {
-            Id = userId,
-            Login = userName,
-            Password = passwordHash
-        };
-        
-        await _dbContext.Users.AddAsync(userEntity);
-        await _dbContext.SaveChangesAsync();
-    }
-
-    public async Task AddDocument(Guid userId, Guid documentId, string documentName)
-    {
-        var documentEntity = new DocumentEntity
-        {
-            Id = documentId,
-            Name = documentName,
-            AuthorId = userId,
-            CreationDateTime = DateTime.Now,
-        };
-        
-        await _dbContext.Documents.AddAsync(documentEntity);
-        await _dbContext.SaveChangesAsync();
-    }
 }

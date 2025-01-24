@@ -1,3 +1,5 @@
+using Application;
+
 namespace API.Interfaces;
 
 public interface IMdService

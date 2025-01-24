@@ -12,7 +12,7 @@ using Persistence;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250123063850_initial")]
+    [Migration("20250123192202_initial")]
     partial class initial
     {
         /// <inheritdoc />
@@ -60,7 +60,7 @@ namespace Persistence.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("character varying(50)");
 
-                    b.Property<string>("Password")
+                    b.Property<string>("PasswordHash")
                         .IsRequired()
                         .HasMaxLength(70)
                         .HasColumnType("character varying(70)");
