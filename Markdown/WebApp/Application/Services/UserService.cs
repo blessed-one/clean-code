@@ -1,13 +1,12 @@
 using Application.Interfaces.Auth;
 using Application.Interfaces.Repositories;
 using Application.Interfaces.Services;
-using Core.Models;
 
 namespace Application.Services;
 
 public class UserService(
-    IPasswordHasher passwordHasher, 
-    IUserRepository userRepository, 
+    IPasswordHasher passwordHasher,
+    IUserRepository userRepository,
     IJwtProvider jwtProvider)
     : IUserService
 {
@@ -17,12 +16,9 @@ public class UserService(
 
         var repositoryResult = await userRepository.Create(Guid.NewGuid(), username, hashedPassword);
 
-        if (repositoryResult.IsFailure)
-        {
-            return Result.Failure(repositoryResult.Message);
-        }
-
-        return Result.Success();
+        return repositoryResult.IsFailure
+            ? Result.Failure(repositoryResult.Message)
+            : Result.Success();
     }
 
     public async Task<Result<string>> Login(string userName, string passwordHash)

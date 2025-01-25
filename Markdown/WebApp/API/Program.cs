@@ -1,4 +1,6 @@
 using API.Extensions;
+using Application.Interfaces.Services;
+using Application.Services;
 using Microsoft.AspNetCore.CookiePolicy;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -15,6 +17,11 @@ services.AddRepositories();
 // swagger
 services.AddEndpointsApiExplorer();
 services.AddSwaggerGen();
+
+// services
+services.AddScoped<IUserService, UserService>();
+services.AddScoped<IDocumentService, DocumentService>();
+
 
 // business logic
 services.AddMdProcessor();

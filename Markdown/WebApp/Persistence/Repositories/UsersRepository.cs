@@ -76,7 +76,7 @@ public class UsersRepository(AppDbContext dbContext) : IUserRepository
             Id = documentId,
             Name = documentName,
             AuthorId = userId,
-            CreationDateTime = DateTime.Now,
+            CreationDateTime = DateTime.UtcNow,
         };
 
         try

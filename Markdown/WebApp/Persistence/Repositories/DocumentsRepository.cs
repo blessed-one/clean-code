@@ -71,7 +71,7 @@ public class DocumentsRepository(AppDbContext dbContext) : IDocumentRepository
             Id = Guid.NewGuid(),
             Name = documentName,
             AuthorId = authorId,
-            CreationDateTime = DateTime.Now,
+            CreationDateTime = DateTime.UtcNow,
         };
 
         try

@@ -41,7 +41,6 @@ public static class ApiExtensions
 
     public static void AddAuthenticator(this IServiceCollection services, IConfiguration configuration)
     {
-        services.AddScoped<IUserService, UserService>();
         services.AddScoped<IPasswordHasher, PasswordHasher>();
         services.AddScoped<IJwtProvider, JwtProvider>();
 

@@ -13,3 +13,133 @@ Application started. Press Ctrl+C to shut down.
 Hosting environment: Development
 Content root path: D:\inf\clean-code\Markdown\WebApp\API
 Application is shutting down...
+Now listening on: http://localhost:5163
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: D:\inf\clean-code\Markdown\WebApp\API
+Application is shutting down...
+Now listening on: http://localhost:5163
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: D:\inf\clean-code\Markdown\WebApp\API
+An error occurred using the connection to database 'mdprocessordb' on server 'tcp://localhost:5432'.
+An exception occurred while iterating over the results of a query for context type 'Persistence.AppDbContext'.
+System.InvalidOperationException: An exception has been raised that is likely due to a transient failure.
+ ---> Npgsql.NpgsqlException (0x80004005): Failed to connect to 127.0.0.1:5432
+ ---> System.Net.Sockets.SocketException (10061): Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение.
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.ThrowException(SocketError error, CancellationToken cancellationToken)
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.System.Threading.Tasks.Sources.IValueTaskSource.GetResult(Int16 token)
+   at System.Net.Sockets.Socket.<ConnectAsync>g__WaitForConnectWithCancellation|285_0(AwaitableSocketAsyncEventArgs saea, ValueTask connectTask, CancellationToken cancellationToken)
+   at Npgsql.TaskTimeoutAndCancellation.ExecuteAsync(Func`2 getTaskFunc, NpgsqlTimeout timeout, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.ConnectAsync(NpgsqlTimeout timeout, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.ConnectAsync(NpgsqlTimeout timeout, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.RawOpen(SslMode sslMode, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.<Open>g__OpenCore|214_1(NpgsqlConnector conn, SslMode sslMode, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.Open(NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.PoolingDataSource.OpenNewConnector(NpgsqlConnection conn, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.PoolingDataSource.<Get>g__RentAsync|33_0(NpgsqlConnection conn, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlConnection.<Open>g__OpenAsync|42_0(Boolean async, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenInternalAsync(Boolean errorsExpected, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenInternalAsync(Boolean errorsExpected, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenAsync(CancellationToken cancellationToken, Boolean errorsExpected)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+An unhandled exception has occurred while executing the request.
+Executed DbCommand (143ms) [Parameters=[@__login_0='?'], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash"
+FROM "Users" AS u
+WHERE u."Login" = @__login_0
+LIMIT 1
+An unhandled exception has occurred while executing the request.
+Application is shutting down...
+Now listening on: http://localhost:5163
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: D:\inf\clean-code\Markdown\WebApp\API
+Executed DbCommand (276ms) [Parameters=[@__login_0='?'], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash"
+FROM "Users" AS u
+WHERE u."Login" = @__login_0
+LIMIT 1
+An unhandled exception has occurred while executing the request.
+Application is shutting down...
+Now listening on: http://localhost:5163
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: D:\inf\clean-code\Markdown\WebApp\API
+Executed DbCommand (128ms) [Parameters=[@__login_0='?'], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash"
+FROM "Users" AS u
+WHERE u."Login" = @__login_0
+LIMIT 1
+Failed executing DbCommand (12ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = Guid), @p2='?' (DbType = DateTime), @p3='?'], CommandType='Text', CommandTimeout='30']
+INSERT INTO "Documents" ("Id", "AuthorId", "CreationDateTime", "Name")
+VALUES (@p0, @p1, @p2, @p3);
+An exception occurred in the database while saving changes for context type 'Persistence.AppDbContext'.
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> System.ArgumentException: Cannot write DateTime with Kind=Local to PostgreSQL type 'timestamp with time zone', only UTC is supported. Note that it's not possible to mix DateTimes with different Kinds in an array, range, or multirange. (Parameter 'value')
+   at Npgsql.Internal.Converters.DateTimeConverterResolver`1.Get(DateTime value, Nullable`1 expectedPgTypeId, Boolean validateOnly)
+   at Npgsql.Internal.Converters.DateTimeConverterResolver.<>c.<CreateResolver>b__0_0(DateTimeConverterResolver`1 resolver, DateTime value, Nullable`1 expectedPgTypeId)
+   at Npgsql.Internal.Converters.DateTimeConverterResolver`1.Get(T value, Nullable`1 expectedPgTypeId)
+   at Npgsql.Internal.PgConverterResolver`1.GetAsObjectInternal(PgTypeInfo typeInfo, Object value, Nullable`1 expectedPgTypeId)
+   at Npgsql.Internal.PgResolverTypeInfo.GetResolutionAsObject(Object value, Nullable`1 expectedPgTypeId)
+   at Npgsql.Internal.PgTypeInfo.GetObjectResolution(Object value)
+   at Npgsql.NpgsqlParameter.ResolveConverter(PgTypeInfo typeInfo)
+   at Npgsql.NpgsqlParameter.ResolveTypeInfo(PgSerializerOptions options)
+   at Npgsql.NpgsqlParameterCollection.ProcessParameters(PgSerializerOptions options, Boolean validateValues, CommandType commandType)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChangesAsync(IList`1 entries, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+Application is shutting down...
+Now listening on: http://localhost:5163
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: D:\inf\clean-code\Markdown\WebApp\API
+Executed DbCommand (257ms) [Parameters=[@__login_0='?'], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash"
+FROM "Users" AS u
+WHERE u."Login" = @__login_0
+LIMIT 1
+Executed DbCommand (54ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = Guid), @p2='?' (DbType = DateTime), @p3='?'], CommandType='Text', CommandTimeout='30']
+INSERT INTO "Documents" ("Id", "AuthorId", "CreationDateTime", "Name")
+VALUES (@p0, @p1, @p2, @p3);
+Executed DbCommand (2ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT d."Id", d."AuthorId", d."CreationDateTime", d."Name"
+FROM "Documents" AS d
+Application is shutting down...
+Now listening on: http://localhost:5163
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: D:\inf\clean-code\Markdown\WebApp\API
+Executed DbCommand (265ms) [Parameters=[@__login_0='?'], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash"
+FROM "Users" AS u
+WHERE u."Login" = @__login_0
+LIMIT 1
+Executed DbCommand (15ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT d."Id", d."AuthorId", d."CreationDateTime", d."Name"
+FROM "Documents" AS d
+Executed DbCommand (16ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = Guid), @p2='?' (DbType = DateTime), @p3='?'], CommandType='Text', CommandTimeout='30']
+INSERT INTO "Documents" ("Id", "AuthorId", "CreationDateTime", "Name")
+VALUES (@p0, @p1, @p2, @p3);
+Executed DbCommand (2ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT d."Id", d."AuthorId", d."CreationDateTime", d."Name"
+FROM "Documents" AS d
+Application is shutting down...
