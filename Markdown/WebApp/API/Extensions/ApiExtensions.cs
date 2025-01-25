@@ -1,3 +1,4 @@
+using System.Security.Claims;
 using System.Text;
 using Microsoft.EntityFrameworkCore;
 using MarkdownRealisation.Classes;
@@ -9,8 +10,10 @@ using Application.Interfaces.Auth;
 using Application.Interfaces.Repositories;
 using Application.Interfaces.Services;
 using Application.Services;
+using Core.Models;
 using Infrastructure;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 
@@ -37,12 +40,14 @@ public static class ApiExtensions
     {
         services.AddScoped<IUserRepository, UsersRepository>();
         services.AddScoped<IDocumentRepository, DocumentsRepository>();
+        services.AddScoped<IDocumentAccessRepository, DocumentAccessRepository>();
     }
 
     public static void AddAuthenticator(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddScoped<IPasswordHasher, PasswordHasher>();
         services.AddScoped<IJwtProvider, JwtProvider>();
+        services.AddSingleton<IAuthorizationHandler, RoleHandler>();
 
         services.Configure<JwtOptions>(configuration.GetSection(nameof(JwtOptions)));
 

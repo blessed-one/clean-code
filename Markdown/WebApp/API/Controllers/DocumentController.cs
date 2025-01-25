@@ -1,4 +1,6 @@
+using System.Security.Claims;
 using Application.Interfaces.Services;
+using Infrastructure;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,7 +10,7 @@ namespace API.Controllers;
 [Route("[controller]")]
 public class DocumentController(IDocumentService documentService, IDocumentAccessService accessService) : ControllerBase
 {
-    [Authorize]
+    [RoleAuthorize("admin")]
     [HttpGet("All")]
     public async Task<IActionResult> All()
     {
@@ -22,11 +24,11 @@ public class DocumentController(IDocumentService documentService, IDocumentAcces
         return Ok(allDocsResult.Data);
     }
 
-    [Authorize]
+    [RoleAuthorize("admin", "user")]
     [HttpPost("New")]
     public async Task<IActionResult> Create([FromQuery] string documentName)
     {
-        var userIdClaim = User.FindFirst("userId");
+        var userIdClaim = User.FindFirst("role");
         if (userIdClaim == null || !Guid.TryParse(userIdClaim.Value, out var userId))
         {
             return Unauthorized();
@@ -58,7 +60,7 @@ public class DocumentController(IDocumentService documentService, IDocumentAcces
         return Created();
     }
 
-    [Authorize]
+    [RoleAuthorize("admin", "user")]
     [HttpDelete("Delete")]
     public async Task<IActionResult> Delete([FromQuery] Guid documentId)
     {

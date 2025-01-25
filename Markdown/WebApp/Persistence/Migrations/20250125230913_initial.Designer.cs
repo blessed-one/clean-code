@@ -12,7 +12,7 @@ using Persistence;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250123192202_initial")]
+    [Migration("20250125230913_initial")]
     partial class initial
     {
         /// <inheritdoc />
@@ -24,6 +24,28 @@ namespace Persistence.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
+
+            modelBuilder.Entity("Persistence.Entities.DocumentAccessEntity", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("DocumentId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DocumentId");
+
+                    b.HasIndex("UserId", "DocumentId")
+                        .IsUnique();
+
+                    b.ToTable("DocumentAccesses");
+                });
 
             modelBuilder.Entity("Persistence.Entities.DocumentEntity", b =>
                 {
@@ -65,6 +87,11 @@ namespace Persistence.Migrations
                         .HasMaxLength(70)
                         .HasColumnType("character varying(70)");
 
+                    b.Property<string>("Role")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("character varying(20)");
+
                     b.HasKey("Id");
 
                     b.HasIndex("Login")
@@ -73,10 +100,29 @@ namespace Persistence.Migrations
                     b.ToTable("Users");
                 });
 
+            modelBuilder.Entity("Persistence.Entities.DocumentAccessEntity", b =>
+                {
+                    b.HasOne("Persistence.Entities.DocumentEntity", "Document")
+                        .WithMany("DocumentAccesses")
+                        .HasForeignKey("DocumentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Persistence.Entities.UserEntity", "User")
+                        .WithMany("DocumentAccesses")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Document");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("Persistence.Entities.DocumentEntity", b =>
                 {
                     b.HasOne("Persistence.Entities.UserEntity", "Author")
-                        .WithMany("Documents")
+                        .WithMany("PersonalDocuments")
                         .HasForeignKey("AuthorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -84,9 +130,16 @@ namespace Persistence.Migrations
                     b.Navigation("Author");
                 });
 
+            modelBuilder.Entity("Persistence.Entities.DocumentEntity", b =>
+                {
+                    b.Navigation("DocumentAccesses");
+                });
+
             modelBuilder.Entity("Persistence.Entities.UserEntity", b =>
                 {
-                    b.Navigation("Documents");
+                    b.Navigation("DocumentAccesses");
+
+                    b.Navigation("PersonalDocuments");
                 });
 #pragma warning restore 612, 618
         }

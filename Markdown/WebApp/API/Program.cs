@@ -21,6 +21,7 @@ services.AddSwaggerGen();
 // services
 services.AddScoped<IUserService, UserService>();
 services.AddScoped<IDocumentService, DocumentService>();
+services.AddScoped<IDocumentAccessService, DocumentAccessService>();
 
 
 // business logic
