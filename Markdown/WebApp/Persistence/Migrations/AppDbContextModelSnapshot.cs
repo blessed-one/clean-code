@@ -43,7 +43,7 @@ namespace Persistence.Migrations
 
                     b.HasIndex("AuthorId");
 
-                    b.ToTable("Documents");
+                    b.ToTable("PersonalDocuments");
                 });
 
             modelBuilder.Entity("Persistence.Entities.UserEntity", b =>
@@ -73,7 +73,7 @@ namespace Persistence.Migrations
             modelBuilder.Entity("Persistence.Entities.DocumentEntity", b =>
                 {
                     b.HasOne("Persistence.Entities.UserEntity", "Author")
-                        .WithMany("Documents")
+                        .WithMany("PersonalDocuments")
                         .HasForeignKey("AuthorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -83,7 +83,7 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("Persistence.Entities.UserEntity", b =>
                 {
-                    b.Navigation("Documents");
+                    b.Navigation("PersonalDocuments");
                 });
 #pragma warning restore 612, 618
         }

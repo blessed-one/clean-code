@@ -53,7 +53,8 @@ public class UsersRepository(AppDbContext dbContext) : IUserRepository
         {
             Id = userId,
             Login = userName,
-            PasswordHash = passwordHash
+            PasswordHash = passwordHash,
+            Role = "user"
         };
 
         try

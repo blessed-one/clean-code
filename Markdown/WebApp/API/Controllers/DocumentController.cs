@@ -46,4 +46,11 @@ public class DocumentController(IDocumentService documentService) : ControllerBa
         
         return Created();
     }
+
+    [Authorize]
+    [HttpDelete("Delete")]
+    public async Task<IActionResult> Delete([FromQuery] Guid documentId)
+    {
+        throw new NotImplementedException();
+    }
 }

@@ -9,4 +9,6 @@ public class DocumentEntity
     public UserEntity Author { get; set; }
     
     public DateTime CreationDateTime { get; set; }
+
+    public List<DocumentAccessEntity> DocumentAccesses { get; set; } = [];
 }

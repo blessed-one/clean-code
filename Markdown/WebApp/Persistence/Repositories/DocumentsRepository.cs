@@ -49,6 +49,20 @@ public class DocumentsRepository(AppDbContext dbContext) : IDocumentRepository
                 .ToList());
     }
 
+    public async Task<Result<List<Document>>> GetByAuthorId(Guid authorId)
+    {
+        var documentEntities = await dbContext.Documents
+            .AsNoTracking()
+            .Where(doc => doc.AuthorId == authorId)
+            .ToListAsync();
+
+        return Result<List<Document>>.Success(
+            documentEntities
+                .Select(
+                    dEntity => Document.Create(dEntity.Id, dEntity.Name, dEntity.AuthorId, dEntity.CreationDateTime))
+                .ToList());
+    }
+
     public async Task<Result<List<Document>>> GetByPage(int page, int pageSize)
     {
         var documentEntities = await dbContext.Documents

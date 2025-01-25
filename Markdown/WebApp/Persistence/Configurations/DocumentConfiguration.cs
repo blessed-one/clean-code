@@ -19,7 +19,7 @@ public class DocumentConfiguration : IEntityTypeConfiguration<DocumentEntity>
 
         builder
             .HasOne(document => document.Author)
-            .WithMany(user => user.Documents)
+            .WithMany(user => user.PersonalDocuments)
             .HasForeignKey(document => document.AuthorId);
     }
 }

@@ -18,8 +18,12 @@ public class UserConfiguration : IEntityTypeConfiguration<UserEntity>
             .IsRequired()
             .HasMaxLength(70);
 
+        builder.Property(user => user.Role)
+            .IsRequired()
+            .HasMaxLength(20);
+        
         builder
-            .HasMany(user => user.Documents)
+            .HasMany(user => user.PersonalDocuments)
             .WithOne(document => document.Author)
             .HasForeignKey(document => document.AuthorId);
         

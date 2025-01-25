@@ -25,7 +25,7 @@ namespace Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Documents",
+                name: "PersonalDocuments",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
@@ -46,7 +46,7 @@ namespace Persistence.Migrations
 
             migrationBuilder.CreateIndex(
                 name: "IX_Documents_AuthorId",
-                table: "Documents",
+                table: "PersonalDocuments",
                 column: "AuthorId");
 
             migrationBuilder.CreateIndex(
@@ -60,7 +60,7 @@ namespace Persistence.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Documents");
+                name: "PersonalDocuments");
 
             migrationBuilder.DropTable(
                 name: "Users");

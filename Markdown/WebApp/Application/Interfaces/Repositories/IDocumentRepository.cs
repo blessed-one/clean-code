@@ -7,6 +7,7 @@ public interface IDocumentRepository
     Task<Result<List<Document>>> GetAll();
     Task<Result<Document>> GetById(Guid id);
     Task<Result<List<Document>>> GetByAuthor(string author);
+    Task<Result<List<Document>>> GetByAuthorId(Guid authorId);
     Task<Result<List<Document>>> GetByPage(int page, int pageSize);
 
     Task<Result<Guid>> Create(string documentName, Guid authorId);

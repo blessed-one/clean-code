@@ -11,5 +11,5 @@ public interface IDocumentService
 
     Task<Result> Create(string documentName, Guid authorId);
     Task<Result> Update(Guid documentId, string documentName);
-    Task<Result> Delete(Guid documentId);
+    Task<Result> Delete(Guid documentId, Guid authorId);
 }

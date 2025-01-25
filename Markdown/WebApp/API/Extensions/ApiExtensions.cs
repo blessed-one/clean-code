@@ -23,7 +23,7 @@ public static class ApiExtensions
         services.AddSingleton<IParser, Parser>();
         services.AddSingleton<ITagsResolver, Resolver>();
         services.AddSingleton<IRender, Md>();
-        
+
         services.AddSingleton<IMdService, MdService>();
     }
 
@@ -45,7 +45,7 @@ public static class ApiExtensions
         services.AddScoped<IJwtProvider, JwtProvider>();
 
         services.Configure<JwtOptions>(configuration.GetSection(nameof(JwtOptions)));
-        
+
         var jwtOptions = configuration.GetSection(nameof(JwtOptions)).Get<JwtOptions>();
 
         services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -70,5 +70,7 @@ public static class ApiExtensions
                     }
                 };
             });
+        
+        services.AddAuthorization();
     }
 }
