@@ -24,7 +24,7 @@ public class DocumentAccessService(IDocumentAccessRepository accessRepository) :
             : Result.Success();
     }
 
-    public async Task<Result<bool>> ValidateAccess(Guid userId, Guid documentId, string access)
+    public async Task<Result<bool>> ValidateAccess(Guid userId, Guid documentId)
     {
         var repositoryResult = await accessRepository.HasAccess(userId, documentId);
 

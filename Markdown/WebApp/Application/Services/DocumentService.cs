@@ -15,14 +15,15 @@ public class DocumentService(IDocumentRepository documentRepository) : IDocument
             : Result<List<Document>>.Success(repositoryResult.Data!);
     }
 
-    public async Task<Result> Create(string documentName, Guid authorId)
+    public async Task<Result<Guid>> Create(string documentName, Guid authorId)
     {
         // TODO add to miro
+        // TODO check same name
         var repositoryResult = await documentRepository.Create(documentName, authorId);
         
         return repositoryResult.IsFailure
-            ? Result.Failure(repositoryResult.Message!)
-            : Result.Success();
+            ? Result<Guid>.Failure(repositoryResult.Message!)
+            : Result<Guid>.Success(repositoryResult.Data);
     }
 
     public Task<Result> Update(Guid documentId, string documentName)
@@ -31,21 +32,8 @@ public class DocumentService(IDocumentRepository documentRepository) : IDocument
         throw new NotImplementedException();
     }
 
-    public async Task<Result> Delete(Guid documentId, Guid userId)
+    public async Task<Result> Delete(Guid documentId)
     {
-        var docsRepositoryResult = await documentRepository.GetByAuthorId(userId);
-        if (docsRepositoryResult.IsFailure)
-        {
-            return Result.Failure(docsRepositoryResult.Message!);
-        }
-        var usersDocs = docsRepositoryResult.Data!;
-        
-        var isInUsersDocs = usersDocs.Any(x => x.Id == documentId);
-        if (!isInUsersDocs)
-        {
-            return Result.Failure($"Document {documentId} does not belongs to user");
-        }
-        
         var deleteRepositoryResult = await documentRepository.Delete(documentId);
         if (deleteRepositoryResult.IsFailure)
         {
