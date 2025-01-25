@@ -1,8 +1,7 @@
-using API.Interfaces;
-using Application;
+using Application.Interfaces.Services;
 using MarkdownRealisation.Interfaces;
 
-namespace API.Services;
+namespace Application.Services;
 
 public class MdService : IMdService
 {

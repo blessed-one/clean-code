@@ -1,6 +1,7 @@
-using API.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using API.Requests;
+using Application.Interfaces.Services;
+using Microsoft.AspNetCore.Authorization;
 
 
 namespace API.Controllers;
@@ -9,6 +10,7 @@ namespace API.Controllers;
 [Route("[controller]")]
 public class ProcessorController(IMdService mdService) : ControllerBase
 {
+    [Authorize]
     [HttpPost("Convert")]
     public async Task<IActionResult> Convert([FromBody] MdRequest request)
     {

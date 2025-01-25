@@ -13,7 +13,7 @@ public class DocumentsRepository(AppDbContext dbContext) : IDocumentRepository
         var documentEntities = await dbContext.Documents
             .AsNoTracking()
             .ToListAsync();
-        
+
         return Result<List<Document>>.Success(
             documentEntities
                 .Select(
@@ -26,11 +26,12 @@ public class DocumentsRepository(AppDbContext dbContext) : IDocumentRepository
         var documentEntity = await dbContext.Documents
             .AsNoTracking()
             .FirstOrDefaultAsync(doc => doc.Id == id);
-        
+
         if (documentEntity == null)
             return Result<Document>.Failure("Document not found.");
 
-        var document = Document.Create(documentEntity.Id, documentEntity.Name, documentEntity.AuthorId, documentEntity.CreationDateTime);
+        var document = Document.Create(documentEntity.Id, documentEntity.Name, documentEntity.AuthorId,
+            documentEntity.CreationDateTime);
         return Result<Document>.Success(document);
     }
 
@@ -40,7 +41,7 @@ public class DocumentsRepository(AppDbContext dbContext) : IDocumentRepository
             .AsNoTracking()
             .Where(doc => doc.Author.Equals(author))
             .ToListAsync();
-        
+
         return Result<List<Document>>.Success(
             documentEntities
                 .Select(
@@ -55,7 +56,7 @@ public class DocumentsRepository(AppDbContext dbContext) : IDocumentRepository
             .Skip((page - 1) * pageSize)
             .Take(pageSize)
             .ToListAsync();
-        
+
         return Result<List<Document>>.Success(
             documentEntities
                 .Select(
@@ -77,15 +78,15 @@ public class DocumentsRepository(AppDbContext dbContext) : IDocumentRepository
         {
             await dbContext.Documents.AddAsync(documentEntity);
             await dbContext.SaveChangesAsync();
-            
+
             return Result<Guid>.Success(documentEntity.Id);
         }
         catch (Exception ex)
         {
             return Result<Guid>.Failure($"Failed to create document: {ex.Message}");
         }
-    } 
-    
+    }
+
     public async Task<Result> Update(Guid documentId, string documentName)
     {
         try
@@ -101,8 +102,8 @@ public class DocumentsRepository(AppDbContext dbContext) : IDocumentRepository
         {
             return Result.Failure($"Failed to update document: {ex.Message}");
         }
-    } 
-    
+    }
+
     public async Task<Result> Delete(Guid documentId)
     {
         try
@@ -110,12 +111,12 @@ public class DocumentsRepository(AppDbContext dbContext) : IDocumentRepository
             await dbContext.Documents
                 .Where(doc => doc.Id == documentId)
                 .ExecuteDeleteAsync();
-            
+
             return Result.Success();
         }
         catch (Exception ex)
         {
             return Result.Failure($"Failed to delete document: {ex.Message}");
         }
-    } 
+    }
 }

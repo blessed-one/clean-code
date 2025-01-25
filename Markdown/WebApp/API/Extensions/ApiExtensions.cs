@@ -1,9 +1,18 @@
+using System.Text;
 using Microsoft.EntityFrameworkCore;
 using MarkdownRealisation.Classes;
 using MarkdownRealisation.Interfaces;
 using Persistence;
-using API.Interfaces;
-using API.Services;
+using Persistence.Repositories;
+using Application.Interfaces;
+using Application.Interfaces.Auth;
+using Application.Interfaces.Repositories;
+using Application.Interfaces.Services;
+using Application.Services;
+using Infrastructure;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
 
 namespace API.Extensions;
 
@@ -14,18 +23,53 @@ public static class ApiExtensions
         services.AddSingleton<IParser, Parser>();
         services.AddSingleton<ITagsResolver, Resolver>();
         services.AddSingleton<IRender, Md>();
+        
         services.AddSingleton<IMdService, MdService>();
     }
 
-    public static void AddPostgresDb(this WebApplicationBuilder builder)
+    public static void AddPostgresDb(this IServiceCollection services, IConfiguration configuration)
     {
-        var services = builder.Services;
-        var configuration = builder.Configuration;
-        
         services.AddDbContext<AppDbContext>(
-            options =>
+            options => { options.UseNpgsql(configuration.GetConnectionString(nameof(AppDbContext))); });
+    }
+
+    public static void AddRepositories(this IServiceCollection services)
+    {
+        services.AddScoped<IUserRepository, UsersRepository>();
+        services.AddScoped<IDocumentRepository, DocumentsRepository>();
+    }
+
+    public static void AddAuthenticator(this IServiceCollection services, IConfiguration configuration)
+    {
+        services.AddScoped<IUserService, UserService>();
+        services.AddScoped<IPasswordHasher, PasswordHasher>();
+        services.AddScoped<IJwtProvider, JwtProvider>();
+
+        services.Configure<JwtOptions>(configuration.GetSection(nameof(JwtOptions)));
+        
+        var jwtOptions = configuration.GetSection(nameof(JwtOptions)).Get<JwtOptions>();
+
+        services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+            .AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, options =>
             {
-                options.UseNpgsql(configuration.GetConnectionString(nameof(AppDbContext)));
+                options.TokenValidationParameters = new()
+                {
+                    ValidateIssuer = false,
+                    ValidateAudience = false,
+                    ValidateLifetime = true,
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtOptions!.SecretKey)),
+                };
+
+                options.Events = new JwtBearerEvents
+                {
+                    OnMessageReceived = context =>
+                    {
+                        context.Token = context.Request.Cookies["token"];
+
+                        return Task.CompletedTask;
+                    }
+                };
             });
     }
 }

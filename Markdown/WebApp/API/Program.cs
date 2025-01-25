@@ -1,13 +1,16 @@
 using API.Extensions;
+using Microsoft.AspNetCore.CookiePolicy;
 
 var builder = WebApplication.CreateBuilder(args);
 var services = builder.Services;
+var configuration = builder.Configuration;
 
 // logging
 builder.Logging.AddFile("logs.txt");
 
 // db
-builder.AddPostgresDb();
+services.AddPostgresDb(configuration);
+services.AddRepositories();
 
 // swagger
 services.AddEndpointsApiExplorer();
@@ -18,6 +21,9 @@ services.AddMdProcessor();
 
 // controllers
 services.AddControllers();
+
+// reg-auth
+services.AddAuthenticator(configuration);
 
 var app = builder.Build();
 
@@ -30,10 +36,14 @@ if (app.Environment.IsDevelopment())
 app.MapControllers();
 app.UseStaticFiles();
 
-app.Run(async (context) =>
+app.UseAuthentication();
+app.UseAuthorization();
+
+app.UseCookiePolicy(new CookiePolicyOptions()
 {
-    app.Logger.LogInformation($"Path: {context.Request.Path}, Method: {context.Request.Method}");
-    await context.Response.WriteAsync("Hello World!");
+    MinimumSameSitePolicy = SameSiteMode.Strict,
+    HttpOnly = HttpOnlyPolicy.Always,
+    Secure = CookieSecurePolicy.Always
 });
 
 app.Run();

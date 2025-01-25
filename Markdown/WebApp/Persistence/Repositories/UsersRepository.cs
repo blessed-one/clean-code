@@ -13,7 +13,7 @@ public class UsersRepository(AppDbContext dbContext) : IUserRepository
         var userEntities = await dbContext.Users
             .AsNoTracking()
             .ToListAsync();
-        
+
         return Result<List<User>>.Success(
             userEntities
                 .Select(
@@ -26,6 +26,19 @@ public class UsersRepository(AppDbContext dbContext) : IUserRepository
         var userEntity = await dbContext.Users
             .AsNoTracking()
             .FirstOrDefaultAsync(user => user.Id == id);
+
+        if (userEntity == null)
+            return Result<User>.Failure("User not found.");
+
+        var user = User.Create(userEntity.Id, userEntity.Login, userEntity.PasswordHash);
+        return Result<User>.Success(user);
+    }
+
+    public async Task<Result<User>> GetByLogin(string login)
+    {
+        var userEntity = await dbContext.Users
+            .AsNoTracking()
+            .FirstOrDefaultAsync(user => user.Login == login);
 
         if (userEntity == null)
             return Result<User>.Failure("User not found.");
@@ -47,7 +60,7 @@ public class UsersRepository(AppDbContext dbContext) : IUserRepository
         {
             await dbContext.Users.AddAsync(userEntity);
             await dbContext.SaveChangesAsync();
-            
+
             return Result.Success();
         }
         catch (Exception ex)
@@ -70,7 +83,7 @@ public class UsersRepository(AppDbContext dbContext) : IUserRepository
         {
             await dbContext.Documents.AddAsync(documentEntity);
             await dbContext.SaveChangesAsync();
-            
+
             return Result.Success();
         }
         catch (Exception ex)
