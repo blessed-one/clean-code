@@ -18,12 +18,24 @@ public class DocumentService(IDocumentRepository documentRepository) : IDocument
     public async Task<Result<Guid>> Create(string documentName, Guid authorId)
     {
         // TODO add to miro
-        // TODO check same name
-        var repositoryResult = await documentRepository.Create(documentName, authorId);
-        
-        return repositoryResult.IsFailure
-            ? Result<Guid>.Failure(repositoryResult.Message!)
-            : Result<Guid>.Success(repositoryResult.Data);
+        var authorsDocsResult = await documentRepository.GetByAuthorId(authorId);
+        if (authorsDocsResult.IsFailure)
+        {
+            return Result<Guid>.Failure(authorsDocsResult.Message!);
+        }
+
+        var authorsDocs = authorsDocsResult.Data;
+        if (authorsDocs != null && authorsDocs
+                .Any(doc => doc.Name == documentName))
+        {
+            return Result<Guid>.Failure("Document with such name already exists");
+        }
+
+        var createResult = await documentRepository.Create(documentName, authorId);
+
+        return createResult.IsFailure
+            ? Result<Guid>.Failure(createResult.Message!)
+            : Result<Guid>.Success(createResult.Data);
     }
 
     public Task<Result> Update(Guid documentId, string documentName)
@@ -37,9 +49,9 @@ public class DocumentService(IDocumentRepository documentRepository) : IDocument
         var deleteRepositoryResult = await documentRepository.Delete(documentId);
         if (deleteRepositoryResult.IsFailure)
         {
-            return Result.Failure(deleteRepositoryResult.Message!);
+            return Result.Failure(deleteRepositoryResult.Message);
         }
-        
+
         return Result.Success();
     }
 }
