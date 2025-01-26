@@ -1,3 +1,4 @@
+using Application.Utils;
 using Core.Models;
 
 namespace Application.Interfaces.Repositories;

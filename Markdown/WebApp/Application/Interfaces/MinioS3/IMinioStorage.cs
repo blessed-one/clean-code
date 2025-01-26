@@ -1,4 +1,6 @@
-namespace Application.Interfaces.Services;
+using Application.Utils;
+
+namespace Application.Interfaces.MinioS3;
 
 public interface IMinioStorage
 {

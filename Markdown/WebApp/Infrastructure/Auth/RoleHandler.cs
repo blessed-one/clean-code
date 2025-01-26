@@ -1,11 +1,7 @@
 using System.Security.Claims;
-using Core.Models;
-
-namespace Infrastructure;
-
 using Microsoft.AspNetCore.Authorization;
-using System.Linq;
-using System.Threading.Tasks;
+
+namespace Infrastructure.Auth;
 
 public class RoleHandler : AuthorizationHandler<RoleRequirement>
 {

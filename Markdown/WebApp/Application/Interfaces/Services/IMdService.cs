@@ -1,3 +1,5 @@
+using Application.Utils;
+
 namespace Application.Interfaces.Services;
 
 public interface IMdService

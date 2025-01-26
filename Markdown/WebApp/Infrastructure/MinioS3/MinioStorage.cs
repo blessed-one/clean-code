@@ -1,5 +1,7 @@
 using Application;
+using Application.Interfaces.MinioS3;
 using Application.Interfaces.Services;
+using Application.Utils;
 using Microsoft.Extensions.Options;
 using Minio;
 using Minio.DataModel.Args;

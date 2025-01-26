@@ -1,7 +1,6 @@
 using Application.Interfaces.Auth;
 
-
-namespace Infrastructure;
+namespace Infrastructure.Auth;
 
 public class PasswordHasher : IPasswordHasher
 {

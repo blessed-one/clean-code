@@ -6,7 +6,7 @@ using Core.Models;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 
-namespace Infrastructure;
+namespace Infrastructure.Auth;
 
 public class JwtProvider(IOptions<JwtOptions> options) : IJwtProvider
 {

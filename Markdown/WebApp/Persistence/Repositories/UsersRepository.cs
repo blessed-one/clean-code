@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Application.Interfaces.Repositories;
 using Application;
+using Application.Utils;
 using Core.Models;
 using Persistence.Entities;
 

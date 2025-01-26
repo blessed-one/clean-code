@@ -2,6 +2,7 @@ using API.Filters;
 using API.Requests;
 using Application.Interfaces.Services;
 using Infrastructure;
+using Infrastructure.Auth;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers;

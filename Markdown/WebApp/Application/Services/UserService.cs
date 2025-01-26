@@ -1,6 +1,7 @@
 using Application.Interfaces.Auth;
 using Application.Interfaces.Repositories;
 using Application.Interfaces.Services;
+using Application.Utils;
 
 namespace Application.Services;
 
