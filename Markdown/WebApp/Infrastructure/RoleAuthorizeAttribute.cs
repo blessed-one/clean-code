@@ -2,7 +2,10 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace Infrastructure;
 
-public class RoleAuthorizeAttribute(params string[] roles) : AuthorizeAttribute
+public class RoleAuthorizeAttribute : AuthorizeAttribute
 {
-    private readonly string[] _roles = roles;
+    public RoleAuthorizeAttribute(params string[] roles)
+    {
+        Roles = string.Join(",", roles);
+    }
 }

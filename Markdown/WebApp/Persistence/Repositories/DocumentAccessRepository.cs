@@ -10,6 +10,15 @@ public class DocumentAccessRepository(AppDbContext dbContext) : IDocumentAccessR
 {
     public async Task<Result<bool>> HasAccess(Guid userId, Guid documentId)
     {
+        var userEntity = await dbContext.Users
+            .AsNoTracking()
+            .FirstOrDefaultAsync(user => user.Id == userId);
+        
+        if (userEntity!.Role == "admin")
+        {
+            return Result<bool>.Success(true);
+        }
+        
         var hasAccess = await dbContext.DocumentAccesses
             .AnyAsync(access => access.UserId == userId && access.DocumentId == documentId);
 

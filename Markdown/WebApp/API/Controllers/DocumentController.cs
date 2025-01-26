@@ -24,11 +24,12 @@ public class DocumentController(IDocumentService documentService, IDocumentAcces
         return Ok(allDocsResult.Data);
     }
 
+    [Authorize]
     [RoleAuthorize("admin", "user")]
     [HttpPost("New")]
     public async Task<IActionResult> Create([FromQuery] string documentName)
     {
-        var userIdClaim = User.FindFirst("role");
+        var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
         if (userIdClaim == null || !Guid.TryParse(userIdClaim.Value, out var userId))
         {
             return Unauthorized();
@@ -64,7 +65,7 @@ public class DocumentController(IDocumentService documentService, IDocumentAcces
     [HttpDelete("Delete")]
     public async Task<IActionResult> Delete([FromQuery] Guid documentId)
     {
-        var userIdClaim = User.FindFirst("userId");
+        var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
         if (userIdClaim == null || !Guid.TryParse(userIdClaim.Value, out var userId))
         {
             return Unauthorized();
@@ -79,7 +80,7 @@ public class DocumentController(IDocumentService documentService, IDocumentAcces
         var hasAccess = accessResult.Data;
         if (!hasAccess)
         {
-            return Forbid("Document isn't accessible");
+            return Forbid();
         }
 
         var docServiceResult = await documentService.Delete(documentId);

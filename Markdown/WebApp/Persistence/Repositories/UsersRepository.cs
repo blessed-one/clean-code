@@ -17,7 +17,7 @@ public class UsersRepository(AppDbContext dbContext) : IUserRepository
         return Result<List<User>>.Success(
             userEntities
                 .Select(
-                    uEntity => User.Create(uEntity.Id, uEntity.Login, uEntity.PasswordHash))
+                    uEntity => User.Create(uEntity.Id, uEntity.Login, uEntity.PasswordHash, uEntity.Role))
                 .ToList());
     }
 
@@ -30,7 +30,7 @@ public class UsersRepository(AppDbContext dbContext) : IUserRepository
         if (userEntity == null)
             return Result<User>.Failure("User not found.");
 
-        var user = User.Create(userEntity.Id, userEntity.Login, userEntity.PasswordHash);
+        var user = User.Create(userEntity.Id, userEntity.Login, userEntity.PasswordHash, userEntity.Role);
         return Result<User>.Success(user);
     }
 
@@ -43,7 +43,7 @@ public class UsersRepository(AppDbContext dbContext) : IUserRepository
         if (userEntity == null)
             return Result<User>.Failure("User not found.");
 
-        var user = User.Create(userEntity.Id, userEntity.Login, userEntity.PasswordHash);
+        var user = User.Create(userEntity.Id, userEntity.Login, userEntity.PasswordHash, userEntity.Role);
         return Result<User>.Success(user);
     }
 

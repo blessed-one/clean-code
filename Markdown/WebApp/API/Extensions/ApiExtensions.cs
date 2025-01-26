@@ -12,6 +12,7 @@ using Application.Interfaces.Services;
 using Application.Services;
 using Core.Models;
 using Infrastructure;
+using MarkdownRealisation.Abstractions;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Options;
@@ -48,6 +49,7 @@ public static class ApiExtensions
         services.AddScoped<IPasswordHasher, PasswordHasher>();
         services.AddScoped<IJwtProvider, JwtProvider>();
         services.AddSingleton<IAuthorizationHandler, RoleHandler>();
+        services.AddSingleton<IAuthorizationPolicyProvider, RolePolicyProvider>();
 
         services.Configure<JwtOptions>(configuration.GetSection(nameof(JwtOptions)));
 
@@ -76,6 +78,17 @@ public static class ApiExtensions
                 };
             });
         
-        services.AddAuthorization();
+        services.AddAuthorization(options =>
+        {
+            options.AddPolicy("RolePolicy", policy =>
+            {
+                policy.Requirements.Add(new RoleRequirement("admin", "user"));
+            });
+            
+            options.AddPolicy("DynamicRolePolicy", policy =>
+            {
+                policy.Requirements.Add(new RoleRequirement(Array.Empty<string>()));
+            });
+        });
     }
 }

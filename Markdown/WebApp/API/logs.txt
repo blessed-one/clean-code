@@ -233,3 +233,220 @@ Content root path: D:\inf\clean-code\Markdown\WebApp\API
 Executed DbCommand (52ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
 SELECT d."Id", d."AuthorId", d."CreationDateTime", d."Name"
 FROM "Documents" AS d
+Application is shutting down...
+Now listening on: http://localhost:5163
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: D:\inf\clean-code\Markdown\WebApp\API
+Executed DbCommand (129ms) [Parameters=[@__login_0='?'], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash", u."Role"
+FROM "Users" AS u
+WHERE u."Login" = @__login_0
+LIMIT 1
+Executed DbCommand (9ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT d."Id", d."AuthorId", d."CreationDateTime", d."Name"
+FROM "Documents" AS d
+Executed DbCommand (13ms) [Parameters=[@__userId_0='?' (DbType = Guid), @__documentId_1='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "DocumentAccesses" AS d
+    WHERE d."UserId" = @__userId_0 AND d."DocumentId" = @__documentId_1)
+An unhandled exception has occurred while executing the request.
+Application is shutting down...
+Now listening on: http://localhost:5163
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: D:\inf\clean-code\Markdown\WebApp\API
+Executed DbCommand (128ms) [Parameters=[@__userId_0='?' (DbType = Guid), @__documentId_1='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "DocumentAccesses" AS d
+    WHERE d."UserId" = @__userId_0 AND d."DocumentId" = @__documentId_1)
+Application is shutting down...
+Now listening on: http://localhost:5163
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: D:\inf\clean-code\Markdown\WebApp\API
+An unhandled exception has occurred while executing the request.
+Application is shutting down...
+Now listening on: http://localhost:5163
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: D:\inf\clean-code\Markdown\WebApp\API
+An unhandled exception has occurred while executing the request.
+Application is shutting down...
+Now listening on: http://localhost:5163
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: D:\inf\clean-code\Markdown\WebApp\API
+Executed DbCommand (61ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT d."Id", d."AuthorId", d."CreationDateTime", d."Name"
+FROM "Documents" AS d
+An unhandled exception has occurred while executing the request.
+Application is shutting down...
+Now listening on: http://localhost:5163
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: D:\inf\clean-code\Markdown\WebApp\API
+Executed DbCommand (104ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT d."Id", d."AuthorId", d."CreationDateTime", d."Name"
+FROM "Documents" AS d
+An unhandled exception has occurred while executing the request.
+Application is shutting down...
+Now listening on: http://localhost:5163
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: D:\inf\clean-code\Markdown\WebApp\API
+An unhandled exception has occurred while executing the request.
+Application is shutting down...
+Now listening on: http://localhost:5163
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: D:\inf\clean-code\Markdown\WebApp\API
+An unhandled exception has occurred while executing the request.
+Application is shutting down...
+Now listening on: http://localhost:5163
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: D:\inf\clean-code\Markdown\WebApp\API
+An unhandled exception has occurred while executing the request.
+Executed DbCommand (281ms) [Parameters=[@__login_0='?'], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash", u."Role"
+FROM "Users" AS u
+WHERE u."Login" = @__login_0
+LIMIT 1
+Executed DbCommand (17ms) [Parameters=[@__authorId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT d."Id", d."AuthorId", d."CreationDateTime", d."Name"
+FROM "Documents" AS d
+WHERE d."AuthorId" = @__authorId_0
+Executed DbCommand (41ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = Guid), @p2='?' (DbType = DateTime), @p3='?'], CommandType='Text', CommandTimeout='30']
+INSERT INTO "Documents" ("Id", "AuthorId", "CreationDateTime", "Name")
+VALUES (@p0, @p1, @p2, @p3);
+Executed DbCommand (4ms) [Parameters=[@__userId_0='?' (DbType = Guid), @__documentId_1='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "DocumentAccesses" AS d
+    WHERE d."UserId" = @__userId_0 AND d."DocumentId" = @__documentId_1)
+Executed DbCommand (3ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = Guid), @p2='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+INSERT INTO "DocumentAccesses" ("Id", "DocumentId", "UserId")
+VALUES (@p0, @p1, @p2);
+Application is shutting down...
+Now listening on: http://localhost:5163
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: D:\inf\clean-code\Markdown\WebApp\API
+Executed DbCommand (53ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT d."Id", d."AuthorId", d."CreationDateTime", d."Name"
+FROM "Documents" AS d
+Application is shutting down...
+Now listening on: http://localhost:5163
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: D:\inf\clean-code\Markdown\WebApp\API
+Executed DbCommand (126ms) [Parameters=[@__authorId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT d."Id", d."AuthorId", d."CreationDateTime", d."Name"
+FROM "Documents" AS d
+WHERE d."AuthorId" = @__authorId_0
+Executed DbCommand (17ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = Guid), @p2='?' (DbType = DateTime), @p3='?'], CommandType='Text', CommandTimeout='30']
+INSERT INTO "Documents" ("Id", "AuthorId", "CreationDateTime", "Name")
+VALUES (@p0, @p1, @p2, @p3);
+Executed DbCommand (5ms) [Parameters=[@__userId_0='?' (DbType = Guid), @__documentId_1='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "DocumentAccesses" AS d
+    WHERE d."UserId" = @__userId_0 AND d."DocumentId" = @__documentId_1)
+Executed DbCommand (2ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = Guid), @p2='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+INSERT INTO "DocumentAccesses" ("Id", "DocumentId", "UserId")
+VALUES (@p0, @p1, @p2);
+Executed DbCommand (2ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?', @p2='?', @p3='?'], CommandType='Text', CommandTimeout='30']
+INSERT INTO "Users" ("Id", "Login", "PasswordHash", "Role")
+VALUES (@p0, @p1, @p2, @p3);
+Failed executing DbCommand (21ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?', @p2='?', @p3='?'], CommandType='Text', CommandTimeout='30']
+INSERT INTO "Users" ("Id", "Login", "PasswordHash", "Role")
+VALUES (@p0, @p1, @p2, @p3);
+An exception occurred in the database while saving changes for context type 'Persistence.AppDbContext'.
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> Npgsql.PostgresException (0x80004005): 23505: повторяющееся значение ключа нарушает ограничение уникальности "IX_Users_Login"
+
+DETAIL: Detail redacted as it may contain sensitive data. Specify 'Include Error Detail' in the connection string to include this information.
+   at Npgsql.Internal.NpgsqlConnector.ReadMessageLong(Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+  Exception data:
+    Severity: ОШИБКА
+    SqlState: 23505
+    MessageText: повторяющееся значение ключа нарушает ограничение уникальности "IX_Users_Login"
+    Detail: Detail redacted as it may contain sensitive data. Specify 'Include Error Detail' in the connection string to include this information.
+    SchemaName: public
+    TableName: Users
+    ConstraintName: IX_Users_Login
+    File: nbtinsert.c
+    Line: 673
+    Routine: _bt_check_unique
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChangesAsync(IList`1 entries, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+Application is shutting down...
+Now listening on: http://localhost:5163
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: D:\inf\clean-code\Markdown\WebApp\API
+Executed DbCommand (183ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?', @p2='?', @p3='?'], CommandType='Text', CommandTimeout='30']
+INSERT INTO "Users" ("Id", "Login", "PasswordHash", "Role")
+VALUES (@p0, @p1, @p2, @p3);
+Application is shutting down...
+Now listening on: http://localhost:5163
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: D:\inf\clean-code\Markdown\WebApp\API
+Executed DbCommand (139ms) [Parameters=[@__login_0='?'], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash", u."Role"
+FROM "Users" AS u
+WHERE u."Login" = @__login_0
+LIMIT 1
+Executed DbCommand (12ms) [Parameters=[@__login_0='?'], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash", u."Role"
+FROM "Users" AS u
+WHERE u."Login" = @__login_0
+LIMIT 1
+Application is shutting down...
+Now listening on: http://localhost:5163
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: D:\inf\clean-code\Markdown\WebApp\API
+Executed DbCommand (263ms) [Parameters=[@__login_0='?'], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash", u."Role"
+FROM "Users" AS u
+WHERE u."Login" = @__login_0
+LIMIT 1
+Executed DbCommand (7ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT d."Id", d."AuthorId", d."CreationDateTime", d."Name"
+FROM "Documents" AS d
+Application is shutting down...
+Now listening on: http://localhost:5163
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: D:\inf\clean-code\Markdown\WebApp\API
+Executed DbCommand (256ms) [Parameters=[@__userId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash", u."Role"
+FROM "Users" AS u
+WHERE u."Id" = @__userId_0
+LIMIT 1
+Executed DbCommand (33ms) [Parameters=[@__documentId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+DELETE FROM "Documents" AS d
+WHERE d."Id" = @__documentId_0
+Application is shutting down...
