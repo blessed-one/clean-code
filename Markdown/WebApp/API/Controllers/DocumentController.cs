@@ -1,4 +1,6 @@
 using System.Security.Claims;
+using API.Filters;
+using API.Requests;
 using Application.Interfaces.Services;
 using Infrastructure;
 using Microsoft.AspNetCore.Authorization;
@@ -27,9 +29,9 @@ public class DocumentController(
     }
 
     [Authorize]
-    [RoleAuthorize("admin", "user")]
+    [RoleAuthorize("user")]
     [HttpPost("New")]
-    public async Task<IActionResult> Create([FromQuery] string documentName)
+    public async Task<IActionResult> Create([FromBody] DocumentRequest request)
     {
         var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
         if (userIdClaim == null || !Guid.TryParse(userIdClaim.Value, out var userId))
@@ -37,6 +39,8 @@ public class DocumentController(
             return Unauthorized();
         }
 
+        var documentName = request.Name;
+        
         if (string.IsNullOrEmpty(documentName))
         {
             return BadRequest("documentName is required");
@@ -51,27 +55,18 @@ public class DocumentController(
         return Created();
     }
 
-    [RoleAuthorize("admin", "user")]
+    [RoleAuthorize("user")]
+    [ServiceFilter(typeof(AccessFilter))]
     [HttpDelete("Delete")]
-    public async Task<IActionResult> Delete([FromQuery] Guid documentId)
+    public async Task<IActionResult> Delete([FromBody] DocumentRequest request)
     {
         var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
         if (userIdClaim == null || !Guid.TryParse(userIdClaim.Value, out var userId))
         {
             return Unauthorized();
         }
-
-        var accessResult = await accessService.ValidateAccess(userId, documentId);
-        if (accessResult.IsFailure)
-        {
-            return Problem(accessResult.Message);
-        }
-
-        var hasAccess = accessResult.Data;
-        if (!hasAccess)
-        {
-            return Forbid();
-        }
+        
+        var documentId = request.DocumentId;
 
         var docServiceResult = await documentService.Delete(documentId);
         if (docServiceResult.IsFailure)

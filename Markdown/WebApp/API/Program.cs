@@ -1,4 +1,5 @@
 using API.Extensions;
+using API.Filters;
 using Application.Interfaces.Services;
 using Application.Services;
 using Microsoft.AspNetCore.CookiePolicy;
@@ -29,8 +30,9 @@ services.AddScoped<IDocumentAccessService, DocumentAccessService>();
 // md
 services.AddMdProcessor();
 
-// controllers
+// controllers, filters
 services.AddControllers();
+services.AddScoped<AccessFilter>();
 
 // reg-auth
 services.AddAuthenticator(configuration);

@@ -1,6 +1,8 @@
 using System.Security.Claims;
+using API.Filters;
 using API.Requests;
 using Application.Interfaces.Services;
+using Core.Models;
 using Infrastructure;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -11,30 +13,13 @@ namespace API.Controllers;
 [Route("[controller]")]
 public class AccessController(IDocumentAccessService accessService) : ControllerBase
 {
-    private async Task<bool> CheckClientAccess(Guid documentId)
-    {
-        _ = Guid.TryParse(User.FindFirst(ClaimTypes.NameIdentifier)!.Value, out var userId);
-        var hasAccessResult = await accessService.ValidateAccess(userId, documentId);
-
-        if (hasAccessResult.IsFailure)
-        {
-            throw new Exception(hasAccessResult.Message);
-        }
-        
-        return hasAccessResult.Data;
-    }
-    
     [RoleAuthorize("user")]
+    [ServiceFilter(typeof(AccessFilter))]
     [HttpGet("Give")]
     public async Task<IActionResult> Give([FromQuery] ManageAccessRequest request)
     {
         try
         {
-            if (!await CheckClientAccess(request.DocumentId))
-            {
-                return Forbid();
-            }
-            
             var addAccessResult = await accessService.AddAccess(request.UserId, request.DocumentId);
             if (addAccessResult.IsFailure)
             {
@@ -48,19 +33,14 @@ public class AccessController(IDocumentAccessService accessService) : Controller
             return BadRequest(ex.Message);
         }
     }
-
-    [Authorize]
+    
     [RoleAuthorize("user")]
+    [ServiceFilter(typeof(AccessFilter))]
     [HttpPost("Remove")]
     public async Task<IActionResult> Remove([FromQuery] ManageAccessRequest request)
     {
         try
         {
-            if (!await CheckClientAccess(request.DocumentId))
-            {
-                return Forbid();
-            }
-            
             var deleteAccessResult = await accessService.DeleteAccess(request.UserId, request.DocumentId);
             if (deleteAccessResult.IsFailure)
             {
