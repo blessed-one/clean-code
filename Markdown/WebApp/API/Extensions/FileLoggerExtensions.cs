@@ -1,3 +1,5 @@
+using API.Logger;
+
 namespace API.Extensions;
 
 public static class FileLoggerExtensions

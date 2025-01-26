@@ -1,21 +1,16 @@
-using System.Security.Claims;
 using System.Text;
 using Microsoft.EntityFrameworkCore;
 using MarkdownRealisation.Classes;
 using MarkdownRealisation.Interfaces;
 using Persistence;
 using Persistence.Repositories;
-using Application.Interfaces;
 using Application.Interfaces.Auth;
 using Application.Interfaces.Repositories;
 using Application.Interfaces.Services;
 using Application.Services;
-using Core.Models;
 using Infrastructure;
-using MarkdownRealisation.Abstractions;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 
 namespace API.Extensions;

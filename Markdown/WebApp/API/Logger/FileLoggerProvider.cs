@@ -1,4 +1,4 @@
-namespace API;
+namespace API.Logger;
 
 public class FileLoggerProvider : ILoggerProvider
 {

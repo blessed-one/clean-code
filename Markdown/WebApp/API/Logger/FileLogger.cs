@@ -1,4 +1,4 @@
-namespace API;
+namespace API.Logger;
 
 public class FileLogger : ILogger, IDisposable
 {
