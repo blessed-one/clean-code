@@ -6,6 +6,13 @@ public class RoleAuthorizeAttribute : AuthorizeAttribute
 {
     public RoleAuthorizeAttribute(params string[] roles)
     {
-        Roles = string.Join(",", roles);
+        List<string> tempRoles = [];
+        tempRoles.AddRange(roles);
+        if (!tempRoles.Contains("admin"))
+        {
+            tempRoles.Add("admin");
+        }
+
+        Roles = string.Join(",", tempRoles);
     }
 }
