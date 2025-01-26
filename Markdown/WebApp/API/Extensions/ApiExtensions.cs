@@ -9,6 +9,7 @@ using Application.Interfaces.Repositories;
 using Application.Interfaces.Services;
 using Application.Services;
 using Infrastructure;
+using Infrastructure.MinioS3;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.IdentityModel.Tokens;
@@ -30,6 +31,12 @@ public static class ApiExtensions
     {
         services.AddDbContext<AppDbContext>(
             options => { options.UseNpgsql(configuration.GetConnectionString(nameof(AppDbContext))); });
+    }
+
+    public static void AddMinioS3(this IServiceCollection services, IConfiguration configuration)
+    {
+        services.Configure<MinioOptions>(configuration.GetSection(nameof(MinioOptions)));
+        services.AddSingleton<IMinioStorage, MinioStorage>();
     }
 
     public static void AddRepositories(this IServiceCollection services)

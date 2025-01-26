@@ -8,7 +8,9 @@ namespace API.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-public class DocumentController(IDocumentService documentService, IDocumentAccessService accessService) : ControllerBase
+public class DocumentController(
+    IDocumentService documentService, 
+    IDocumentAccessService accessService) : ControllerBase
 {
     [RoleAuthorize("admin")]
     [HttpGet("All")]

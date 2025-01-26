@@ -2,6 +2,7 @@ using API.Extensions;
 using Application.Interfaces.Services;
 using Application.Services;
 using Microsoft.AspNetCore.CookiePolicy;
+using Minio;
 
 var builder = WebApplication.CreateBuilder(args);
 var services = builder.Services;
@@ -13,6 +14,7 @@ builder.Logging.AddFile("logs.txt");
 // db
 services.AddPostgresDb(configuration);
 services.AddRepositories();
+services.AddMinioS3(configuration);
 
 // swagger
 services.AddEndpointsApiExplorer();
@@ -24,7 +26,7 @@ services.AddScoped<IDocumentService, DocumentService>();
 services.AddScoped<IDocumentAccessService, DocumentAccessService>();
 
 
-// business logic
+// md
 services.AddMdProcessor();
 
 // controllers

@@ -1,10 +1,11 @@
+using System.Text;
 using Application.Interfaces.Repositories;
 using Application.Interfaces.Services;
 using Core.Models;
 
 namespace Application.Services;
 
-public class DocumentService(IDocumentRepository documentRepository) : IDocumentService
+public class DocumentService(IDocumentRepository documentRepository, IMinioStorage minioStorage) : IDocumentService
 {
     public async Task<Result<List<Document>>> GetAll()
     {
@@ -35,7 +36,6 @@ public class DocumentService(IDocumentRepository documentRepository) : IDocument
 
     public async Task<Result<Guid>> Create(string documentName, Guid authorId)
     {
-        // TODO add save to minio
         var authorsDocsResult = await documentRepository.GetByAuthorId(authorId);
         if (authorsDocsResult.IsFailure)
         {
@@ -50,33 +50,58 @@ public class DocumentService(IDocumentRepository documentRepository) : IDocument
         }
 
         var createResult = await documentRepository.Create(documentName, authorId);
-
-        return createResult.IsFailure
-            ? Result<Guid>.Failure(createResult.Message!)
-            : Result<Guid>.Success(createResult.Data);
+        if (createResult.IsFailure)
+        {
+            return Result<Guid>.Failure(createResult.Message!);
+        }
+        var documentId = createResult.Data;
+        
+        var minioResult = await minioStorage.UploadFile(documentId.ToString(), Encoding.UTF8.GetBytes(documentName));
+        if (minioResult.IsFailure)
+        {
+            var docDeletedResult = await documentRepository.Delete(documentId);
+            if (docDeletedResult.IsFailure)
+            {
+                return Result<Guid>.Failure("ДОКУМЕНТ БЫЛ СОЗДАН, НО НЕ УДАЛЁН!!! " + docDeletedResult.Message!);
+            }
+            return Result<Guid>.Failure(minioResult.Message);
+        }
+        
+        return Result<Guid>.Success(documentId);
     }
 
-    public Task<Result> Update(Guid documentId, string documentName)
+    public async Task<Result> Update(Guid documentId, string documentText)
     {
-        // TODO add save to minio
-        throw new NotImplementedException();
+        var minioResult = await minioStorage.UploadFile(documentId.ToString(), Encoding.UTF8.GetBytes(documentText));
+        if (minioResult.IsFailure)
+        {
+            return Result.Failure(minioResult.Message);
+        }
+        
+        return Result.Success();
     }
 
-    public Task<Result<string>> GetDocumentContent(Guid documentId)
+    public async Task<Result<string>> GetDocumentContent(Guid documentId)
     {
-        // TODO add get form minio
-        throw new NotImplementedException();
+        var minioResult = await minioStorage.DownloadFile(documentId.ToString());
+        
+        return minioResult.IsFailure 
+            ? Result<string>.Failure(minioResult.Message!) 
+            : Result<string>.Success(Encoding.UTF8.GetString(minioResult.Data!));
     }
 
     public async Task<Result> Delete(Guid documentId)
     {
-        // TODO add delete from minio
         var deleteRepositoryResult = await documentRepository.Delete(documentId);
         if (deleteRepositoryResult.IsFailure)
         {
             return Result.Failure(deleteRepositoryResult.Message);
         }
+        
+        var minioResult = await minioStorage.DeleteFile(documentId.ToString());
 
-        return Result.Success();
+        return minioResult.IsFailure
+            ? Result.Failure(minioResult.Message!)
+            : Result.Success();
     }
 }
