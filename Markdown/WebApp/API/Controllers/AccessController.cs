@@ -1,10 +1,7 @@
-using System.Security.Claims;
 using API.Filters;
 using API.Requests;
 using Application.Interfaces.Services;
-using Core.Models;
 using Infrastructure;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers;
@@ -14,44 +11,32 @@ namespace API.Controllers;
 public class AccessController(IDocumentAccessService accessService) : ControllerBase
 {
     [RoleAuthorize("user")]
-    [ServiceFilter(typeof(AccessFilter))]
-    [HttpGet("Give")]
-    public async Task<IActionResult> Give([FromQuery] ManageAccessRequest request)
+    [ServiceFilter(typeof(UserExistFilter))]
+    [ServiceFilter(typeof(HasAccessFilter))]
+    [HttpPost("Give")]
+    public async Task<IActionResult> Give([FromBody] ManageAccessRequest request)
     {
-        try
+        var addAccessResult = await accessService.AddAccess(request.UserId, request.DocumentId);
+        if (addAccessResult.IsFailure)
         {
-            var addAccessResult = await accessService.AddAccess(request.UserId, request.DocumentId);
-            if (addAccessResult.IsFailure)
-            {
-                return BadRequest(addAccessResult.Message);
-            }
+            return BadRequest(addAccessResult.Message);
+        }
 
-            return Ok();
-        }
-        catch (Exception ex)
-        {
-            return BadRequest(ex.Message);
-        }
+        return Ok();
     }
-    
-    [RoleAuthorize("user")]
-    [ServiceFilter(typeof(AccessFilter))]
-    [HttpPost("Remove")]
-    public async Task<IActionResult> Remove([FromQuery] ManageAccessRequest request)
-    {
-        try
-        {
-            var deleteAccessResult = await accessService.DeleteAccess(request.UserId, request.DocumentId);
-            if (deleteAccessResult.IsFailure)
-            {
-                return BadRequest(deleteAccessResult.Message);
-            }
 
-            return Ok();
-        }
-        catch (Exception ex)
+    [RoleAuthorize("user")]
+    [ServiceFilter(typeof(UserExistFilter))]
+    [ServiceFilter(typeof(HasAccessFilter))]
+    [HttpDelete("Remove")]
+    public async Task<IActionResult> Remove([FromBody] ManageAccessRequest request)
+    {
+        var deleteAccessResult = await accessService.DeleteAccess(request.UserId, request.DocumentId);
+        if (deleteAccessResult.IsFailure)
         {
-            return BadRequest(ex.Message);
+            return BadRequest(deleteAccessResult.Message);
         }
+
+        return Ok();
     }
 }

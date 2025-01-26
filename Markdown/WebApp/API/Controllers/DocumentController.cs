@@ -27,26 +27,19 @@ public class DocumentController(
 
         return Ok(allDocsResult.Data);
     }
-
-    [Authorize]
+    
     [RoleAuthorize("user")]
+    [ServiceFilter(typeof(UserExistFilter))]
     [HttpPost("New")]
     public async Task<IActionResult> Create([FromBody] DocumentRequest request)
     {
-        var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
-        if (userIdClaim == null || !Guid.TryParse(userIdClaim.Value, out var userId))
-        {
-            return Unauthorized();
-        }
-
         var documentName = request.Name;
-        
         if (string.IsNullOrEmpty(documentName))
         {
             return BadRequest("documentName is required");
         }
 
-        var createDocResult = await documentService.Create(documentName, userId);
+        var createDocResult = await documentService.Create(documentName, (Guid)HttpContext.Items["UserId"]!);
         if (createDocResult.IsFailure)
         {
             return Problem(createDocResult.Message);
@@ -56,22 +49,16 @@ public class DocumentController(
     }
 
     [RoleAuthorize("user")]
-    [ServiceFilter(typeof(AccessFilter))]
+    [ServiceFilter(typeof(HasAccessFilter))]
     [HttpDelete("Delete")]
     public async Task<IActionResult> Delete([FromBody] DocumentRequest request)
     {
-        var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
-        if (userIdClaim == null || !Guid.TryParse(userIdClaim.Value, out var userId))
-        {
-            return Unauthorized();
-        }
-        
         var documentId = request.DocumentId;
 
-        var docServiceResult = await documentService.Delete(documentId);
-        if (docServiceResult.IsFailure)
+        var deleteDocResult = await documentService.Delete(documentId);
+        if (deleteDocResult.IsFailure)
         {
-            return Problem(docServiceResult.Message);
+            return Problem(deleteDocResult.Message);
         }
 
         return Ok();

@@ -32,7 +32,7 @@ services.AddMdProcessor();
 
 // controllers, filters
 services.AddControllers();
-services.AddScoped<AccessFilter>();
+services.AddScoped<HasAccessFilter>();
 
 // reg-auth
 services.AddAuthenticator(configuration);

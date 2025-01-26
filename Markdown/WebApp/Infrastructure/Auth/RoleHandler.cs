@@ -16,7 +16,6 @@ public class RoleHandler : AuthorizationHandler<RoleRequirement>
         if (requirement.Roles.Any(role => roleClaim.Contains(role)))
         {
             context.Succeed(requirement);
-            Console.WriteLine(1);
         }
 
         return Task.CompletedTask;

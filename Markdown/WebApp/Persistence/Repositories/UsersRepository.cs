@@ -47,6 +47,17 @@ public class UsersRepository(AppDbContext dbContext) : IUserRepository
         return Result<User>.Success(user);
     }
 
+    public async Task<Result<bool>> Exist(Guid id)
+    {
+        var userEntity = await dbContext.Users
+            .AsNoTracking()
+            .FirstOrDefaultAsync(u => u.Id == id);
+        
+        return userEntity is null 
+            ? Result<bool>.Success(false) 
+            : Result<bool>.Success(true);
+    }
+
     public async Task<Result> Create(Guid userId, string userName, string passwordHash)
     {
         var userEntity = new UserEntity

@@ -10,6 +10,15 @@ public class UserService(
     IJwtProvider jwtProvider)
     : IUserService
 {
+    public async Task<Result<bool>> ExistById(Guid id)
+    {
+        var existResult = await userRepository.Exist(id);
+        
+        return existResult.IsFailure
+            ? Result<bool>.Failure(existResult.Message!)
+            : Result<bool>.Success(existResult.Data);
+    }
+
     public async Task<Result> Register(string username, string password)
     {
         var hashedPassword = passwordHasher.Generate(password);

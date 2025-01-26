@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace API.Filters;
 
-public class AccessFilter(IDocumentAccessService accessService) : IAsyncActionFilter
+public class HasAccessFilter(IDocumentAccessService accessService) : IAsyncActionFilter
 {
     public async Task OnActionExecutionAsync(ActionExecutingContext context, ActionExecutionDelegate next)
     {
@@ -26,7 +26,7 @@ public class AccessFilter(IDocumentAccessService accessService) : IAsyncActionFi
         var documentId = request.DocumentId;
 
         var hasAccessResult = await accessService.ValidateAccess(userId, documentId);
-        if (hasAccessResult.IsFailure || !hasAccessResult.Data)
+        if (hasAccessResult.IsFailure)
         {
             context.Result = new ForbidResult();
             return;
