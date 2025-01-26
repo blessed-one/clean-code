@@ -32,7 +32,7 @@ public class DocumentController(
     [RoleAuthorize("user")]
     [ServiceFilter(typeof(UserExistFilter))]
     [HttpPost("New")]
-    public async Task<IActionResult> Create([FromBody] DocumentRequest request)
+    public async Task<IActionResult> Create([FromBody] DocumentNameRequest request)
     {
         var documentName = request.Name;
         if (string.IsNullOrEmpty(documentName))
@@ -52,7 +52,7 @@ public class DocumentController(
     [RoleAuthorize("user")]
     [ServiceFilter(typeof(HasAccessFilter))]
     [HttpDelete("Delete")]
-    public async Task<IActionResult> Delete([FromBody] DocumentRequest request)
+    public async Task<IActionResult> Delete([FromBody] DocumentIdRequest request)
     {
         var documentId = request.DocumentId;
 
