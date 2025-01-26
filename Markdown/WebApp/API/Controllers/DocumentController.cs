@@ -45,18 +45,6 @@ public class DocumentController(IDocumentService documentService, IDocumentAcces
         {
             return Problem(createDocResult.Message);
         }
-        var documentId = createDocResult.Data;
-        
-        var getAccessResult = await accessService.AddAccess(userId, documentId);
-        if (getAccessResult.IsFailure)
-        {
-            var deleteResult = await documentService.Delete(documentId);
-            if (deleteResult.IsFailure)
-            {
-                return Problem(deleteResult.Message);
-            }
-            return Problem(getAccessResult.Message);
-        }
 
         return Created();
     }

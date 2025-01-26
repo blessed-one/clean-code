@@ -15,9 +15,27 @@ public class DocumentService(IDocumentRepository documentRepository) : IDocument
             : Result<List<Document>>.Success(repositoryResult.Data!);
     }
 
+    public async Task<Result<Document>> GetById(Guid id)
+    {
+        var repositoryResult = await documentRepository.GetById(id);
+
+        return repositoryResult.IsFailure
+            ? Result<Document>.Failure(repositoryResult.Message!)
+            : Result<Document>.Success(repositoryResult.Data!);
+    }
+
+    public async Task<Result<List<Document>>> GetByAuthorId(Guid authorId)
+    {
+        var repositoryResult = await documentRepository.GetByAuthorId(authorId);
+
+        return repositoryResult.IsFailure
+            ? Result<List<Document>>.Failure(repositoryResult.Message!)
+            : Result<List<Document>>.Success(repositoryResult.Data!);
+    }
+
     public async Task<Result<Guid>> Create(string documentName, Guid authorId)
     {
-        // TODO add to miro
+        // TODO add save to minio
         var authorsDocsResult = await documentRepository.GetByAuthorId(authorId);
         if (authorsDocsResult.IsFailure)
         {
@@ -40,12 +58,19 @@ public class DocumentService(IDocumentRepository documentRepository) : IDocument
 
     public Task<Result> Update(Guid documentId, string documentName)
     {
-        // TODO add to miro
+        // TODO add save to minio
+        throw new NotImplementedException();
+    }
+
+    public Task<Result<string>> GetDocumentContent(Guid documentId)
+    {
+        // TODO add get form minio
         throw new NotImplementedException();
     }
 
     public async Task<Result> Delete(Guid documentId)
     {
+        // TODO add delete from minio
         var deleteRepositoryResult = await documentRepository.Delete(documentId);
         if (deleteRepositoryResult.IsFailure)
         {

@@ -63,34 +63,30 @@ public class DocumentsRepository(AppDbContext dbContext) : IDocumentRepository
                 .ToList());
     }
 
-    public async Task<Result<List<Document>>> GetByPage(int page, int pageSize)
-    {
-        var documentEntities = await dbContext.Documents
-            .AsNoTracking()
-            .Skip((page - 1) * pageSize)
-            .Take(pageSize)
-            .ToListAsync();
-
-        return Result<List<Document>>.Success(
-            documentEntities
-                .Select(
-                    dEntity => Document.Create(dEntity.Id, dEntity.Name, dEntity.AuthorId, dEntity.CreationDateTime))
-                .ToList());
-    }
-
     public async Task<Result<Guid>> Create(string documentName, Guid authorId)
     {
+        var newDocGuid = Guid.NewGuid();
+        var newAccessGuid = Guid.NewGuid();
+
         var documentEntity = new DocumentEntity
         {
-            Id = Guid.NewGuid(),
+            Id = newDocGuid,
             Name = documentName,
             AuthorId = authorId,
             CreationDateTime = DateTime.UtcNow,
         };
 
+        var accessEntity = new DocumentAccessEntity
+        {
+            Id = newAccessGuid,
+            UserId = authorId,
+            DocumentId = documentEntity.Id,
+        };
+
         try
         {
             await dbContext.Documents.AddAsync(documentEntity);
+            await dbContext.DocumentAccesses.AddAsync(accessEntity);
             await dbContext.SaveChangesAsync();
 
             return Result<Guid>.Success(documentEntity.Id);
