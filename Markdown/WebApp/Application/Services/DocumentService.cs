@@ -27,9 +27,27 @@ public class DocumentService(IDocumentRepository documentRepository, IMinioStora
             : Result<Document>.Success(repositoryResult.Data!);
     }
 
+    public async Task<Result<byte[]>> GetContentById(Guid id)
+    {
+        var minioResult = await minioStorage.DownloadFile(id.ToString());
+        
+        return minioResult.IsFailure
+            ? Result<byte[]>.Failure(minioResult.Message!)
+            : Result<byte[]>.Success(minioResult.Data!);
+    }
+    
     public async Task<Result<List<Document>>> GetByAuthorId(Guid authorId)
     {
         var repositoryResult = await documentRepository.GetByAuthorId(authorId);
+
+        return repositoryResult.IsFailure
+            ? Result<List<Document>>.Failure(repositoryResult.Message!)
+            : Result<List<Document>>.Success(repositoryResult.Data!);
+    }
+
+    public async Task<Result<List<Document>>> GetByAuthorIdAccess(Guid authorId)
+    {
+        var repositoryResult = await documentRepository.GetByAuthorIdAccess(authorId);
 
         return repositoryResult.IsFailure
             ? Result<List<Document>>.Failure(repositoryResult.Message!)
@@ -81,15 +99,6 @@ public class DocumentService(IDocumentRepository documentRepository, IMinioStora
         }
         
         return Result.Success();
-    }
-
-    public async Task<Result<string>> GetDocumentContent(Guid documentId)
-    {
-        var minioResult = await minioStorage.DownloadFile(documentId.ToString());
-        
-        return minioResult.IsFailure 
-            ? Result<string>.Failure(minioResult.Message!) 
-            : Result<string>.Success(Encoding.UTF8.GetString(minioResult.Data!));
     }
 
     public async Task<Result> Delete(Guid documentId)
