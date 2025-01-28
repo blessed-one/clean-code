@@ -18,7 +18,8 @@ public class DocumentsRepository(AppDbContext dbContext) : IDocumentRepository
         return Result<List<Document>>.Success(
             documentEntities
                 .Select(
-                    dEntity => Document.Create(dEntity.Id, dEntity.Name, dEntity.AuthorId, dEntity.CreationDateTime))
+                    dEntity => Document.Create(dEntity.Id, dEntity.Name, dEntity.AuthorId, dEntity.AuthorName,
+                        dEntity.CreationDateTime))
                 .ToList());
     }
 
@@ -32,7 +33,7 @@ public class DocumentsRepository(AppDbContext dbContext) : IDocumentRepository
             return Result<Document>.Failure("Document not found.");
 
         var document = Document.Create(documentEntity.Id, documentEntity.Name, documentEntity.AuthorId,
-            documentEntity.CreationDateTime);
+            documentEntity.AuthorName, documentEntity.CreationDateTime);
         return Result<Document>.Success(document);
     }
 
@@ -46,7 +47,8 @@ public class DocumentsRepository(AppDbContext dbContext) : IDocumentRepository
         return Result<List<Document>>.Success(
             documentEntities
                 .Select(
-                    dEntity => Document.Create(dEntity.Id, dEntity.Name, dEntity.AuthorId, dEntity.CreationDateTime))
+                    dEntity => Document.Create(dEntity.Id, dEntity.Name, dEntity.AuthorId, dEntity.AuthorName,
+                        dEntity.CreationDateTime))
                 .ToList());
     }
 
@@ -60,7 +62,8 @@ public class DocumentsRepository(AppDbContext dbContext) : IDocumentRepository
         return Result<List<Document>>.Success(
             documentEntities
                 .Select(
-                    dEntity => Document.Create(dEntity.Id, dEntity.Name, dEntity.AuthorId, dEntity.CreationDateTime))
+                    dEntity => Document.Create(dEntity.Id, dEntity.Name, dEntity.AuthorId, dEntity.AuthorName,
+                        dEntity.CreationDateTime))
                 .ToList());
     }
 
@@ -79,7 +82,8 @@ public class DocumentsRepository(AppDbContext dbContext) : IDocumentRepository
         return Result<List<Document>>.Success(
             documentEntities
                 .Select(
-                    dEntity => Document.Create(dEntity.Id, dEntity.Name, dEntity.AuthorId, dEntity.CreationDateTime))
+                    dEntity => Document.Create(dEntity.Id, dEntity.Name, dEntity.AuthorId, dEntity.AuthorName,
+                        dEntity.CreationDateTime))
                 .ToList());
     }
 
@@ -88,23 +92,36 @@ public class DocumentsRepository(AppDbContext dbContext) : IDocumentRepository
         var newDocGuid = Guid.NewGuid();
         var newAccessGuid = Guid.NewGuid();
 
-        var documentEntity = new DocumentEntity
-        {
-            Id = newDocGuid,
-            Name = documentName,
-            AuthorId = authorId,
-            CreationDateTime = DateTime.UtcNow,
-        };
-
-        var accessEntity = new DocumentAccessEntity
-        {
-            Id = newAccessGuid,
-            UserId = authorId,
-            DocumentId = documentEntity.Id,
-        };
-
         try
         {
+            var authorName = await dbContext.Users
+                .AsNoTracking()
+                .Where(user => user.Id == authorId)
+                .Select(user => user.Login)
+                .FirstOrDefaultAsync();
+
+            if (string.IsNullOrEmpty(authorName))
+            {
+                return Result<Guid>.Failure("Author not found.");
+            }
+            
+            var documentEntity = new DocumentEntity
+            {
+                Id = newDocGuid,
+                Name = documentName,
+                AuthorId = authorId,
+                AuthorName = authorName,
+                CreationDateTime = DateTime.UtcNow,
+            };
+
+            var accessEntity = new DocumentAccessEntity
+            {
+                Id = newAccessGuid,
+                UserId = authorId,
+                DocumentId = documentEntity.Id,
+            };
+
+
             await dbContext.Documents.AddAsync(documentEntity);
             await dbContext.DocumentAccesses.AddAsync(accessEntity);
             await dbContext.SaveChangesAsync();

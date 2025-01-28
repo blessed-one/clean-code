@@ -1,0 +1,440 @@
+
+document.addEventListener("DOMContentLoaded", async () => {await UpdateUserInfo()} )
+
+// Метод для показа личных документов и скрытия доступных
+function showPersonalDocuments() {
+    document.getElementById('personal-documents').style.display = 'flex';
+    document.getElementById('available-documents').style.display = 'none';
+}
+
+// Метод для показа доступных документов и скрытия личных
+function showAvailableDocuments() {
+    document.getElementById('personal-documents').style.display = 'none';
+    document.getElementById('available-documents').style.display = 'flex';
+}
+
+// Изначально скрываем доступные документы
+document.addEventListener('DOMContentLoaded', function() {
+    showPersonalDocuments(); // По умолчанию показываем личные документы
+});
+
+// Глобальные переменные для хранения документов
+let userDocs = []; // Личные документы пользователя
+let sharedDocs = []; // Документы, доступные пользователю
+
+// Функция отображения формы регистрации
+function showRegistrationForm() {
+    const overlay = createOverlay();
+    const popup = createPopup();
+    const form = createRegistrationForm(() => removeOverlay(overlay));
+
+    popup.appendChild(form);
+    overlay.appendChild(popup);
+    document.body.appendChild(overlay);
+}
+
+// Функция отображения формы входа
+function showLoginForm() {
+    const overlay = createOverlay();
+    const popup = createPopup();
+    const form = createLoginForm(() => removeOverlay(overlay));
+
+    popup.appendChild(form);
+    overlay.appendChild(popup);
+    document.body.appendChild(overlay);
+}
+
+// Функция создания затемнения фона
+function createOverlay() {
+    const overlay = document.createElement('div');
+    overlay.className = "overlay";
+    return overlay;
+}
+
+// Функция удаления overlay
+function removeOverlay(overlay) {
+    document.body.removeChild(overlay);
+}
+
+// Функция создания всплывающего окна
+function createPopup() {
+    const popup = document.createElement('div');
+    popup.className = "popup";
+
+    const closeButton = document.createElement('button');
+    closeButton.textContent = "×";
+    closeButton.className = "close-button";
+    closeButton.addEventListener('click', () => {
+        removeOverlay(document.querySelector('.overlay'));
+    });
+
+    popup.appendChild(closeButton);
+    return popup;
+}
+
+// Функция создания формы регистрации
+function createRegistrationForm(onClose) {
+    const form = document.createElement('form');
+    form.className = "new-document-form";
+
+    const loginField = createInputField('text', 'login', 'Логин');
+    const passwordField = createInputField('password', 'password', 'Пароль');
+    const submitButton = createSubmitButton('Зарегистрироваться');
+
+    form.appendChild(loginField);
+    form.appendChild(passwordField);
+    form.appendChild(submitButton);
+
+    form.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        const formData = new FormData(form);
+        const data = Object.fromEntries(formData.entries());
+
+        try {
+            const response = await fetch('http://localhost:5163/User/Register', {
+                method: 'POST',
+                credentials: 'include',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data),
+            });
+
+            if (!response.ok) {
+                const errorText = await response.text();
+                throw new Error(errorText);
+            }
+
+            alert('Регистрация прошла успешно!');
+            onClose();
+        } catch (error) {
+            alert(`Ошибка регистрации: ${error.message}`);
+        }
+    });
+
+    return form;
+}
+
+// Функция создания формы входа
+function createLoginForm(onClose) {
+    const form = document.createElement('form');
+    form.className = "new-document-form";
+
+    const loginField = createInputField('text', 'login', 'Логин');
+    const passwordField = createInputField('password', 'password', 'Пароль');
+    const submitButton = createSubmitButton('Войти');
+    
+    form.appendChild(loginField);
+    form.appendChild(passwordField);
+    form.appendChild(submitButton);
+
+    form.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        const formData = new FormData(form);
+        const data = Object.fromEntries(formData.entries());
+
+        try {
+            const response = await fetch('http://localhost:5163/User/Login', {
+                method: 'POST',
+                credentials: 'include',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data),
+            });
+
+            if (!response.ok) {
+                const errorText = await response.text();
+                throw new Error(errorText);
+            }
+
+            alert('Вход выполнен успешно!');
+            onClose();
+        } catch (error) {
+            alert(`Ошибка входа: ${error.message}`);
+        } finally {
+            await UpdateUserInfo(); // Обновляем информацию о пользователе после входа
+        }
+    });
+
+    return form;
+}
+
+// Функция создания поля ввода
+function createInputField(type, name, placeholder) {
+    const input = document.createElement('input');
+    input.type = type;
+    input.name = name;
+    input.placeholder = placeholder;
+    return input;
+}
+
+// Функция создания кнопки отправки
+function createSubmitButton(text) {
+    const button = document.createElement('button');
+    button.type = 'submit';
+    button.textContent = text;
+    return button;
+}
+
+// Метод для обновления информации о пользователе
+async function UpdateUserInfo() {
+    try {
+        // Запрос личных документов
+        const myDocsResponse = await fetch('http://localhost:5163/Document/My', {
+            credentials: 'include',
+        });
+        if (!myDocsResponse.ok) {
+            throw new Error('Ошибка при получении личных документов');
+        }
+        userDocs = await myDocsResponse.json();
+
+        // Запрос доступных документов
+        const sharedDocsResponse = await fetch('http://localhost:5163/Document/Shared', {
+            credentials: 'include',
+        });
+        if (!sharedDocsResponse.ok) {
+            throw new Error('Ошибка при получении доступных документов');
+        }
+        sharedDocs = await sharedDocsResponse.json();
+
+        // Обновляем интерфейс
+        updateDocumentLists();
+    } catch (error) {
+        console.error('Ошибка при обновлении информации о пользователе:', error);
+    }
+}
+
+// Функция для обновления списков документов в интерфейсе
+function updateDocumentLists() {
+    const personalDocumentsContainer = document.getElementById('personal-documents');
+    const availableDocumentsContainer = document.getElementById('available-documents');
+
+    // Очищаем контейнеры
+    personalDocumentsContainer.innerHTML = '';
+    availableDocumentsContainer.innerHTML = '';
+
+    // Добавляем личные документы
+    userDocs.forEach((doc, index) => {
+        const card = createDocumentCard(doc, `pd_${doc.id}`);
+        personalDocumentsContainer.appendChild(card);
+    });
+
+    // Добавляем доступные документы
+    sharedDocs.forEach((doc, index) => {
+        const card = createDocumentCard(doc, `sd_${doc.id}`);
+        availableDocumentsContainer.appendChild(card);
+    });
+}
+
+// Функция для создания карточки документа
+function createDocumentCard(doc, cardId) {
+    const card = document.createElement('div');
+    card.className = 'document-card';
+    card.id = cardId;
+
+    const documentInfo = document.createElement('div');
+    documentInfo.className = 'document-info';
+
+    const documentName = document.createElement('span');
+    documentName.className = 'document-name';
+    documentName.textContent = doc.name;
+
+    const documentAuthor = document.createElement('span');
+    documentAuthor.className = 'document-author';
+    documentAuthor.textContent = `Автор: ${doc.authorName}`;
+
+    documentInfo.appendChild(documentName);
+    documentInfo.appendChild(documentAuthor);
+
+    const documentActions = document.createElement('div');
+    documentActions.className = 'document-actions';
+
+    const accessButton = document.createElement('button');
+    accessButton.className = 'access-button';
+    accessButton.textContent = 'Доступ';
+    
+    accessButton.onclick = () => showAccessManagementForm(doc.id)
+
+    const openButton = document.createElement('button');
+    openButton.className = 'open-button';
+    openButton.textContent = 'Открыть';
+
+    // Привязываем метод переадресации
+    openButton.onclick = () => {
+        window.location.href = `/Page/Convertor?documentId=${doc.id}`;
+    };
+
+    const deleteButton = document.createElement('button');
+    deleteButton.className = 'delete-button';
+    deleteButton.textContent = 'Удалить';
+    deleteButton.style.backgroundColor = 'red';
+    deleteButton.style.color = 'white';
+    deleteButton.onclick = () => removeCard(doc.id);
+
+    documentActions.appendChild(accessButton);
+    documentActions.appendChild(openButton);
+    documentActions.appendChild(deleteButton);
+
+    card.appendChild(documentInfo);
+    card.appendChild(documentActions);
+
+    return card;
+}
+
+// Функция удаления карточки документа
+async function removeCard(documentId) {
+    try {
+        const response = await fetch('http://localhost:5163/Document/Delete', {
+            method: 'DELETE',
+            credentials: 'include',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ documentId: documentId }),
+        });
+
+        if (!response.ok) {
+            throw new Error('Ошибка при удалении документа');
+        }
+
+        // Удаляем карточки с указанным documentId
+        const personalCard = document.getElementById(`pd_${documentId}`);
+        const sharedCard = document.getElementById(`sd_${documentId}`);
+
+        if (personalCard) personalCard.remove();
+        if (sharedCard) sharedCard.remove();
+
+        alert('Документ успешно удалён!');
+    } catch (error) {
+        console.error('Ошибка при удалении документа:', error);
+        alert('Не удалось удалить документ.');
+    }
+}
+
+
+
+// Функция отображения формы создания нового документа
+function showCreateDocumentForm() {
+    const overlay = createOverlay();
+    const popup = createPopup();
+    const form = createNewDocumentForm(() => removeOverlay(overlay));
+
+    popup.appendChild(form);
+    overlay.appendChild(popup);
+    document.body.appendChild(overlay);
+}
+
+// Функция создания формы нового документа
+function createNewDocumentForm(onClose) {
+    const form = document.createElement('form');
+    form.className = 'new-document-form';
+
+    const nameField = createInputField('text', 'name', 'Имя документа');
+    const submitButton = createSubmitButton('Создать');
+
+    form.appendChild(nameField);
+    form.appendChild(submitButton);
+
+    form.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        const formData = new FormData(form);
+        const data = Object.fromEntries(formData.entries());
+
+        try {
+            const response = await fetch('http://localhost:5163/Document/New', {
+                method: 'POST',
+                credentials: 'include',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data),
+            });
+
+            if (!response.ok) {
+                const errorText = await response.text();
+                throw new Error(errorText);
+            }
+
+            const newDocumentId = await response.text();
+            
+            // Редирект на Page/Convertor с передачей documentId
+            window.location.href = `/Page/Convertor?documentId=${newDocumentId.replaceAll('\"', '')}`;
+        } catch (error) {
+            alert(`Ошибка создания документа: ${error.message}`);
+        }
+    });
+
+    return form;
+}
+
+function showAccessManagementForm(documentId) {
+    const overlay = createOverlay();
+    const popup = createPopup();
+    const form = createAccessManagementForm(documentId, () => removeOverlay(overlay));
+
+    popup.appendChild(form);
+    overlay.appendChild(popup);
+    document.body.appendChild(overlay);
+}
+
+// Функция создания формы управления доступом
+function createAccessManagementForm(documentId, onClose) {
+    const form = document.createElement('form');
+    form.className = 'access-management-form';
+
+    // Поле для ввода логина пользователя
+    const userLoginField = createInputField('text', 'userLogin', 'Логин пользователя');
+    form.appendChild(userLoginField);
+
+    // Селект с вариантами разрешить/запретить доступ
+    const accessOptionsField = document.createElement('select');
+    accessOptionsField.name = 'accessOptions';
+    accessOptionsField.className = 'access-options-field';
+
+    const grantOption = document.createElement('option');
+    grantOption.value = 'grant';
+    grantOption.textContent = 'Разрешить доступ';
+    accessOptionsField.appendChild(grantOption);
+
+    const denyOption = document.createElement('option');
+    denyOption.value = 'deny';
+    denyOption.textContent = 'Запретить доступ';
+    accessOptionsField.appendChild(denyOption);
+
+    form.appendChild(accessOptionsField);
+
+    // Кнопка подтверждения
+    const submitButton = createSubmitButton('Подтвердить');
+    form.appendChild(submitButton);
+
+    form.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        const formData = new FormData(form);
+        const { userLogin, accessOptions } = Object.fromEntries(formData.entries());
+
+        if (!userLogin) {
+            alert('Введите логин пользователя!');
+            return;
+        }
+
+        const url = accessOptions === 'grant' ? '/Access/Give' : '/Access/Remove';
+        const payload = {
+            userLogin,
+            documentId,
+        };
+
+        try {
+            const response = await fetch(url, {
+                method: 'POST',
+                credentials: 'include',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload),
+            });
+
+            if (!response.ok) {
+                const errorText = await response.text();
+                throw new Error(errorText);
+            }
+
+            alert('Действие выполнено успешно!');
+            onClose(); // Закрываем форму при успешной операции
+        } catch (error) {
+            alert(`Ошибка: ${error.message}`);
+        }
+    });
+
+    return form;
+}

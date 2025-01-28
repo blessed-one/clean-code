@@ -1,12 +1,3 @@
-Now listening on: http://localhost:5163
-Application started. Press Ctrl+C to shut down.
-Hosting environment: Development
-Content root path: D:\inf\clean-code\Markdown\WebApp\API
-Executed DbCommand (257ms) [Parameters=[@__login_0='?'], CommandType='Text', CommandTimeout='30']
-SELECT u."Id", u."Login", u."PasswordHash"
-FROM "Users" AS u
-WHERE u."Login" = @__login_0
-LIMIT 1
 Application is shutting down...
 Now listening on: http://localhost:5163
 Application started. Press Ctrl+C to shut down.
@@ -17,673 +8,12 @@ Now listening on: http://localhost:5163
 Application started. Press Ctrl+C to shut down.
 Hosting environment: Development
 Content root path: D:\inf\clean-code\Markdown\WebApp\API
-Application is shutting down...
-Now listening on: http://localhost:5163
-Application started. Press Ctrl+C to shut down.
-Hosting environment: Development
-Content root path: D:\inf\clean-code\Markdown\WebApp\API
-An error occurred using the connection to database 'mdprocessordb' on server 'tcp://localhost:5432'.
-An exception occurred while iterating over the results of a query for context type 'Persistence.AppDbContext'.
-System.InvalidOperationException: An exception has been raised that is likely due to a transient failure.
- ---> Npgsql.NpgsqlException (0x80004005): Failed to connect to 127.0.0.1:5432
- ---> System.Net.Sockets.SocketException (10061): Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение.
-   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.ThrowException(SocketError error, CancellationToken cancellationToken)
-   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.System.Threading.Tasks.Sources.IValueTaskSource.GetResult(Int16 token)
-   at System.Net.Sockets.Socket.<ConnectAsync>g__WaitForConnectWithCancellation|285_0(AwaitableSocketAsyncEventArgs saea, ValueTask connectTask, CancellationToken cancellationToken)
-   at Npgsql.TaskTimeoutAndCancellation.ExecuteAsync(Func`2 getTaskFunc, NpgsqlTimeout timeout, CancellationToken cancellationToken)
-   at Npgsql.Internal.NpgsqlConnector.ConnectAsync(NpgsqlTimeout timeout, CancellationToken cancellationToken)
-   at Npgsql.Internal.NpgsqlConnector.ConnectAsync(NpgsqlTimeout timeout, CancellationToken cancellationToken)
-   at Npgsql.Internal.NpgsqlConnector.RawOpen(SslMode sslMode, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
-   at Npgsql.Internal.NpgsqlConnector.<Open>g__OpenCore|214_1(NpgsqlConnector conn, SslMode sslMode, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
-   at Npgsql.Internal.NpgsqlConnector.Open(NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
-   at Npgsql.PoolingDataSource.OpenNewConnector(NpgsqlConnection conn, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
-   at Npgsql.PoolingDataSource.<Get>g__RentAsync|33_0(NpgsqlConnection conn, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlConnection.<Open>g__OpenAsync|42_0(Boolean async, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenInternalAsync(Boolean errorsExpected, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenInternalAsync(Boolean errorsExpected, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenAsync(CancellationToken cancellationToken, Boolean errorsExpected)
-   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
-   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
-   --- End of inner exception stack trace ---
-   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
-An unhandled exception has occurred while executing the request.
-Executed DbCommand (143ms) [Parameters=[@__login_0='?'], CommandType='Text', CommandTimeout='30']
-SELECT u."Id", u."Login", u."PasswordHash"
-FROM "Users" AS u
-WHERE u."Login" = @__login_0
-LIMIT 1
-An unhandled exception has occurred while executing the request.
-Application is shutting down...
-Now listening on: http://localhost:5163
-Application started. Press Ctrl+C to shut down.
-Hosting environment: Development
-Content root path: D:\inf\clean-code\Markdown\WebApp\API
-Executed DbCommand (276ms) [Parameters=[@__login_0='?'], CommandType='Text', CommandTimeout='30']
-SELECT u."Id", u."Login", u."PasswordHash"
-FROM "Users" AS u
-WHERE u."Login" = @__login_0
-LIMIT 1
-An unhandled exception has occurred while executing the request.
-Application is shutting down...
-Now listening on: http://localhost:5163
-Application started. Press Ctrl+C to shut down.
-Hosting environment: Development
-Content root path: D:\inf\clean-code\Markdown\WebApp\API
-Executed DbCommand (128ms) [Parameters=[@__login_0='?'], CommandType='Text', CommandTimeout='30']
-SELECT u."Id", u."Login", u."PasswordHash"
-FROM "Users" AS u
-WHERE u."Login" = @__login_0
-LIMIT 1
-Failed executing DbCommand (12ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = Guid), @p2='?' (DbType = DateTime), @p3='?'], CommandType='Text', CommandTimeout='30']
-INSERT INTO "Documents" ("Id", "AuthorId", "CreationDateTime", "Name")
-VALUES (@p0, @p1, @p2, @p3);
-An exception occurred in the database while saving changes for context type 'Persistence.AppDbContext'.
-Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
- ---> System.ArgumentException: Cannot write DateTime with Kind=Local to PostgreSQL type 'timestamp with time zone', only UTC is supported. Note that it's not possible to mix DateTimes with different Kinds in an array, range, or multirange. (Parameter 'value')
-   at Npgsql.Internal.Converters.DateTimeConverterResolver`1.Get(DateTime value, Nullable`1 expectedPgTypeId, Boolean validateOnly)
-   at Npgsql.Internal.Converters.DateTimeConverterResolver.<>c.<CreateResolver>b__0_0(DateTimeConverterResolver`1 resolver, DateTime value, Nullable`1 expectedPgTypeId)
-   at Npgsql.Internal.Converters.DateTimeConverterResolver`1.Get(T value, Nullable`1 expectedPgTypeId)
-   at Npgsql.Internal.PgConverterResolver`1.GetAsObjectInternal(PgTypeInfo typeInfo, Object value, Nullable`1 expectedPgTypeId)
-   at Npgsql.Internal.PgResolverTypeInfo.GetResolutionAsObject(Object value, Nullable`1 expectedPgTypeId)
-   at Npgsql.Internal.PgTypeInfo.GetObjectResolution(Object value)
-   at Npgsql.NpgsqlParameter.ResolveConverter(PgTypeInfo typeInfo)
-   at Npgsql.NpgsqlParameter.ResolveTypeInfo(PgSerializerOptions options)
-   at Npgsql.NpgsqlParameterCollection.ProcessParameters(PgSerializerOptions options, Boolean validateValues, CommandType commandType)
-   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
-   --- End of inner exception stack trace ---
-   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChangesAsync(IList`1 entries, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
-   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
-Application is shutting down...
-Now listening on: http://localhost:5163
-Application started. Press Ctrl+C to shut down.
-Hosting environment: Development
-Content root path: D:\inf\clean-code\Markdown\WebApp\API
-Executed DbCommand (257ms) [Parameters=[@__login_0='?'], CommandType='Text', CommandTimeout='30']
-SELECT u."Id", u."Login", u."PasswordHash"
-FROM "Users" AS u
-WHERE u."Login" = @__login_0
-LIMIT 1
-Executed DbCommand (54ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = Guid), @p2='?' (DbType = DateTime), @p3='?'], CommandType='Text', CommandTimeout='30']
-INSERT INTO "Documents" ("Id", "AuthorId", "CreationDateTime", "Name")
-VALUES (@p0, @p1, @p2, @p3);
-Executed DbCommand (2ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
-SELECT d."Id", d."AuthorId", d."CreationDateTime", d."Name"
-FROM "Documents" AS d
-Application is shutting down...
-Now listening on: http://localhost:5163
-Application started. Press Ctrl+C to shut down.
-Hosting environment: Development
-Content root path: D:\inf\clean-code\Markdown\WebApp\API
-Executed DbCommand (265ms) [Parameters=[@__login_0='?'], CommandType='Text', CommandTimeout='30']
-SELECT u."Id", u."Login", u."PasswordHash"
-FROM "Users" AS u
-WHERE u."Login" = @__login_0
-LIMIT 1
-Executed DbCommand (15ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
-SELECT d."Id", d."AuthorId", d."CreationDateTime", d."Name"
-FROM "Documents" AS d
-Executed DbCommand (16ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = Guid), @p2='?' (DbType = DateTime), @p3='?'], CommandType='Text', CommandTimeout='30']
-INSERT INTO "Documents" ("Id", "AuthorId", "CreationDateTime", "Name")
-VALUES (@p0, @p1, @p2, @p3);
-Executed DbCommand (2ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
-SELECT d."Id", d."AuthorId", d."CreationDateTime", d."Name"
-FROM "Documents" AS d
-Application is shutting down...
-Executed DbCommand (134ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
-DROP DATABASE mdprocessordb WITH (FORCE);
-An error occurred using the connection to database 'mdprocessordb' on server 'tcp://localhost:5432'.
-Executed DbCommand (547ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
-CREATE DATABASE mdprocessordb;
-Executed DbCommand (25ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
-CREATE TABLE IF NOT EXISTS "__EFMigrationsHistory" (
-    "MigrationId" character varying(150) NOT NULL,
-    "ProductVersion" character varying(32) NOT NULL,
-    CONSTRAINT "PK___EFMigrationsHistory" PRIMARY KEY ("MigrationId")
-);
-Acquiring an exclusive lock for migration application. See https://aka.ms/efcore-docs-migrations-lock for more information if this takes too long.
-Executed DbCommand (3ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
-LOCK TABLE "__EFMigrationsHistory" IN ACCESS EXCLUSIVE MODE
-Executed DbCommand (4ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
-SELECT "MigrationId", "ProductVersion"
-FROM "__EFMigrationsHistory"
-ORDER BY "MigrationId";
-Applying migration '20250125230913_initial'.
-Executed DbCommand (3ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
-CREATE TABLE "Users" (
-    "Id" uuid NOT NULL,
-    "Login" character varying(50) NOT NULL,
-    "PasswordHash" character varying(70) NOT NULL,
-    "Role" character varying(20) NOT NULL,
-    CONSTRAINT "PK_Users" PRIMARY KEY ("Id")
-);
-Executed DbCommand (9ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
-CREATE TABLE "Documents" (
-    "Id" uuid NOT NULL,
-    "Name" character varying(255) NOT NULL,
-    "AuthorId" uuid NOT NULL,
-    "CreationDateTime" timestamp with time zone NOT NULL,
-    CONSTRAINT "PK_Documents" PRIMARY KEY ("Id"),
-    CONSTRAINT "FK_Documents_Users_AuthorId" FOREIGN KEY ("AuthorId") REFERENCES "Users" ("Id") ON DELETE CASCADE
-);
-Executed DbCommand (4ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
-CREATE TABLE "DocumentAccesses" (
-    "Id" uuid NOT NULL,
-    "UserId" uuid NOT NULL,
-    "DocumentId" uuid NOT NULL,
-    CONSTRAINT "PK_DocumentAccesses" PRIMARY KEY ("Id"),
-    CONSTRAINT "FK_DocumentAccesses_Documents_DocumentId" FOREIGN KEY ("DocumentId") REFERENCES "Documents" ("Id") ON DELETE CASCADE,
-    CONSTRAINT "FK_DocumentAccesses_Users_UserId" FOREIGN KEY ("UserId") REFERENCES "Users" ("Id") ON DELETE CASCADE
-);
-Executed DbCommand (4ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
-CREATE INDEX "IX_DocumentAccesses_DocumentId" ON "DocumentAccesses" ("DocumentId");
-Executed DbCommand (2ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
-CREATE UNIQUE INDEX "IX_DocumentAccesses_UserId_DocumentId" ON "DocumentAccesses" ("UserId", "DocumentId");
-Executed DbCommand (2ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
-CREATE INDEX "IX_Documents_AuthorId" ON "Documents" ("AuthorId");
-Executed DbCommand (2ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
-CREATE UNIQUE INDEX "IX_Users_Login" ON "Users" ("Login");
-Executed DbCommand (4ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
-INSERT INTO "__EFMigrationsHistory" ("MigrationId", "ProductVersion")
-VALUES ('20250125230913_initial', '9.0.1');
-Now listening on: http://localhost:5163
-Application started. Press Ctrl+C to shut down.
-Hosting environment: Development
-Content root path: D:\inf\clean-code\Markdown\WebApp\API
-Executed DbCommand (264ms) [Parameters=[@__login_0='?'], CommandType='Text', CommandTimeout='30']
-SELECT u."Id", u."Login", u."PasswordHash", u."Role"
-FROM "Users" AS u
-WHERE u."Login" = @__login_0
-LIMIT 1
-Executed DbCommand (26ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?', @p2='?', @p3='?'], CommandType='Text', CommandTimeout='30']
-INSERT INTO "Users" ("Id", "Login", "PasswordHash", "Role")
-VALUES (@p0, @p1, @p2, @p3);
-Executed DbCommand (3ms) [Parameters=[@__login_0='?'], CommandType='Text', CommandTimeout='30']
-SELECT u."Id", u."Login", u."PasswordHash", u."Role"
-FROM "Users" AS u
-WHERE u."Login" = @__login_0
-LIMIT 1
-An unhandled exception has occurred while executing the request.
-Application is shutting down...
-Now listening on: http://localhost:5163
-Application started. Press Ctrl+C to shut down.
-Hosting environment: Development
-Content root path: D:\inf\clean-code\Markdown\WebApp\API
-Executed DbCommand (103ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
-SELECT d."Id", d."AuthorId", d."CreationDateTime", d."Name"
-FROM "Documents" AS d
-Application is shutting down...
-Now listening on: http://localhost:5163
-Application started. Press Ctrl+C to shut down.
-Hosting environment: Development
-Content root path: D:\inf\clean-code\Markdown\WebApp\API
-Executed DbCommand (52ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
-SELECT d."Id", d."AuthorId", d."CreationDateTime", d."Name"
-FROM "Documents" AS d
-Application is shutting down...
-Now listening on: http://localhost:5163
-Application started. Press Ctrl+C to shut down.
-Hosting environment: Development
-Content root path: D:\inf\clean-code\Markdown\WebApp\API
-Executed DbCommand (129ms) [Parameters=[@__login_0='?'], CommandType='Text', CommandTimeout='30']
-SELECT u."Id", u."Login", u."PasswordHash", u."Role"
-FROM "Users" AS u
-WHERE u."Login" = @__login_0
-LIMIT 1
-Executed DbCommand (9ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
-SELECT d."Id", d."AuthorId", d."CreationDateTime", d."Name"
-FROM "Documents" AS d
-Executed DbCommand (13ms) [Parameters=[@__userId_0='?' (DbType = Guid), @__documentId_1='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
-SELECT EXISTS (
-    SELECT 1
-    FROM "DocumentAccesses" AS d
-    WHERE d."UserId" = @__userId_0 AND d."DocumentId" = @__documentId_1)
-An unhandled exception has occurred while executing the request.
-Application is shutting down...
-Now listening on: http://localhost:5163
-Application started. Press Ctrl+C to shut down.
-Hosting environment: Development
-Content root path: D:\inf\clean-code\Markdown\WebApp\API
-Executed DbCommand (128ms) [Parameters=[@__userId_0='?' (DbType = Guid), @__documentId_1='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
-SELECT EXISTS (
-    SELECT 1
-    FROM "DocumentAccesses" AS d
-    WHERE d."UserId" = @__userId_0 AND d."DocumentId" = @__documentId_1)
-Application is shutting down...
-Now listening on: http://localhost:5163
-Application started. Press Ctrl+C to shut down.
-Hosting environment: Development
-Content root path: D:\inf\clean-code\Markdown\WebApp\API
-An unhandled exception has occurred while executing the request.
-Application is shutting down...
-Now listening on: http://localhost:5163
-Application started. Press Ctrl+C to shut down.
-Hosting environment: Development
-Content root path: D:\inf\clean-code\Markdown\WebApp\API
-An unhandled exception has occurred while executing the request.
-Application is shutting down...
-Now listening on: http://localhost:5163
-Application started. Press Ctrl+C to shut down.
-Hosting environment: Development
-Content root path: D:\inf\clean-code\Markdown\WebApp\API
-Executed DbCommand (61ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
-SELECT d."Id", d."AuthorId", d."CreationDateTime", d."Name"
-FROM "Documents" AS d
-An unhandled exception has occurred while executing the request.
-Application is shutting down...
-Now listening on: http://localhost:5163
-Application started. Press Ctrl+C to shut down.
-Hosting environment: Development
-Content root path: D:\inf\clean-code\Markdown\WebApp\API
-Executed DbCommand (104ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
-SELECT d."Id", d."AuthorId", d."CreationDateTime", d."Name"
-FROM "Documents" AS d
-An unhandled exception has occurred while executing the request.
-Application is shutting down...
-Now listening on: http://localhost:5163
-Application started. Press Ctrl+C to shut down.
-Hosting environment: Development
-Content root path: D:\inf\clean-code\Markdown\WebApp\API
-An unhandled exception has occurred while executing the request.
-Application is shutting down...
-Now listening on: http://localhost:5163
-Application started. Press Ctrl+C to shut down.
-Hosting environment: Development
-Content root path: D:\inf\clean-code\Markdown\WebApp\API
-An unhandled exception has occurred while executing the request.
-Application is shutting down...
-Now listening on: http://localhost:5163
-Application started. Press Ctrl+C to shut down.
-Hosting environment: Development
-Content root path: D:\inf\clean-code\Markdown\WebApp\API
-An unhandled exception has occurred while executing the request.
-Executed DbCommand (281ms) [Parameters=[@__login_0='?'], CommandType='Text', CommandTimeout='30']
-SELECT u."Id", u."Login", u."PasswordHash", u."Role"
-FROM "Users" AS u
-WHERE u."Login" = @__login_0
-LIMIT 1
-Executed DbCommand (17ms) [Parameters=[@__authorId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
-SELECT d."Id", d."AuthorId", d."CreationDateTime", d."Name"
-FROM "Documents" AS d
-WHERE d."AuthorId" = @__authorId_0
-Executed DbCommand (41ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = Guid), @p2='?' (DbType = DateTime), @p3='?'], CommandType='Text', CommandTimeout='30']
-INSERT INTO "Documents" ("Id", "AuthorId", "CreationDateTime", "Name")
-VALUES (@p0, @p1, @p2, @p3);
-Executed DbCommand (4ms) [Parameters=[@__userId_0='?' (DbType = Guid), @__documentId_1='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
-SELECT EXISTS (
-    SELECT 1
-    FROM "DocumentAccesses" AS d
-    WHERE d."UserId" = @__userId_0 AND d."DocumentId" = @__documentId_1)
-Executed DbCommand (3ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = Guid), @p2='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
-INSERT INTO "DocumentAccesses" ("Id", "DocumentId", "UserId")
-VALUES (@p0, @p1, @p2);
-Application is shutting down...
-Now listening on: http://localhost:5163
-Application started. Press Ctrl+C to shut down.
-Hosting environment: Development
-Content root path: D:\inf\clean-code\Markdown\WebApp\API
-Executed DbCommand (53ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
-SELECT d."Id", d."AuthorId", d."CreationDateTime", d."Name"
-FROM "Documents" AS d
-Application is shutting down...
-Now listening on: http://localhost:5163
-Application started. Press Ctrl+C to shut down.
-Hosting environment: Development
-Content root path: D:\inf\clean-code\Markdown\WebApp\API
-Executed DbCommand (126ms) [Parameters=[@__authorId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
-SELECT d."Id", d."AuthorId", d."CreationDateTime", d."Name"
-FROM "Documents" AS d
-WHERE d."AuthorId" = @__authorId_0
-Executed DbCommand (17ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = Guid), @p2='?' (DbType = DateTime), @p3='?'], CommandType='Text', CommandTimeout='30']
-INSERT INTO "Documents" ("Id", "AuthorId", "CreationDateTime", "Name")
-VALUES (@p0, @p1, @p2, @p3);
-Executed DbCommand (5ms) [Parameters=[@__userId_0='?' (DbType = Guid), @__documentId_1='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
-SELECT EXISTS (
-    SELECT 1
-    FROM "DocumentAccesses" AS d
-    WHERE d."UserId" = @__userId_0 AND d."DocumentId" = @__documentId_1)
-Executed DbCommand (2ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = Guid), @p2='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
-INSERT INTO "DocumentAccesses" ("Id", "DocumentId", "UserId")
-VALUES (@p0, @p1, @p2);
-Executed DbCommand (2ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?', @p2='?', @p3='?'], CommandType='Text', CommandTimeout='30']
-INSERT INTO "Users" ("Id", "Login", "PasswordHash", "Role")
-VALUES (@p0, @p1, @p2, @p3);
-Failed executing DbCommand (21ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?', @p2='?', @p3='?'], CommandType='Text', CommandTimeout='30']
-INSERT INTO "Users" ("Id", "Login", "PasswordHash", "Role")
-VALUES (@p0, @p1, @p2, @p3);
-An exception occurred in the database while saving changes for context type 'Persistence.AppDbContext'.
-Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
- ---> Npgsql.PostgresException (0x80004005): 23505: повторяющееся значение ключа нарушает ограничение уникальности "IX_Users_Login"
-
-DETAIL: Detail redacted as it may contain sensitive data. Specify 'Include Error Detail' in the connection string to include this information.
-   at Npgsql.Internal.NpgsqlConnector.ReadMessageLong(Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
-   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
-   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
-  Exception data:
-    Severity: ОШИБКА
-    SqlState: 23505
-    MessageText: повторяющееся значение ключа нарушает ограничение уникальности "IX_Users_Login"
-    Detail: Detail redacted as it may contain sensitive data. Specify 'Include Error Detail' in the connection string to include this information.
-    SchemaName: public
-    TableName: Users
-    ConstraintName: IX_Users_Login
-    File: nbtinsert.c
-    Line: 673
-    Routine: _bt_check_unique
-   --- End of inner exception stack trace ---
-   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChangesAsync(IList`1 entries, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
-   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
-Application is shutting down...
-Now listening on: http://localhost:5163
-Application started. Press Ctrl+C to shut down.
-Hosting environment: Development
-Content root path: D:\inf\clean-code\Markdown\WebApp\API
-Executed DbCommand (183ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?', @p2='?', @p3='?'], CommandType='Text', CommandTimeout='30']
-INSERT INTO "Users" ("Id", "Login", "PasswordHash", "Role")
-VALUES (@p0, @p1, @p2, @p3);
-Application is shutting down...
-Now listening on: http://localhost:5163
-Application started. Press Ctrl+C to shut down.
-Hosting environment: Development
-Content root path: D:\inf\clean-code\Markdown\WebApp\API
-Executed DbCommand (139ms) [Parameters=[@__login_0='?'], CommandType='Text', CommandTimeout='30']
-SELECT u."Id", u."Login", u."PasswordHash", u."Role"
-FROM "Users" AS u
-WHERE u."Login" = @__login_0
-LIMIT 1
-Executed DbCommand (12ms) [Parameters=[@__login_0='?'], CommandType='Text', CommandTimeout='30']
-SELECT u."Id", u."Login", u."PasswordHash", u."Role"
-FROM "Users" AS u
-WHERE u."Login" = @__login_0
-LIMIT 1
-Application is shutting down...
-Now listening on: http://localhost:5163
-Application started. Press Ctrl+C to shut down.
-Hosting environment: Development
-Content root path: D:\inf\clean-code\Markdown\WebApp\API
-Executed DbCommand (263ms) [Parameters=[@__login_0='?'], CommandType='Text', CommandTimeout='30']
-SELECT u."Id", u."Login", u."PasswordHash", u."Role"
-FROM "Users" AS u
-WHERE u."Login" = @__login_0
-LIMIT 1
-Executed DbCommand (7ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
-SELECT d."Id", d."AuthorId", d."CreationDateTime", d."Name"
-FROM "Documents" AS d
-Application is shutting down...
-Now listening on: http://localhost:5163
-Application started. Press Ctrl+C to shut down.
-Hosting environment: Development
-Content root path: D:\inf\clean-code\Markdown\WebApp\API
-Executed DbCommand (256ms) [Parameters=[@__userId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
-SELECT u."Id", u."Login", u."PasswordHash", u."Role"
-FROM "Users" AS u
-WHERE u."Id" = @__userId_0
-LIMIT 1
-Executed DbCommand (33ms) [Parameters=[@__documentId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
-DELETE FROM "Documents" AS d
-WHERE d."Id" = @__documentId_0
-Application is shutting down...
-Now listening on: http://localhost:5163
-Application started. Press Ctrl+C to shut down.
-Hosting environment: Development
-Content root path: D:\inf\clean-code\Markdown\WebApp\API
-Executed DbCommand (264ms) [Parameters=[@__authorId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
-SELECT d."Id", d."AuthorId", d."CreationDateTime", d."Name"
-FROM "Documents" AS d
-WHERE d."AuthorId" = @__authorId_0
-Executed DbCommand (59ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = Guid), @p2='?' (DbType = DateTime), @p3='?', @p4='?' (DbType = Guid), @p5='?' (DbType = Guid), @p6='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
-INSERT INTO "Documents" ("Id", "AuthorId", "CreationDateTime", "Name")
-VALUES (@p0, @p1, @p2, @p3);
-INSERT INTO "DocumentAccesses" ("Id", "DocumentId", "UserId")
-VALUES (@p4, @p5, @p6);
-Application is shutting down...
-Now listening on: http://localhost:5163
-Application started. Press Ctrl+C to shut down.
-Hosting environment: Development
-Content root path: D:\inf\clean-code\Markdown\WebApp\API
-Application is shutting down...
-Now listening on: http://localhost:5163
-Application started. Press Ctrl+C to shut down.
-Hosting environment: Development
-Content root path: D:\inf\clean-code\Markdown\WebApp\API
-Application is shutting down...
-Now listening on: http://localhost:5163
-Application started. Press Ctrl+C to shut down.
-Hosting environment: Development
-Content root path: D:\inf\clean-code\Markdown\WebApp\API
-An unhandled exception has occurred while executing the request.
-Application is shutting down...
-Now listening on: http://localhost:5163
-Application started. Press Ctrl+C to shut down.
-Hosting environment: Development
-Content root path: D:\inf\clean-code\Markdown\WebApp\API
-Executed DbCommand (257ms) [Parameters=[@__authorId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
-SELECT d."Id", d."AuthorId", d."CreationDateTime", d."Name"
-FROM "Documents" AS d
-WHERE d."AuthorId" = @__authorId_0
-Executed DbCommand (31ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = Guid), @p2='?' (DbType = DateTime), @p3='?', @p4='?' (DbType = Guid), @p5='?' (DbType = Guid), @p6='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
-INSERT INTO "Documents" ("Id", "AuthorId", "CreationDateTime", "Name")
-VALUES (@p0, @p1, @p2, @p3);
-INSERT INTO "DocumentAccesses" ("Id", "DocumentId", "UserId")
-VALUES (@p4, @p5, @p6);
-Executed DbCommand (13ms) [Parameters=[@__documentId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
-DELETE FROM "Documents" AS d
-WHERE d."Id" = @__documentId_0
-Application is shutting down...
-Now listening on: http://localhost:5163
-Application started. Press Ctrl+C to shut down.
-Hosting environment: Development
-Content root path: D:\inf\clean-code\Markdown\WebApp\API
-Executed DbCommand (250ms) [Parameters=[@__authorId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
-SELECT d."Id", d."AuthorId", d."CreationDateTime", d."Name"
-FROM "Documents" AS d
-WHERE d."AuthorId" = @__authorId_0
-Executed DbCommand (33ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = Guid), @p2='?' (DbType = DateTime), @p3='?', @p4='?' (DbType = Guid), @p5='?' (DbType = Guid), @p6='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
-INSERT INTO "Documents" ("Id", "AuthorId", "CreationDateTime", "Name")
-VALUES (@p0, @p1, @p2, @p3);
-INSERT INTO "DocumentAccesses" ("Id", "DocumentId", "UserId")
-VALUES (@p4, @p5, @p6);
-Executed DbCommand (15ms) [Parameters=[@__documentId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
-DELETE FROM "Documents" AS d
-WHERE d."Id" = @__documentId_0
-Application is shutting down...
-Now listening on: http://localhost:5163
-Application started. Press Ctrl+C to shut down.
-Hosting environment: Development
-Content root path: D:\inf\clean-code\Markdown\WebApp\API
-Executed DbCommand (264ms) [Parameters=[@__authorId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
-SELECT d."Id", d."AuthorId", d."CreationDateTime", d."Name"
-FROM "Documents" AS d
-WHERE d."AuthorId" = @__authorId_0
-Executed DbCommand (31ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = Guid), @p2='?' (DbType = DateTime), @p3='?', @p4='?' (DbType = Guid), @p5='?' (DbType = Guid), @p6='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
-INSERT INTO "Documents" ("Id", "AuthorId", "CreationDateTime", "Name")
-VALUES (@p0, @p1, @p2, @p3);
-INSERT INTO "DocumentAccesses" ("Id", "DocumentId", "UserId")
-VALUES (@p4, @p5, @p6);
-Executed DbCommand (3ms) [Parameters=[@__userId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
-SELECT u."Id", u."Login", u."PasswordHash", u."Role"
-FROM "Users" AS u
-WHERE u."Id" = @__userId_0
-LIMIT 1
-Executed DbCommand (15ms) [Parameters=[@__documentId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
-DELETE FROM "Documents" AS d
-WHERE d."Id" = @__documentId_0
-Application is shutting down...
-Now listening on: http://localhost:5163
-Application started. Press Ctrl+C to shut down.
-Hosting environment: Development
-Content root path: D:\inf\clean-code\Markdown\WebApp\API
-Executed DbCommand (255ms) [Parameters=[@__login_0='?'], CommandType='Text', CommandTimeout='30']
-SELECT u."Id", u."Login", u."PasswordHash", u."Role"
-FROM "Users" AS u
-WHERE u."Login" = @__login_0
-LIMIT 1
-Executed DbCommand (10ms) [Parameters=[@__userId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
-SELECT u."Id", u."Login", u."PasswordHash", u."Role"
-FROM "Users" AS u
-WHERE u."Id" = @__userId_0
-LIMIT 1
-Executed DbCommand (8ms) [Parameters=[@__userId_0='?' (DbType = Guid), @__documentId_1='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
-SELECT EXISTS (
-    SELECT 1
-    FROM "DocumentAccesses" AS d
-    WHERE d."UserId" = @__userId_0 AND d."DocumentId" = @__documentId_1)
-Executed DbCommand (5ms) [Parameters=[@__authorId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
-SELECT d."Id", d."AuthorId", d."CreationDateTime", d."Name"
-FROM "Documents" AS d
-WHERE d."AuthorId" = @__authorId_0
-Executed DbCommand (9ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = Guid), @p2='?' (DbType = DateTime), @p3='?', @p4='?' (DbType = Guid), @p5='?' (DbType = Guid), @p6='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
-INSERT INTO "Documents" ("Id", "AuthorId", "CreationDateTime", "Name")
-VALUES (@p0, @p1, @p2, @p3);
-INSERT INTO "DocumentAccesses" ("Id", "DocumentId", "UserId")
-VALUES (@p4, @p5, @p6);
-Executed DbCommand (2ms) [Parameters=[@__userId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
-SELECT u."Id", u."Login", u."PasswordHash", u."Role"
-FROM "Users" AS u
-WHERE u."Id" = @__userId_0
-LIMIT 1
-Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Guid), @__documentId_1='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
-SELECT EXISTS (
-    SELECT 1
-    FROM "DocumentAccesses" AS d
-    WHERE d."UserId" = @__userId_0 AND d."DocumentId" = @__documentId_1)
-Application is shutting down...
-Now listening on: http://localhost:5163
-Application started. Press Ctrl+C to shut down.
-Hosting environment: Development
-Content root path: D:\inf\clean-code\Markdown\WebApp\API
-Executed DbCommand (133ms) [Parameters=[@__userId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
-SELECT u."Id", u."Login", u."PasswordHash", u."Role"
-FROM "Users" AS u
-WHERE u."Id" = @__userId_0
-LIMIT 1
-Executed DbCommand (9ms) [Parameters=[@__userId_0='?' (DbType = Guid), @__documentId_1='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
-SELECT EXISTS (
-    SELECT 1
-    FROM "DocumentAccesses" AS d
-    WHERE d."UserId" = @__userId_0 AND d."DocumentId" = @__documentId_1)
-Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Guid), @__documentId_1='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
-SELECT EXISTS (
-    SELECT 1
-    FROM "DocumentAccesses" AS d
-    WHERE d."UserId" = @__userId_0 AND d."DocumentId" = @__documentId_1)
-Executed DbCommand (6ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = Guid), @p2='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
-INSERT INTO "DocumentAccesses" ("Id", "DocumentId", "UserId")
-VALUES (@p0, @p1, @p2);
-Application is shutting down...
-Now listening on: http://localhost:5163
-Application started. Press Ctrl+C to shut down.
-Hosting environment: Development
-Content root path: D:\inf\clean-code\Markdown\WebApp\API
-Application is shutting down...
-Now listening on: http://localhost:5163
-Application started. Press Ctrl+C to shut down.
-Hosting environment: Development
-Content root path: D:\inf\clean-code\Markdown\WebApp\API
-Executed DbCommand (254ms) [Parameters=[@__id_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+Executed DbCommand (129ms) [Parameters=[@__id_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
 SELECT u."Id", u."Login", u."PasswordHash", u."Role"
 FROM "Users" AS u
 WHERE u."Id" = @__id_0
 LIMIT 1
-Executed DbCommand (18ms) [Parameters=[@__authorId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
-SELECT d."Id", d."AuthorId", d."CreationDateTime", d."Name"
-FROM "Documents" AS d
-WHERE d."AuthorId" = @__authorId_0
-Executed DbCommand (16ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = Guid), @p2='?' (DbType = DateTime), @p3='?', @p4='?' (DbType = Guid), @p5='?' (DbType = Guid), @p6='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
-INSERT INTO "Documents" ("Id", "AuthorId", "CreationDateTime", "Name")
-VALUES (@p0, @p1, @p2, @p3);
-INSERT INTO "DocumentAccesses" ("Id", "DocumentId", "UserId")
-VALUES (@p4, @p5, @p6);
-Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
-SELECT u."Id", u."Login", u."PasswordHash", u."Role"
-FROM "Users" AS u
-WHERE u."Id" = @__userId_0
-LIMIT 1
-Executed DbCommand (5ms) [Parameters=[@__userId_0='?' (DbType = Guid), @__documentId_1='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
-SELECT EXISTS (
-    SELECT 1
-    FROM "DocumentAccesses" AS d
-    WHERE d."UserId" = @__userId_0 AND d."DocumentId" = @__documentId_1)
-Executed DbCommand (12ms) [Parameters=[@__documentId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
-DELETE FROM "Documents" AS d
-WHERE d."Id" = @__documentId_0
-Application is shutting down...
-Now listening on: http://localhost:5163
-Application started. Press Ctrl+C to shut down.
-Hosting environment: Development
-Content root path: D:\inf\clean-code\Markdown\WebApp\API
-Application is shutting down...
-Now listening on: http://localhost:5163
-Application started. Press Ctrl+C to shut down.
-Hosting environment: Development
-Content root path: D:\inf\clean-code\Markdown\WebApp\API
-Application is shutting down...
-Now listening on: http://localhost:5163
-Application started. Press Ctrl+C to shut down.
-Hosting environment: Development
-Content root path: D:\inf\clean-code\Markdown\WebApp\API
-Executed DbCommand (262ms) [Parameters=[@__id_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
-SELECT u."Id", u."Login", u."PasswordHash", u."Role"
-FROM "Users" AS u
-WHERE u."Id" = @__id_0
-LIMIT 1
-Executed DbCommand (18ms) [Parameters=[@__authorId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
-SELECT d."Id", d."AuthorId", d."CreationDateTime", d."Name"
-FROM "Documents" AS d
-WHERE d."AuthorId" = @__authorId_0
-Executed DbCommand (3ms) [Parameters=[@__id_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
-SELECT u."Id", u."Login", u."PasswordHash", u."Role"
-FROM "Users" AS u
-WHERE u."Id" = @__id_0
-LIMIT 1
-Executed DbCommand (2ms) [Parameters=[@__userId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
-SELECT u."Id", u."Login", u."PasswordHash", u."Role"
-FROM "Users" AS u
-WHERE u."Id" = @__userId_0
-LIMIT 1
-Executed DbCommand (9ms) [Parameters=[@__userId_0='?' (DbType = Guid), @__documentId_1='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
-SELECT EXISTS (
-    SELECT 1
-    FROM "DocumentAccesses" AS d
-    WHERE d."UserId" = @__userId_0 AND d."DocumentId" = @__documentId_1)
-Executed DbCommand (2ms) [Parameters=[@__id_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
-SELECT d."Id", d."AuthorId", d."CreationDateTime", d."Name"
-FROM "Documents" AS d
-WHERE d."Id" = @__id_0
-LIMIT 1
-Executed DbCommand (2ms) [Parameters=[@__id_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
-SELECT u."Id", u."Login", u."PasswordHash", u."Role"
-FROM "Users" AS u
-WHERE u."Id" = @__id_0
-LIMIT 1
-Executed DbCommand (9ms) [Parameters=[@__authorId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+Executed DbCommand (15ms) [Parameters=[@__authorId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
 SELECT d."Id", d."AuthorId", d."CreationDateTime", d."Name"
 FROM "Documents" AS d
 INNER JOIN (
@@ -691,12 +21,89 @@ INNER JOIN (
     FROM "DocumentAccesses" AS d0
     WHERE d0."UserId" = @__authorId_0
 ) AS d1 ON d."Id" = d1."DocumentId"
-Executed DbCommand (2ms) [Parameters=[@__id_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+Executed DbCommand (1ms) [Parameters=[@__id_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
 SELECT u."Id", u."Login", u."PasswordHash", u."Role"
 FROM "Users" AS u
 WHERE u."Id" = @__id_0
 LIMIT 1
-Executed DbCommand (2ms) [Parameters=[@__userId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+Executed DbCommand (1ms) [Parameters=[@__authorId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT d."Id", d."AuthorId", d."CreationDateTime", d."Name"
+FROM "Documents" AS d
+WHERE d."AuthorId" = @__authorId_0
+Executed DbCommand (1ms) [Parameters=[@__id_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash", u."Role"
+FROM "Users" AS u
+WHERE u."Id" = @__id_0
+LIMIT 1
+Executed DbCommand (1ms) [Parameters=[@__authorId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT d."Id", d."AuthorId", d."CreationDateTime", d."Name"
+FROM "Documents" AS d
+INNER JOIN (
+    SELECT d0."DocumentId"
+    FROM "DocumentAccesses" AS d0
+    WHERE d0."UserId" = @__authorId_0
+) AS d1 ON d."Id" = d1."DocumentId"
+Executed DbCommand (1ms) [Parameters=[@__id_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash", u."Role"
+FROM "Users" AS u
+WHERE u."Id" = @__id_0
+LIMIT 1
+Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash", u."Role"
+FROM "Users" AS u
+WHERE u."Id" = @__userId_0
+LIMIT 1
+Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Guid), @__documentId_1='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "DocumentAccesses" AS d
+    WHERE d."UserId" = @__userId_0 AND d."DocumentId" = @__documentId_1)
+Application is shutting down...
+Now listening on: http://localhost:5163
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: D:\inf\clean-code\Markdown\WebApp\API
+Executed DbCommand (127ms) [Parameters=[@__id_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash", u."Role"
+FROM "Users" AS u
+WHERE u."Id" = @__id_0
+LIMIT 1
+Executed DbCommand (9ms) [Parameters=[@__userId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash", u."Role"
+FROM "Users" AS u
+WHERE u."Id" = @__userId_0
+LIMIT 1
+Executed DbCommand (5ms) [Parameters=[@__userId_0='?' (DbType = Guid), @__documentId_1='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "DocumentAccesses" AS d
+    WHERE d."UserId" = @__userId_0 AND d."DocumentId" = @__documentId_1)
+Application is shutting down...
+Now listening on: http://localhost:5163
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: D:\inf\clean-code\Markdown\WebApp\API
+Executed DbCommand (129ms) [Parameters=[@__id_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash", u."Role"
+FROM "Users" AS u
+WHERE u."Id" = @__id_0
+LIMIT 1
+Executed DbCommand (10ms) [Parameters=[@__userId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash", u."Role"
+FROM "Users" AS u
+WHERE u."Id" = @__userId_0
+LIMIT 1
+Executed DbCommand (5ms) [Parameters=[@__userId_0='?' (DbType = Guid), @__documentId_1='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "DocumentAccesses" AS d
+    WHERE d."UserId" = @__userId_0 AND d."DocumentId" = @__documentId_1)
+Executed DbCommand (1ms) [Parameters=[@__id_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash", u."Role"
+FROM "Users" AS u
+WHERE u."Id" = @__id_0
+LIMIT 1
+Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
 SELECT u."Id", u."Login", u."PasswordHash", u."Role"
 FROM "Users" AS u
 WHERE u."Id" = @__userId_0
@@ -707,79 +114,6 @@ SELECT EXISTS (
     FROM "DocumentAccesses" AS d
     WHERE d."UserId" = @__userId_0 AND d."DocumentId" = @__documentId_1)
 Executed DbCommand (1ms) [Parameters=[@__id_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
-SELECT d."Id", d."AuthorId", d."CreationDateTime", d."Name"
-FROM "Documents" AS d
-WHERE d."Id" = @__id_0
-LIMIT 1
-Application is shutting down...
-Now listening on: http://localhost:5163
-Application started. Press Ctrl+C to shut down.
-Hosting environment: Development
-Content root path: D:\inf\clean-code\Markdown\WebApp\API
-Executed DbCommand (268ms) [Parameters=[@__login_0='?'], CommandType='Text', CommandTimeout='30']
-SELECT u."Id", u."Login", u."PasswordHash", u."Role"
-FROM "Users" AS u
-WHERE u."Login" = @__login_0
-LIMIT 1
-Executed DbCommand (9ms) [Parameters=[@__id_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
-SELECT u."Id", u."Login", u."PasswordHash", u."Role"
-FROM "Users" AS u
-WHERE u."Id" = @__id_0
-LIMIT 1
-Executed DbCommand (8ms) [Parameters=[@__authorId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
-SELECT d."Id", d."AuthorId", d."CreationDateTime", d."Name"
-FROM "Documents" AS d
-WHERE d."AuthorId" = @__authorId_0
-Application is shutting down...
-Now listening on: http://localhost:5163
-Application started. Press Ctrl+C to shut down.
-Hosting environment: Development
-Content root path: D:\inf\clean-code\Markdown\WebApp\API
-Executed DbCommand (328ms) [Parameters=[@__id_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
-SELECT u."Id", u."Login", u."PasswordHash", u."Role"
-FROM "Users" AS u
-WHERE u."Id" = @__id_0
-LIMIT 1
-Executed DbCommand (96ms) [Parameters=[@__userId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
-SELECT u."Id", u."Login", u."PasswordHash", u."Role"
-FROM "Users" AS u
-WHERE u."Id" = @__userId_0
-LIMIT 1
-Executed DbCommand (6ms) [Parameters=[@__userId_0='?' (DbType = Guid), @__documentId_1='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
-SELECT EXISTS (
-    SELECT 1
-    FROM "DocumentAccesses" AS d
-    WHERE d."UserId" = @__userId_0 AND d."DocumentId" = @__documentId_1)
-Application is shutting down...
-Now listening on: http://localhost:5163
-Application started. Press Ctrl+C to shut down.
-Hosting environment: Development
-Content root path: D:\inf\clean-code\Markdown\WebApp\API
-Executed DbCommand (292ms) [Parameters=[@__id_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
-SELECT u."Id", u."Login", u."PasswordHash", u."Role"
-FROM "Users" AS u
-WHERE u."Id" = @__id_0
-LIMIT 1
-Executed DbCommand (20ms) [Parameters=[@__authorId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
-SELECT d."Id", d."AuthorId", d."CreationDateTime", d."Name"
-FROM "Documents" AS d
-WHERE d."AuthorId" = @__authorId_0
-Executed DbCommand (3ms) [Parameters=[@__id_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
-SELECT u."Id", u."Login", u."PasswordHash", u."Role"
-FROM "Users" AS u
-WHERE u."Id" = @__id_0
-LIMIT 1
-Executed DbCommand (2ms) [Parameters=[@__userId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
-SELECT u."Id", u."Login", u."PasswordHash", u."Role"
-FROM "Users" AS u
-WHERE u."Id" = @__userId_0
-LIMIT 1
-Executed DbCommand (6ms) [Parameters=[@__userId_0='?' (DbType = Guid), @__documentId_1='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
-SELECT EXISTS (
-    SELECT 1
-    FROM "DocumentAccesses" AS d
-    WHERE d."UserId" = @__userId_0 AND d."DocumentId" = @__documentId_1)
-Executed DbCommand (2ms) [Parameters=[@__id_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
 SELECT u."Id", u."Login", u."PasswordHash", u."Role"
 FROM "Users" AS u
 WHERE u."Id" = @__id_0
@@ -794,7 +128,689 @@ SELECT EXISTS (
     SELECT 1
     FROM "DocumentAccesses" AS d
     WHERE d."UserId" = @__userId_0 AND d."DocumentId" = @__documentId_1)
+Application is shutting down...
+Now listening on: http://localhost:5163
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: D:\inf\clean-code\Markdown\WebApp\API
+Executed DbCommand (126ms) [Parameters=[@__id_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash", u."Role"
+FROM "Users" AS u
+WHERE u."Id" = @__id_0
+LIMIT 1
+Executed DbCommand (10ms) [Parameters=[@__authorId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT d."Id", d."AuthorId", d."CreationDateTime", d."Name"
+FROM "Documents" AS d
+WHERE d."AuthorId" = @__authorId_0
 Executed DbCommand (2ms) [Parameters=[@__id_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash", u."Role"
+FROM "Users" AS u
+WHERE u."Id" = @__id_0
+LIMIT 1
+Executed DbCommand (5ms) [Parameters=[@__authorId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT d."Id", d."AuthorId", d."CreationDateTime", d."Name"
+FROM "Documents" AS d
+INNER JOIN (
+    SELECT d0."DocumentId"
+    FROM "DocumentAccesses" AS d0
+    WHERE d0."UserId" = @__authorId_0
+) AS d1 ON d."Id" = d1."DocumentId"
+Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash", u."Role"
+FROM "Users" AS u
+WHERE u."Id" = @__userId_0
+LIMIT 1
+Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Guid), @__documentId_1='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "DocumentAccesses" AS d
+    WHERE d."UserId" = @__userId_0 AND d."DocumentId" = @__documentId_1)
+Executed DbCommand (10ms) [Parameters=[@__documentId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+DELETE FROM "Documents" AS d
+WHERE d."Id" = @__documentId_0
+Executed DbCommand (1ms) [Parameters=[@__id_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash", u."Role"
+FROM "Users" AS u
+WHERE u."Id" = @__id_0
+LIMIT 1
+Executed DbCommand (1ms) [Parameters=[@__authorId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT d."Id", d."AuthorId", d."CreationDateTime", d."Name"
+FROM "Documents" AS d
+WHERE d."AuthorId" = @__authorId_0
+Executed DbCommand (7ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = Guid), @p2='?' (DbType = DateTime), @p3='?', @p4='?' (DbType = Guid), @p5='?' (DbType = Guid), @p6='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+INSERT INTO "Documents" ("Id", "AuthorId", "CreationDateTime", "Name")
+VALUES (@p0, @p1, @p2, @p3);
+INSERT INTO "DocumentAccesses" ("Id", "DocumentId", "UserId")
+VALUES (@p4, @p5, @p6);
+Executed DbCommand (1ms) [Parameters=[@__id_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash", u."Role"
+FROM "Users" AS u
+WHERE u."Id" = @__id_0
+LIMIT 1
+Executed DbCommand (1ms) [Parameters=[@__authorId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT d."Id", d."AuthorId", d."CreationDateTime", d."Name"
+FROM "Documents" AS d
+WHERE d."AuthorId" = @__authorId_0
+Executed DbCommand (2ms) [Parameters=[@__id_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash", u."Role"
+FROM "Users" AS u
+WHERE u."Id" = @__id_0
+LIMIT 1
+Executed DbCommand (2ms) [Parameters=[@__authorId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT d."Id", d."AuthorId", d."CreationDateTime", d."Name"
+FROM "Documents" AS d
+INNER JOIN (
+    SELECT d0."DocumentId"
+    FROM "DocumentAccesses" AS d0
+    WHERE d0."UserId" = @__authorId_0
+) AS d1 ON d."Id" = d1."DocumentId"
+Application is shutting down...
+Now listening on: http://localhost:5163
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: D:\inf\clean-code\Markdown\WebApp\API
+Executed DbCommand (127ms) [Parameters=[@__id_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash", u."Role"
+FROM "Users" AS u
+WHERE u."Id" = @__id_0
+LIMIT 1
+Executed DbCommand (9ms) [Parameters=[@__authorId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT d."Id", d."AuthorId", d."CreationDateTime", d."Name"
+FROM "Documents" AS d
+WHERE d."AuthorId" = @__authorId_0
+Executed DbCommand (9ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = Guid), @p2='?' (DbType = DateTime), @p3='?', @p4='?' (DbType = Guid), @p5='?' (DbType = Guid), @p6='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+INSERT INTO "Documents" ("Id", "AuthorId", "CreationDateTime", "Name")
+VALUES (@p0, @p1, @p2, @p3);
+INSERT INTO "DocumentAccesses" ("Id", "DocumentId", "UserId")
+VALUES (@p4, @p5, @p6);
+Application is shutting down...
+Now listening on: http://localhost:5163
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: D:\inf\clean-code\Markdown\WebApp\API
+Executed DbCommand (260ms) [Parameters=[@__id_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash", u."Role"
+FROM "Users" AS u
+WHERE u."Id" = @__id_0
+LIMIT 1
+Executed DbCommand (17ms) [Parameters=[@__authorId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT d."Id", d."AuthorId", d."CreationDateTime", d."Name"
+FROM "Documents" AS d
+WHERE d."AuthorId" = @__authorId_0
+Executed DbCommand (2ms) [Parameters=[@__id_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash", u."Role"
+FROM "Users" AS u
+WHERE u."Id" = @__id_0
+LIMIT 1
+Executed DbCommand (6ms) [Parameters=[@__authorId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT d."Id", d."AuthorId", d."CreationDateTime", d."Name"
+FROM "Documents" AS d
+INNER JOIN (
+    SELECT d0."DocumentId"
+    FROM "DocumentAccesses" AS d0
+    WHERE d0."UserId" = @__authorId_0
+) AS d1 ON d."Id" = d1."DocumentId"
+Executed DbCommand (2ms) [Parameters=[@__id_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash", u."Role"
+FROM "Users" AS u
+WHERE u."Id" = @__id_0
+LIMIT 1
+Executed DbCommand (1ms) [Parameters=[@__authorId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT d."Id", d."AuthorId", d."CreationDateTime", d."Name"
+FROM "Documents" AS d
+WHERE d."AuthorId" = @__authorId_0
+Executed DbCommand (16ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = Guid), @p2='?' (DbType = DateTime), @p3='?', @p4='?' (DbType = Guid), @p5='?' (DbType = Guid), @p6='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+INSERT INTO "Documents" ("Id", "AuthorId", "CreationDateTime", "Name")
+VALUES (@p0, @p1, @p2, @p3);
+INSERT INTO "DocumentAccesses" ("Id", "DocumentId", "UserId")
+VALUES (@p4, @p5, @p6);
+Executed DbCommand (2ms) [Parameters=[@__id_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash", u."Role"
+FROM "Users" AS u
+WHERE u."Id" = @__id_0
+LIMIT 1
+Executed DbCommand (2ms) [Parameters=[@__authorId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT d."Id", d."AuthorId", d."CreationDateTime", d."Name"
+FROM "Documents" AS d
+INNER JOIN (
+    SELECT d0."DocumentId"
+    FROM "DocumentAccesses" AS d0
+    WHERE d0."UserId" = @__authorId_0
+) AS d1 ON d."Id" = d1."DocumentId"
+Application is shutting down...
+Now listening on: http://localhost:5163
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: D:\inf\clean-code\Markdown\WebApp\API
+Executed DbCommand (126ms) [Parameters=[@__id_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash", u."Role"
+FROM "Users" AS u
+WHERE u."Id" = @__id_0
+LIMIT 1
+Executed DbCommand (10ms) [Parameters=[@__authorId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT d."Id", d."AuthorId", d."CreationDateTime", d."Name"
+FROM "Documents" AS d
+WHERE d."AuthorId" = @__authorId_0
+Executed DbCommand (9ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = Guid), @p2='?' (DbType = DateTime), @p3='?', @p4='?' (DbType = Guid), @p5='?' (DbType = Guid), @p6='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+INSERT INTO "Documents" ("Id", "AuthorId", "CreationDateTime", "Name")
+VALUES (@p0, @p1, @p2, @p3);
+INSERT INTO "DocumentAccesses" ("Id", "DocumentId", "UserId")
+VALUES (@p4, @p5, @p6);
+Application is shutting down...
+Now listening on: http://localhost:5163
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: D:\inf\clean-code\Markdown\WebApp\API
+Executed DbCommand (265ms) [Parameters=[@__id_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash", u."Role"
+FROM "Users" AS u
+WHERE u."Id" = @__id_0
+LIMIT 1
+Executed DbCommand (20ms) [Parameters=[@__authorId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT d."Id", d."AuthorId", d."CreationDateTime", d."Name"
+FROM "Documents" AS d
+WHERE d."AuthorId" = @__authorId_0
+Executed DbCommand (2ms) [Parameters=[@__id_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash", u."Role"
+FROM "Users" AS u
+WHERE u."Id" = @__id_0
+LIMIT 1
+Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash", u."Role"
+FROM "Users" AS u
+WHERE u."Id" = @__userId_0
+LIMIT 1
+Executed DbCommand (6ms) [Parameters=[@__userId_0='?' (DbType = Guid), @__documentId_1='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "DocumentAccesses" AS d
+    WHERE d."UserId" = @__userId_0 AND d."DocumentId" = @__documentId_1)
+Executed DbCommand (2ms) [Parameters=[@__id_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash", u."Role"
+FROM "Users" AS u
+WHERE u."Id" = @__id_0
+LIMIT 1
+Executed DbCommand (2ms) [Parameters=[@__authorId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT d."Id", d."AuthorId", d."CreationDateTime", d."Name"
+FROM "Documents" AS d
+WHERE d."AuthorId" = @__authorId_0
+Executed DbCommand (21ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = Guid), @p2='?' (DbType = DateTime), @p3='?', @p4='?' (DbType = Guid), @p5='?' (DbType = Guid), @p6='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+INSERT INTO "Documents" ("Id", "AuthorId", "CreationDateTime", "Name")
+VALUES (@p0, @p1, @p2, @p3);
+INSERT INTO "DocumentAccesses" ("Id", "DocumentId", "UserId")
+VALUES (@p4, @p5, @p6);
+Application is shutting down...
+Now listening on: http://localhost:5163
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: D:\inf\clean-code\Markdown\WebApp\API
+Executed DbCommand (127ms) [Parameters=[@__id_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash", u."Role"
+FROM "Users" AS u
+WHERE u."Id" = @__id_0
+LIMIT 1
+Executed DbCommand (11ms) [Parameters=[@__authorId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT d."Id", d."AuthorId", d."CreationDateTime", d."Name"
+FROM "Documents" AS d
+INNER JOIN (
+    SELECT d0."DocumentId"
+    FROM "DocumentAccesses" AS d0
+    WHERE d0."UserId" = @__authorId_0
+) AS d1 ON d."Id" = d1."DocumentId"
+Executed DbCommand (1ms) [Parameters=[@__id_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash", u."Role"
+FROM "Users" AS u
+WHERE u."Id" = @__id_0
+LIMIT 1
+Executed DbCommand (1ms) [Parameters=[@__authorId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT d."Id", d."AuthorId", d."CreationDateTime", d."Name"
+FROM "Documents" AS d
+WHERE d."AuthorId" = @__authorId_0
+Executed DbCommand (8ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = Guid), @p2='?' (DbType = DateTime), @p3='?', @p4='?' (DbType = Guid), @p5='?' (DbType = Guid), @p6='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+INSERT INTO "Documents" ("Id", "AuthorId", "CreationDateTime", "Name")
+VALUES (@p0, @p1, @p2, @p3);
+INSERT INTO "DocumentAccesses" ("Id", "DocumentId", "UserId")
+VALUES (@p4, @p5, @p6);
+Executed DbCommand (1ms) [Parameters=[@__id_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash", u."Role"
+FROM "Users" AS u
+WHERE u."Id" = @__id_0
+LIMIT 1
+Executed DbCommand (2ms) [Parameters=[@__authorId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT d."Id", d."AuthorId", d."CreationDateTime", d."Name"
+FROM "Documents" AS d
+WHERE d."AuthorId" = @__authorId_0
+Executed DbCommand (2ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = Guid), @p2='?' (DbType = DateTime), @p3='?', @p4='?' (DbType = Guid), @p5='?' (DbType = Guid), @p6='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+INSERT INTO "Documents" ("Id", "AuthorId", "CreationDateTime", "Name")
+VALUES (@p0, @p1, @p2, @p3);
+INSERT INTO "DocumentAccesses" ("Id", "DocumentId", "UserId")
+VALUES (@p4, @p5, @p6);
+Application is shutting down...
+Now listening on: http://localhost:5163
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: D:\inf\clean-code\Markdown\WebApp\API
+Executed DbCommand (126ms) [Parameters=[@__id_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash", u."Role"
+FROM "Users" AS u
+WHERE u."Id" = @__id_0
+LIMIT 1
+Executed DbCommand (11ms) [Parameters=[@__authorId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT d."Id", d."AuthorId", d."CreationDateTime", d."Name"
+FROM "Documents" AS d
+INNER JOIN (
+    SELECT d0."DocumentId"
+    FROM "DocumentAccesses" AS d0
+    WHERE d0."UserId" = @__authorId_0
+) AS d1 ON d."Id" = d1."DocumentId"
+Executed DbCommand (1ms) [Parameters=[@__id_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash", u."Role"
+FROM "Users" AS u
+WHERE u."Id" = @__id_0
+LIMIT 1
+Executed DbCommand (1ms) [Parameters=[@__authorId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT d."Id", d."AuthorId", d."CreationDateTime", d."Name"
+FROM "Documents" AS d
+WHERE d."AuthorId" = @__authorId_0
+Executed DbCommand (8ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = Guid), @p2='?' (DbType = DateTime), @p3='?', @p4='?' (DbType = Guid), @p5='?' (DbType = Guid), @p6='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+INSERT INTO "Documents" ("Id", "AuthorId", "CreationDateTime", "Name")
+VALUES (@p0, @p1, @p2, @p3);
+INSERT INTO "DocumentAccesses" ("Id", "DocumentId", "UserId")
+VALUES (@p4, @p5, @p6);
+Application is shutting down...
+Now listening on: http://localhost:5163
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: D:\inf\clean-code\Markdown\WebApp\API
+Executed DbCommand (124ms) [Parameters=[@__id_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash", u."Role"
+FROM "Users" AS u
+WHERE u."Id" = @__id_0
+LIMIT 1
+Executed DbCommand (9ms) [Parameters=[@__authorId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT d."Id", d."AuthorId", d."CreationDateTime", d."Name"
+FROM "Documents" AS d
+WHERE d."AuthorId" = @__authorId_0
+Executed DbCommand (9ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = Guid), @p2='?' (DbType = DateTime), @p3='?', @p4='?' (DbType = Guid), @p5='?' (DbType = Guid), @p6='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+INSERT INTO "Documents" ("Id", "AuthorId", "CreationDateTime", "Name")
+VALUES (@p0, @p1, @p2, @p3);
+INSERT INTO "DocumentAccesses" ("Id", "DocumentId", "UserId")
+VALUES (@p4, @p5, @p6);
+Executed DbCommand (1ms) [Parameters=[@__id_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash", u."Role"
+FROM "Users" AS u
+WHERE u."Id" = @__id_0
+LIMIT 1
+Executed DbCommand (6ms) [Parameters=[@__authorId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT d."Id", d."AuthorId", d."CreationDateTime", d."Name"
+FROM "Documents" AS d
+INNER JOIN (
+    SELECT d0."DocumentId"
+    FROM "DocumentAccesses" AS d0
+    WHERE d0."UserId" = @__authorId_0
+) AS d1 ON d."Id" = d1."DocumentId"
+Executed DbCommand (1ms) [Parameters=[@__id_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash", u."Role"
+FROM "Users" AS u
+WHERE u."Id" = @__id_0
+LIMIT 1
+Executed DbCommand (2ms) [Parameters=[@__authorId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT d."Id", d."AuthorId", d."CreationDateTime", d."Name"
+FROM "Documents" AS d
+WHERE d."AuthorId" = @__authorId_0
+Executed DbCommand (1ms) [Parameters=[@__id_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash", u."Role"
+FROM "Users" AS u
+WHERE u."Id" = @__id_0
+LIMIT 1
+Executed DbCommand (1ms) [Parameters=[@__authorId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT d."Id", d."AuthorId", d."CreationDateTime", d."Name"
+FROM "Documents" AS d
+INNER JOIN (
+    SELECT d0."DocumentId"
+    FROM "DocumentAccesses" AS d0
+    WHERE d0."UserId" = @__authorId_0
+) AS d1 ON d."Id" = d1."DocumentId"
+Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash", u."Role"
+FROM "Users" AS u
+WHERE u."Id" = @__userId_0
+LIMIT 1
+Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Guid), @__documentId_1='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "DocumentAccesses" AS d
+    WHERE d."UserId" = @__userId_0 AND d."DocumentId" = @__documentId_1)
+Executed DbCommand (7ms) [Parameters=[@__documentId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+DELETE FROM "Documents" AS d
+WHERE d."Id" = @__documentId_0
+Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash", u."Role"
+FROM "Users" AS u
+WHERE u."Id" = @__userId_0
+LIMIT 1
+Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Guid), @__documentId_1='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "DocumentAccesses" AS d
+    WHERE d."UserId" = @__userId_0 AND d."DocumentId" = @__documentId_1)
+Executed DbCommand (2ms) [Parameters=[@__documentId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+DELETE FROM "Documents" AS d
+WHERE d."Id" = @__documentId_0
+Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash", u."Role"
+FROM "Users" AS u
+WHERE u."Id" = @__userId_0
+LIMIT 1
+Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Guid), @__documentId_1='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "DocumentAccesses" AS d
+    WHERE d."UserId" = @__userId_0 AND d."DocumentId" = @__documentId_1)
+Executed DbCommand (3ms) [Parameters=[@__documentId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+DELETE FROM "Documents" AS d
+WHERE d."Id" = @__documentId_0
+Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash", u."Role"
+FROM "Users" AS u
+WHERE u."Id" = @__userId_0
+LIMIT 1
+Executed DbCommand (2ms) [Parameters=[@__userId_0='?' (DbType = Guid), @__documentId_1='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "DocumentAccesses" AS d
+    WHERE d."UserId" = @__userId_0 AND d."DocumentId" = @__documentId_1)
+Executed DbCommand (2ms) [Parameters=[@__documentId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+DELETE FROM "Documents" AS d
+WHERE d."Id" = @__documentId_0
+Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash", u."Role"
+FROM "Users" AS u
+WHERE u."Id" = @__userId_0
+LIMIT 1
+Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Guid), @__documentId_1='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "DocumentAccesses" AS d
+    WHERE d."UserId" = @__userId_0 AND d."DocumentId" = @__documentId_1)
+Executed DbCommand (2ms) [Parameters=[@__documentId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+DELETE FROM "Documents" AS d
+WHERE d."Id" = @__documentId_0
+Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash", u."Role"
+FROM "Users" AS u
+WHERE u."Id" = @__userId_0
+LIMIT 1
+Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Guid), @__documentId_1='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "DocumentAccesses" AS d
+    WHERE d."UserId" = @__userId_0 AND d."DocumentId" = @__documentId_1)
+Executed DbCommand (3ms) [Parameters=[@__documentId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+DELETE FROM "Documents" AS d
+WHERE d."Id" = @__documentId_0
+Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash", u."Role"
+FROM "Users" AS u
+WHERE u."Id" = @__userId_0
+LIMIT 1
+Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Guid), @__documentId_1='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "DocumentAccesses" AS d
+    WHERE d."UserId" = @__userId_0 AND d."DocumentId" = @__documentId_1)
+Executed DbCommand (2ms) [Parameters=[@__documentId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+DELETE FROM "Documents" AS d
+WHERE d."Id" = @__documentId_0
+Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash", u."Role"
+FROM "Users" AS u
+WHERE u."Id" = @__userId_0
+LIMIT 1
+Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Guid), @__documentId_1='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "DocumentAccesses" AS d
+    WHERE d."UserId" = @__userId_0 AND d."DocumentId" = @__documentId_1)
+Executed DbCommand (3ms) [Parameters=[@__documentId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+DELETE FROM "Documents" AS d
+WHERE d."Id" = @__documentId_0
+Application is shutting down...
+Now listening on: http://localhost:5163
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: D:\inf\clean-code\Markdown\WebApp\API
+Executed DbCommand (128ms) [Parameters=[@__id_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash", u."Role"
+FROM "Users" AS u
+WHERE u."Id" = @__id_0
+LIMIT 1
+Executed DbCommand (128ms) [Parameters=[@__id_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash", u."Role"
+FROM "Users" AS u
+WHERE u."Id" = @__id_0
+LIMIT 1
+Executed DbCommand (9ms) [Parameters=[@__authorId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT d."Id", d."AuthorId", d."CreationDateTime", d."Name"
+FROM "Documents" AS d
+WHERE d."AuthorId" = @__authorId_0
+Executed DbCommand (9ms) [Parameters=[@__authorId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT d."Id", d."AuthorId", d."CreationDateTime", d."Name"
+FROM "Documents" AS d
+WHERE d."AuthorId" = @__authorId_0
+Executed DbCommand (9ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = Guid), @p2='?' (DbType = DateTime), @p3='?', @p4='?' (DbType = Guid), @p5='?' (DbType = Guid), @p6='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+INSERT INTO "Documents" ("Id", "AuthorId", "CreationDateTime", "Name")
+VALUES (@p0, @p1, @p2, @p3);
+INSERT INTO "DocumentAccesses" ("Id", "DocumentId", "UserId")
+VALUES (@p4, @p5, @p6);
+Executed DbCommand (10ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = Guid), @p2='?' (DbType = DateTime), @p3='?', @p4='?' (DbType = Guid), @p5='?' (DbType = Guid), @p6='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+INSERT INTO "Documents" ("Id", "AuthorId", "CreationDateTime", "Name")
+VALUES (@p0, @p1, @p2, @p3);
+INSERT INTO "DocumentAccesses" ("Id", "DocumentId", "UserId")
+VALUES (@p4, @p5, @p6);
+Executed DbCommand (1ms) [Parameters=[@__id_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash", u."Role"
+FROM "Users" AS u
+WHERE u."Id" = @__id_0
+LIMIT 1
+Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash", u."Role"
+FROM "Users" AS u
+WHERE u."Id" = @__userId_0
+LIMIT 1
+Executed DbCommand (3ms) [Parameters=[@__userId_0='?' (DbType = Guid), @__documentId_1='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "DocumentAccesses" AS d
+    WHERE d."UserId" = @__userId_0 AND d."DocumentId" = @__documentId_1)
+Executed DbCommand (1ms) [Parameters=[@__id_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash", u."Role"
+FROM "Users" AS u
+WHERE u."Id" = @__id_0
+LIMIT 1
+Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash", u."Role"
+FROM "Users" AS u
+WHERE u."Id" = @__userId_0
+LIMIT 1
+Executed DbCommand (4ms) [Parameters=[@__userId_0='?' (DbType = Guid), @__documentId_1='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "DocumentAccesses" AS d
+    WHERE d."UserId" = @__userId_0 AND d."DocumentId" = @__documentId_1)
+Executed DbCommand (1ms) [Parameters=[@__id_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash", u."Role"
+FROM "Users" AS u
+WHERE u."Id" = @__id_0
+LIMIT 1
+Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash", u."Role"
+FROM "Users" AS u
+WHERE u."Id" = @__userId_0
+LIMIT 1
+Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Guid), @__documentId_1='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "DocumentAccesses" AS d
+    WHERE d."UserId" = @__userId_0 AND d."DocumentId" = @__documentId_1)
+Executed DbCommand (1ms) [Parameters=[@__id_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash", u."Role"
+FROM "Users" AS u
+WHERE u."Id" = @__id_0
+LIMIT 1
+Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash", u."Role"
+FROM "Users" AS u
+WHERE u."Id" = @__userId_0
+LIMIT 1
+Executed DbCommand (2ms) [Parameters=[@__userId_0='?' (DbType = Guid), @__documentId_1='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "DocumentAccesses" AS d
+    WHERE d."UserId" = @__userId_0 AND d."DocumentId" = @__documentId_1)
+Executed DbCommand (1ms) [Parameters=[@__id_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash", u."Role"
+FROM "Users" AS u
+WHERE u."Id" = @__id_0
+LIMIT 1
+Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash", u."Role"
+FROM "Users" AS u
+WHERE u."Id" = @__userId_0
+LIMIT 1
+Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Guid), @__documentId_1='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "DocumentAccesses" AS d
+    WHERE d."UserId" = @__userId_0 AND d."DocumentId" = @__documentId_1)
+Executed DbCommand (1ms) [Parameters=[@__id_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash", u."Role"
+FROM "Users" AS u
+WHERE u."Id" = @__id_0
+LIMIT 1
+Executed DbCommand (3ms) [Parameters=[@__authorId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT d."Id", d."AuthorId", d."CreationDateTime", d."Name"
+FROM "Documents" AS d
+INNER JOIN (
+    SELECT d0."DocumentId"
+    FROM "DocumentAccesses" AS d0
+    WHERE d0."UserId" = @__authorId_0
+) AS d1 ON d."Id" = d1."DocumentId"
+Executed DbCommand (1ms) [Parameters=[@__id_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash", u."Role"
+FROM "Users" AS u
+WHERE u."Id" = @__id_0
+LIMIT 1
+Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash", u."Role"
+FROM "Users" AS u
+WHERE u."Id" = @__userId_0
+LIMIT 1
+Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Guid), @__documentId_1='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "DocumentAccesses" AS d
+    WHERE d."UserId" = @__userId_0 AND d."DocumentId" = @__documentId_1)
+Executed DbCommand (1ms) [Parameters=[@__id_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash", u."Role"
+FROM "Users" AS u
+WHERE u."Id" = @__id_0
+LIMIT 1
+Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash", u."Role"
+FROM "Users" AS u
+WHERE u."Id" = @__userId_0
+LIMIT 1
+Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Guid), @__documentId_1='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "DocumentAccesses" AS d
+    WHERE d."UserId" = @__userId_0 AND d."DocumentId" = @__documentId_1)
+Executed DbCommand (1ms) [Parameters=[@__id_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash", u."Role"
+FROM "Users" AS u
+WHERE u."Id" = @__id_0
+LIMIT 1
+Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash", u."Role"
+FROM "Users" AS u
+WHERE u."Id" = @__userId_0
+LIMIT 1
+Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Guid), @__documentId_1='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "DocumentAccesses" AS d
+    WHERE d."UserId" = @__userId_0 AND d."DocumentId" = @__documentId_1)
+Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash", u."Role"
+FROM "Users" AS u
+WHERE u."Id" = @__userId_0
+LIMIT 1
+Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Guid), @__documentId_1='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "DocumentAccesses" AS d
+    WHERE d."UserId" = @__userId_0 AND d."DocumentId" = @__documentId_1)
+Executed DbCommand (9ms) [Parameters=[@__documentId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+DELETE FROM "Documents" AS d
+WHERE d."Id" = @__documentId_0
+Executed DbCommand (1ms) [Parameters=[@__id_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash", u."Role"
+FROM "Users" AS u
+WHERE u."Id" = @__id_0
+LIMIT 1
+Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash", u."Role"
+FROM "Users" AS u
+WHERE u."Id" = @__userId_0
+LIMIT 1
+Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Guid), @__documentId_1='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "DocumentAccesses" AS d
+    WHERE d."UserId" = @__userId_0 AND d."DocumentId" = @__documentId_1)
+Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash", u."Role"
+FROM "Users" AS u
+WHERE u."Id" = @__userId_0
+LIMIT 1
+Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Guid), @__documentId_1='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "DocumentAccesses" AS d
+    WHERE d."UserId" = @__userId_0 AND d."DocumentId" = @__documentId_1)
+Executed DbCommand (2ms) [Parameters=[@__documentId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+DELETE FROM "Documents" AS d
+WHERE d."Id" = @__documentId_0
+Executed DbCommand (2ms) [Parameters=[@__id_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash", u."Role"
+FROM "Users" AS u
+WHERE u."Id" = @__id_0
+LIMIT 1
+Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash", u."Role"
+FROM "Users" AS u
+WHERE u."Id" = @__userId_0
+LIMIT 1
+Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Guid), @__documentId_1='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "DocumentAccesses" AS d
+    WHERE d."UserId" = @__userId_0 AND d."DocumentId" = @__documentId_1)
+Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash", u."Role"
+FROM "Users" AS u
+WHERE u."Id" = @__userId_0
+LIMIT 1
+Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Guid), @__documentId_1='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "DocumentAccesses" AS d
+    WHERE d."UserId" = @__userId_0 AND d."DocumentId" = @__documentId_1)
+Executed DbCommand (1ms) [Parameters=[@__documentId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+DELETE FROM "Documents" AS d
+WHERE d."Id" = @__documentId_0
+Executed DbCommand (1ms) [Parameters=[@__id_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
 SELECT u."Id", u."Login", u."PasswordHash", u."Role"
 FROM "Users" AS u
 WHERE u."Id" = @__id_0
@@ -814,3 +830,1163 @@ Now listening on: http://localhost:5163
 Application started. Press Ctrl+C to shut down.
 Hosting environment: Development
 Content root path: D:\inf\clean-code\Markdown\WebApp\API
+Executed DbCommand (242ms) [Parameters=[@__id_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash", u."Role"
+FROM "Users" AS u
+WHERE u."Id" = @__id_0
+LIMIT 1
+Executed DbCommand (242ms) [Parameters=[@__id_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash", u."Role"
+FROM "Users" AS u
+WHERE u."Id" = @__id_0
+LIMIT 1
+Executed DbCommand (20ms) [Parameters=[@__userId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash", u."Role"
+FROM "Users" AS u
+WHERE u."Id" = @__userId_0
+LIMIT 1
+Executed DbCommand (6ms) [Parameters=[@__userId_0='?' (DbType = Guid), @__documentId_1='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "DocumentAccesses" AS d
+    WHERE d."UserId" = @__userId_0 AND d."DocumentId" = @__documentId_1)
+Executed DbCommand (8ms) [Parameters=[@__authorId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT d."Id", d."AuthorId", d."CreationDateTime", d."Name"
+FROM "Documents" AS d
+INNER JOIN (
+    SELECT d0."DocumentId"
+    FROM "DocumentAccesses" AS d0
+    WHERE d0."UserId" = @__authorId_0
+) AS d1 ON d."Id" = d1."DocumentId"
+Executed DbCommand (2ms) [Parameters=[@__userId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash", u."Role"
+FROM "Users" AS u
+WHERE u."Id" = @__userId_0
+LIMIT 1
+Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Guid), @__documentId_1='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "DocumentAccesses" AS d
+    WHERE d."UserId" = @__userId_0 AND d."DocumentId" = @__documentId_1)
+Executed DbCommand (19ms) [Parameters=[@__documentId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+DELETE FROM "Documents" AS d
+WHERE d."Id" = @__documentId_0
+Executed DbCommand (2ms) [Parameters=[@__userId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash", u."Role"
+FROM "Users" AS u
+WHERE u."Id" = @__userId_0
+LIMIT 1
+Executed DbCommand (2ms) [Parameters=[@__userId_0='?' (DbType = Guid), @__documentId_1='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "DocumentAccesses" AS d
+    WHERE d."UserId" = @__userId_0 AND d."DocumentId" = @__documentId_1)
+Executed DbCommand (12ms) [Parameters=[@__documentId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+DELETE FROM "Documents" AS d
+WHERE d."Id" = @__documentId_0
+Executed DbCommand (2ms) [Parameters=[@__userId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash", u."Role"
+FROM "Users" AS u
+WHERE u."Id" = @__userId_0
+LIMIT 1
+Executed DbCommand (2ms) [Parameters=[@__userId_0='?' (DbType = Guid), @__documentId_1='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "DocumentAccesses" AS d
+    WHERE d."UserId" = @__userId_0 AND d."DocumentId" = @__documentId_1)
+Executed DbCommand (4ms) [Parameters=[@__documentId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+DELETE FROM "Documents" AS d
+WHERE d."Id" = @__documentId_0
+Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash", u."Role"
+FROM "Users" AS u
+WHERE u."Id" = @__userId_0
+LIMIT 1
+Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Guid), @__documentId_1='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "DocumentAccesses" AS d
+    WHERE d."UserId" = @__userId_0 AND d."DocumentId" = @__documentId_1)
+Executed DbCommand (1ms) [Parameters=[@__documentId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+DELETE FROM "Documents" AS d
+WHERE d."Id" = @__documentId_0
+Executed DbCommand (2ms) [Parameters=[@__userId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash", u."Role"
+FROM "Users" AS u
+WHERE u."Id" = @__userId_0
+LIMIT 1
+Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Guid), @__documentId_1='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "DocumentAccesses" AS d
+    WHERE d."UserId" = @__userId_0 AND d."DocumentId" = @__documentId_1)
+Executed DbCommand (3ms) [Parameters=[@__documentId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+DELETE FROM "Documents" AS d
+WHERE d."Id" = @__documentId_0
+Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash", u."Role"
+FROM "Users" AS u
+WHERE u."Id" = @__userId_0
+LIMIT 1
+Executed DbCommand (2ms) [Parameters=[@__userId_0='?' (DbType = Guid), @__documentId_1='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "DocumentAccesses" AS d
+    WHERE d."UserId" = @__userId_0 AND d."DocumentId" = @__documentId_1)
+Executed DbCommand (2ms) [Parameters=[@__documentId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+DELETE FROM "Documents" AS d
+WHERE d."Id" = @__documentId_0
+Executed DbCommand (2ms) [Parameters=[@__userId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash", u."Role"
+FROM "Users" AS u
+WHERE u."Id" = @__userId_0
+LIMIT 1
+Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Guid), @__documentId_1='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "DocumentAccesses" AS d
+    WHERE d."UserId" = @__userId_0 AND d."DocumentId" = @__documentId_1)
+Executed DbCommand (3ms) [Parameters=[@__documentId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+DELETE FROM "Documents" AS d
+WHERE d."Id" = @__documentId_0
+Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash", u."Role"
+FROM "Users" AS u
+WHERE u."Id" = @__userId_0
+LIMIT 1
+Executed DbCommand (2ms) [Parameters=[@__userId_0='?' (DbType = Guid), @__documentId_1='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "DocumentAccesses" AS d
+    WHERE d."UserId" = @__userId_0 AND d."DocumentId" = @__documentId_1)
+Executed DbCommand (1ms) [Parameters=[@__documentId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+DELETE FROM "Documents" AS d
+WHERE d."Id" = @__documentId_0
+Executed DbCommand (2ms) [Parameters=[@__id_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash", u."Role"
+FROM "Users" AS u
+WHERE u."Id" = @__id_0
+LIMIT 1
+Executed DbCommand (1ms) [Parameters=[@__authorId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT d."Id", d."AuthorId", d."CreationDateTime", d."Name"
+FROM "Documents" AS d
+WHERE d."AuthorId" = @__authorId_0
+Executed DbCommand (1ms) [Parameters=[@__id_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash", u."Role"
+FROM "Users" AS u
+WHERE u."Id" = @__id_0
+LIMIT 1
+Executed DbCommand (2ms) [Parameters=[@__authorId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT d."Id", d."AuthorId", d."CreationDateTime", d."Name"
+FROM "Documents" AS d
+INNER JOIN (
+    SELECT d0."DocumentId"
+    FROM "DocumentAccesses" AS d0
+    WHERE d0."UserId" = @__authorId_0
+) AS d1 ON d."Id" = d1."DocumentId"
+Executed DbCommand (1ms) [Parameters=[@__id_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash", u."Role"
+FROM "Users" AS u
+WHERE u."Id" = @__id_0
+LIMIT 1
+Executed DbCommand (2ms) [Parameters=[@__authorId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT d."Id", d."AuthorId", d."CreationDateTime", d."Name"
+FROM "Documents" AS d
+WHERE d."AuthorId" = @__authorId_0
+Executed DbCommand (5ms) [Parameters=[@__id_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash", u."Role"
+FROM "Users" AS u
+WHERE u."Id" = @__id_0
+LIMIT 1
+Executed DbCommand (2ms) [Parameters=[@__authorId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT d."Id", d."AuthorId", d."CreationDateTime", d."Name"
+FROM "Documents" AS d
+INNER JOIN (
+    SELECT d0."DocumentId"
+    FROM "DocumentAccesses" AS d0
+    WHERE d0."UserId" = @__authorId_0
+) AS d1 ON d."Id" = d1."DocumentId"
+Executed DbCommand (1ms) [Parameters=[@__id_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash", u."Role"
+FROM "Users" AS u
+WHERE u."Id" = @__id_0
+LIMIT 1
+Executed DbCommand (1ms) [Parameters=[@__authorId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT d."Id", d."AuthorId", d."CreationDateTime", d."Name"
+FROM "Documents" AS d
+WHERE d."AuthorId" = @__authorId_0
+Executed DbCommand (1ms) [Parameters=[@__id_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash", u."Role"
+FROM "Users" AS u
+WHERE u."Id" = @__id_0
+LIMIT 1
+Executed DbCommand (2ms) [Parameters=[@__authorId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT d."Id", d."AuthorId", d."CreationDateTime", d."Name"
+FROM "Documents" AS d
+INNER JOIN (
+    SELECT d0."DocumentId"
+    FROM "DocumentAccesses" AS d0
+    WHERE d0."UserId" = @__authorId_0
+) AS d1 ON d."Id" = d1."DocumentId"
+Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash", u."Role"
+FROM "Users" AS u
+WHERE u."Id" = @__userId_0
+LIMIT 1
+Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Guid), @__documentId_1='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "DocumentAccesses" AS d
+    WHERE d."UserId" = @__userId_0 AND d."DocumentId" = @__documentId_1)
+Executed DbCommand (3ms) [Parameters=[@__documentId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+DELETE FROM "Documents" AS d
+WHERE d."Id" = @__documentId_0
+Executed DbCommand (2ms) [Parameters=[@__id_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash", u."Role"
+FROM "Users" AS u
+WHERE u."Id" = @__id_0
+LIMIT 1
+Executed DbCommand (1ms) [Parameters=[@__authorId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT d."Id", d."AuthorId", d."CreationDateTime", d."Name"
+FROM "Documents" AS d
+WHERE d."AuthorId" = @__authorId_0
+Executed DbCommand (1ms) [Parameters=[@__id_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash", u."Role"
+FROM "Users" AS u
+WHERE u."Id" = @__id_0
+LIMIT 1
+Executed DbCommand (2ms) [Parameters=[@__authorId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT d."Id", d."AuthorId", d."CreationDateTime", d."Name"
+FROM "Documents" AS d
+INNER JOIN (
+    SELECT d0."DocumentId"
+    FROM "DocumentAccesses" AS d0
+    WHERE d0."UserId" = @__authorId_0
+) AS d1 ON d."Id" = d1."DocumentId"
+Executed DbCommand (2ms) [Parameters=[@__userId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash", u."Role"
+FROM "Users" AS u
+WHERE u."Id" = @__userId_0
+LIMIT 1
+Executed DbCommand (2ms) [Parameters=[@__userId_0='?' (DbType = Guid), @__documentId_1='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "DocumentAccesses" AS d
+    WHERE d."UserId" = @__userId_0 AND d."DocumentId" = @__documentId_1)
+Executed DbCommand (3ms) [Parameters=[@__documentId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+DELETE FROM "Documents" AS d
+WHERE d."Id" = @__documentId_0
+Executed DbCommand (1ms) [Parameters=[@__id_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash", u."Role"
+FROM "Users" AS u
+WHERE u."Id" = @__id_0
+LIMIT 1
+Executed DbCommand (1ms) [Parameters=[@__authorId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT d."Id", d."AuthorId", d."CreationDateTime", d."Name"
+FROM "Documents" AS d
+WHERE d."AuthorId" = @__authorId_0
+Executed DbCommand (1ms) [Parameters=[@__id_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash", u."Role"
+FROM "Users" AS u
+WHERE u."Id" = @__id_0
+LIMIT 1
+Executed DbCommand (2ms) [Parameters=[@__authorId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT d."Id", d."AuthorId", d."CreationDateTime", d."Name"
+FROM "Documents" AS d
+INNER JOIN (
+    SELECT d0."DocumentId"
+    FROM "DocumentAccesses" AS d0
+    WHERE d0."UserId" = @__authorId_0
+) AS d1 ON d."Id" = d1."DocumentId"
+Executed DbCommand (2ms) [Parameters=[@__id_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash", u."Role"
+FROM "Users" AS u
+WHERE u."Id" = @__id_0
+LIMIT 1
+Executed DbCommand (1ms) [Parameters=[@__authorId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT d."Id", d."AuthorId", d."CreationDateTime", d."Name"
+FROM "Documents" AS d
+WHERE d."AuthorId" = @__authorId_0
+Executed DbCommand (13ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = Guid), @p2='?' (DbType = DateTime), @p3='?', @p4='?' (DbType = Guid), @p5='?' (DbType = Guid), @p6='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+INSERT INTO "Documents" ("Id", "AuthorId", "CreationDateTime", "Name")
+VALUES (@p0, @p1, @p2, @p3);
+INSERT INTO "DocumentAccesses" ("Id", "DocumentId", "UserId")
+VALUES (@p4, @p5, @p6);
+Executed DbCommand (2ms) [Parameters=[@__id_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash", u."Role"
+FROM "Users" AS u
+WHERE u."Id" = @__id_0
+LIMIT 1
+Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash", u."Role"
+FROM "Users" AS u
+WHERE u."Id" = @__userId_0
+LIMIT 1
+Executed DbCommand (2ms) [Parameters=[@__userId_0='?' (DbType = Guid), @__documentId_1='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "DocumentAccesses" AS d
+    WHERE d."UserId" = @__userId_0 AND d."DocumentId" = @__documentId_1)
+Executed DbCommand (1ms) [Parameters=[@__id_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash", u."Role"
+FROM "Users" AS u
+WHERE u."Id" = @__id_0
+LIMIT 1
+Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash", u."Role"
+FROM "Users" AS u
+WHERE u."Id" = @__userId_0
+LIMIT 1
+Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Guid), @__documentId_1='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "DocumentAccesses" AS d
+    WHERE d."UserId" = @__userId_0 AND d."DocumentId" = @__documentId_1)
+Executed DbCommand (1ms) [Parameters=[@__id_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash", u."Role"
+FROM "Users" AS u
+WHERE u."Id" = @__id_0
+LIMIT 1
+Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash", u."Role"
+FROM "Users" AS u
+WHERE u."Id" = @__userId_0
+LIMIT 1
+Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Guid), @__documentId_1='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "DocumentAccesses" AS d
+    WHERE d."UserId" = @__userId_0 AND d."DocumentId" = @__documentId_1)
+Executed DbCommand (1ms) [Parameters=[@__id_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash", u."Role"
+FROM "Users" AS u
+WHERE u."Id" = @__id_0
+LIMIT 1
+Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash", u."Role"
+FROM "Users" AS u
+WHERE u."Id" = @__userId_0
+LIMIT 1
+Executed DbCommand (2ms) [Parameters=[@__userId_0='?' (DbType = Guid), @__documentId_1='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "DocumentAccesses" AS d
+    WHERE d."UserId" = @__userId_0 AND d."DocumentId" = @__documentId_1)
+Executed DbCommand (1ms) [Parameters=[@__id_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash", u."Role"
+FROM "Users" AS u
+WHERE u."Id" = @__id_0
+LIMIT 1
+Executed DbCommand (1ms) [Parameters=[@__authorId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT d."Id", d."AuthorId", d."CreationDateTime", d."Name"
+FROM "Documents" AS d
+INNER JOIN (
+    SELECT d0."DocumentId"
+    FROM "DocumentAccesses" AS d0
+    WHERE d0."UserId" = @__authorId_0
+) AS d1 ON d."Id" = d1."DocumentId"
+Executed DbCommand (2ms) [Parameters=[@__id_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash", u."Role"
+FROM "Users" AS u
+WHERE u."Id" = @__id_0
+LIMIT 1
+Executed DbCommand (1ms) [Parameters=[@__authorId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT d."Id", d."AuthorId", d."CreationDateTime", d."Name"
+FROM "Documents" AS d
+WHERE d."AuthorId" = @__authorId_0
+Executed DbCommand (1ms) [Parameters=[@__id_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash", u."Role"
+FROM "Users" AS u
+WHERE u."Id" = @__id_0
+LIMIT 1
+Executed DbCommand (1ms) [Parameters=[@__authorId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT d."Id", d."AuthorId", d."CreationDateTime", d."Name"
+FROM "Documents" AS d
+INNER JOIN (
+    SELECT d0."DocumentId"
+    FROM "DocumentAccesses" AS d0
+    WHERE d0."UserId" = @__authorId_0
+) AS d1 ON d."Id" = d1."DocumentId"
+Executed DbCommand (1ms) [Parameters=[@__id_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash", u."Role"
+FROM "Users" AS u
+WHERE u."Id" = @__id_0
+LIMIT 1
+Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash", u."Role"
+FROM "Users" AS u
+WHERE u."Id" = @__userId_0
+LIMIT 1
+Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Guid), @__documentId_1='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "DocumentAccesses" AS d
+    WHERE d."UserId" = @__userId_0 AND d."DocumentId" = @__documentId_1)
+Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash", u."Role"
+FROM "Users" AS u
+WHERE u."Id" = @__userId_0
+LIMIT 1
+Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Guid), @__documentId_1='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "DocumentAccesses" AS d
+    WHERE d."UserId" = @__userId_0 AND d."DocumentId" = @__documentId_1)
+Executed DbCommand (3ms) [Parameters=[@__documentId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+DELETE FROM "Documents" AS d
+WHERE d."Id" = @__documentId_0
+Application is shutting down...
+Now listening on: http://localhost:5163
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: D:\inf\clean-code\Markdown\WebApp\API
+Executed DbCommand (270ms) [Parameters=[@__id_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash", u."Role"
+FROM "Users" AS u
+WHERE u."Id" = @__id_0
+LIMIT 1
+Failed executing DbCommand (37ms) [Parameters=[@__authorId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT d."Id", d."AuthorId", d."AuthorName", d."CreationDateTime", d."Name"
+FROM "Documents" AS d
+WHERE d."AuthorId" = @__authorId_0
+An exception occurred while iterating over the results of a query for context type 'Persistence.AppDbContext'.
+Npgsql.PostgresException (0x80004005): 42703: столбец d.AuthorName не существует
+
+POSITION: 30
+   at Npgsql.Internal.NpgsqlConnector.ReadMessageLong(Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+  Exception data:
+    Severity: ОШИБКА
+    SqlState: 42703
+    MessageText: столбец d.AuthorName не существует
+    Position: 30
+    File: parse_relation.c
+    Line: 3721
+    Routine: errorMissingColumn
+An unhandled exception has occurred while executing the request.
+Application is shutting down...
+Executed DbCommand (221ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+DROP DATABASE mdprocessordb WITH (FORCE);
+An error occurred using the connection to database 'mdprocessordb' on server 'tcp://localhost:5432'.
+Executed DbCommand (603ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+CREATE DATABASE mdprocessordb;
+Executed DbCommand (21ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+CREATE TABLE IF NOT EXISTS "__EFMigrationsHistory" (
+    "MigrationId" character varying(150) NOT NULL,
+    "ProductVersion" character varying(32) NOT NULL,
+    CONSTRAINT "PK___EFMigrationsHistory" PRIMARY KEY ("MigrationId")
+);
+Acquiring an exclusive lock for migration application. See https://aka.ms/efcore-docs-migrations-lock for more information if this takes too long.
+Executed DbCommand (2ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+LOCK TABLE "__EFMigrationsHistory" IN ACCESS EXCLUSIVE MODE
+Executed DbCommand (4ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT "MigrationId", "ProductVersion"
+FROM "__EFMigrationsHistory"
+ORDER BY "MigrationId";
+Applying migration '20250128160051_initial'.
+Executed DbCommand (3ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+CREATE TABLE "Users" (
+    "Id" uuid NOT NULL,
+    "Login" character varying(50) NOT NULL,
+    "PasswordHash" character varying(70) NOT NULL,
+    "Role" character varying(20) NOT NULL,
+    CONSTRAINT "PK_Users" PRIMARY KEY ("Id")
+);
+Executed DbCommand (12ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+CREATE TABLE "Documents" (
+    "Id" uuid NOT NULL,
+    "Name" character varying(255) NOT NULL,
+    "AuthorId" uuid NOT NULL,
+    "AuthorName" character varying(255) NOT NULL,
+    "CreationDateTime" timestamp with time zone NOT NULL,
+    CONSTRAINT "PK_Documents" PRIMARY KEY ("Id"),
+    CONSTRAINT "FK_Documents_Users_AuthorId" FOREIGN KEY ("AuthorId") REFERENCES "Users" ("Id") ON DELETE CASCADE
+);
+Executed DbCommand (3ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+CREATE TABLE "DocumentAccesses" (
+    "Id" uuid NOT NULL,
+    "UserId" uuid NOT NULL,
+    "DocumentId" uuid NOT NULL,
+    CONSTRAINT "PK_DocumentAccesses" PRIMARY KEY ("Id"),
+    CONSTRAINT "FK_DocumentAccesses_Documents_DocumentId" FOREIGN KEY ("DocumentId") REFERENCES "Documents" ("Id") ON DELETE CASCADE,
+    CONSTRAINT "FK_DocumentAccesses_Users_UserId" FOREIGN KEY ("UserId") REFERENCES "Users" ("Id") ON DELETE CASCADE
+);
+Executed DbCommand (3ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+CREATE INDEX "IX_DocumentAccesses_DocumentId" ON "DocumentAccesses" ("DocumentId");
+Executed DbCommand (2ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+CREATE UNIQUE INDEX "IX_DocumentAccesses_UserId_DocumentId" ON "DocumentAccesses" ("UserId", "DocumentId");
+Executed DbCommand (2ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+CREATE INDEX "IX_Documents_AuthorId" ON "Documents" ("AuthorId");
+Executed DbCommand (2ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+CREATE UNIQUE INDEX "IX_Users_Login" ON "Users" ("Login");
+Executed DbCommand (1ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+INSERT INTO "__EFMigrationsHistory" ("MigrationId", "ProductVersion")
+VALUES ('20250128160051_initial', '9.0.1');
+Now listening on: http://localhost:5163
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: D:\inf\clean-code\Markdown\WebApp\API
+Executed DbCommand (268ms) [Parameters=[@__id_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash", u."Role"
+FROM "Users" AS u
+WHERE u."Id" = @__id_0
+LIMIT 1
+Executed DbCommand (24ms) [Parameters=[@__login_0='?'], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash", u."Role"
+FROM "Users" AS u
+WHERE u."Login" = @__login_0
+LIMIT 1
+Executed DbCommand (9ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?', @p2='?', @p3='?'], CommandType='Text', CommandTimeout='30']
+INSERT INTO "Users" ("Id", "Login", "PasswordHash", "Role")
+VALUES (@p0, @p1, @p2, @p3);
+Executed DbCommand (3ms) [Parameters=[@__login_0='?'], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash", u."Role"
+FROM "Users" AS u
+WHERE u."Login" = @__login_0
+LIMIT 1
+Executed DbCommand (2ms) [Parameters=[@__id_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash", u."Role"
+FROM "Users" AS u
+WHERE u."Id" = @__id_0
+LIMIT 1
+Executed DbCommand (7ms) [Parameters=[@__authorId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT d."Id", d."AuthorId", d."AuthorName", d."CreationDateTime", d."Name"
+FROM "Documents" AS d
+WHERE d."AuthorId" = @__authorId_0
+Executed DbCommand (2ms) [Parameters=[@__authorId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT u."Login"
+FROM "Users" AS u
+WHERE u."Id" = @__authorId_0
+LIMIT 1
+Executed DbCommand (31ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = Guid), @p2='?', @p3='?' (DbType = DateTime), @p4='?', @p5='?' (DbType = Guid), @p6='?' (DbType = Guid), @p7='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+INSERT INTO "Documents" ("Id", "AuthorId", "AuthorName", "CreationDateTime", "Name")
+VALUES (@p0, @p1, @p2, @p3, @p4);
+INSERT INTO "DocumentAccesses" ("Id", "DocumentId", "UserId")
+VALUES (@p5, @p6, @p7);
+Executed DbCommand (1ms) [Parameters=[@__id_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash", u."Role"
+FROM "Users" AS u
+WHERE u."Id" = @__id_0
+LIMIT 1
+Executed DbCommand (1ms) [Parameters=[@__authorId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT d."Id", d."AuthorId", d."AuthorName", d."CreationDateTime", d."Name"
+FROM "Documents" AS d
+WHERE d."AuthorId" = @__authorId_0
+Application is shutting down...
+Now listening on: http://localhost:5163
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: D:\inf\clean-code\Markdown\WebApp\API
+Executed DbCommand (250ms) [Parameters=[@__id_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash", u."Role"
+FROM "Users" AS u
+WHERE u."Id" = @__id_0
+LIMIT 1
+Executed DbCommand (18ms) [Parameters=[@__authorId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT d."Id", d."AuthorId", d."AuthorName", d."CreationDateTime", d."Name"
+FROM "Documents" AS d
+WHERE d."AuthorId" = @__authorId_0
+Executed DbCommand (2ms) [Parameters=[@__id_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash", u."Role"
+FROM "Users" AS u
+WHERE u."Id" = @__id_0
+LIMIT 1
+Executed DbCommand (6ms) [Parameters=[@__authorId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT d."Id", d."AuthorId", d."AuthorName", d."CreationDateTime", d."Name"
+FROM "Documents" AS d
+INNER JOIN (
+    SELECT d0."DocumentId"
+    FROM "DocumentAccesses" AS d0
+    WHERE d0."UserId" = @__authorId_0
+) AS d1 ON d."Id" = d1."DocumentId"
+Application is shutting down...
+Now listening on: http://localhost:5163
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: D:\inf\clean-code\Markdown\WebApp\API
+Executed DbCommand (278ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?', @p2='?', @p3='?'], CommandType='Text', CommandTimeout='30']
+INSERT INTO "Users" ("Id", "Login", "PasswordHash", "Role")
+VALUES (@p0, @p1, @p2, @p3);
+Executed DbCommand (20ms) [Parameters=[@__id_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash", u."Role"
+FROM "Users" AS u
+WHERE u."Id" = @__id_0
+LIMIT 1
+Executed DbCommand (8ms) [Parameters=[@__authorId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT d."Id", d."AuthorId", d."AuthorName", d."CreationDateTime", d."Name"
+FROM "Documents" AS d
+WHERE d."AuthorId" = @__authorId_0
+Executed DbCommand (2ms) [Parameters=[@__authorId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT u."Login"
+FROM "Users" AS u
+WHERE u."Id" = @__authorId_0
+LIMIT 1
+Executed DbCommand (13ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = Guid), @p2='?', @p3='?' (DbType = DateTime), @p4='?', @p5='?' (DbType = Guid), @p6='?' (DbType = Guid), @p7='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+INSERT INTO "Documents" ("Id", "AuthorId", "AuthorName", "CreationDateTime", "Name")
+VALUES (@p0, @p1, @p2, @p3, @p4);
+INSERT INTO "DocumentAccesses" ("Id", "DocumentId", "UserId")
+VALUES (@p5, @p6, @p7);
+Executed DbCommand (2ms) [Parameters=[@__login_0='?'], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash", u."Role"
+FROM "Users" AS u
+WHERE u."Login" = @__login_0
+LIMIT 1
+Executed DbCommand (2ms) [Parameters=[@__id_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash", u."Role"
+FROM "Users" AS u
+WHERE u."Id" = @__id_0
+LIMIT 1
+Executed DbCommand (2ms) [Parameters=[@__authorId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT d."Id", d."AuthorId", d."AuthorName", d."CreationDateTime", d."Name"
+FROM "Documents" AS d
+WHERE d."AuthorId" = @__authorId_0
+Executed DbCommand (2ms) [Parameters=[@__id_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash", u."Role"
+FROM "Users" AS u
+WHERE u."Id" = @__id_0
+LIMIT 1
+Executed DbCommand (1ms) [Parameters=[@__authorId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT d."Id", d."AuthorId", d."AuthorName", d."CreationDateTime", d."Name"
+FROM "Documents" AS d
+WHERE d."AuthorId" = @__authorId_0
+Executed DbCommand (1ms) [Parameters=[@__login_0='?'], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash", u."Role"
+FROM "Users" AS u
+WHERE u."Login" = @__login_0
+LIMIT 1
+Executed DbCommand (1ms) [Parameters=[@__id_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash", u."Role"
+FROM "Users" AS u
+WHERE u."Id" = @__id_0
+LIMIT 1
+Executed DbCommand (1ms) [Parameters=[@__authorId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT d."Id", d."AuthorId", d."AuthorName", d."CreationDateTime", d."Name"
+FROM "Documents" AS d
+WHERE d."AuthorId" = @__authorId_0
+Executed DbCommand (2ms) [Parameters=[@__id_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash", u."Role"
+FROM "Users" AS u
+WHERE u."Id" = @__id_0
+LIMIT 1
+Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash", u."Role"
+FROM "Users" AS u
+WHERE u."Id" = @__userId_0
+LIMIT 1
+Executed DbCommand (4ms) [Parameters=[@__userId_0='?' (DbType = Guid), @__documentId_1='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "DocumentAccesses" AS d
+    WHERE d."UserId" = @__userId_0 AND d."DocumentId" = @__documentId_1)
+Executed DbCommand (1ms) [Parameters=[@__login_0='?'], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash", u."Role"
+FROM "Users" AS u
+WHERE u."Login" = @__login_0
+LIMIT 1
+Executed DbCommand (2ms) [Parameters=[@__userId_0='?' (DbType = Guid), @__documentId_1='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "DocumentAccesses" AS d
+    WHERE d."UserId" = @__userId_0 AND d."DocumentId" = @__documentId_1)
+Executed DbCommand (3ms) [Parameters=[@__id_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash", u."Role"
+FROM "Users" AS u
+WHERE u."Id" = @__id_0
+LIMIT 1
+Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash", u."Role"
+FROM "Users" AS u
+WHERE u."Id" = @__userId_0
+LIMIT 1
+Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Guid), @__documentId_1='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "DocumentAccesses" AS d
+    WHERE d."UserId" = @__userId_0 AND d."DocumentId" = @__documentId_1)
+Executed DbCommand (1ms) [Parameters=[@__login_0='?'], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash", u."Role"
+FROM "Users" AS u
+WHERE u."Login" = @__login_0
+LIMIT 1
+Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Guid), @__documentId_1='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "DocumentAccesses" AS d
+    WHERE d."UserId" = @__userId_0 AND d."DocumentId" = @__documentId_1)
+Executed DbCommand (3ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = Guid), @p2='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+INSERT INTO "DocumentAccesses" ("Id", "DocumentId", "UserId")
+VALUES (@p0, @p1, @p2);
+Executed DbCommand (2ms) [Parameters=[@__login_0='?'], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash", u."Role"
+FROM "Users" AS u
+WHERE u."Login" = @__login_0
+LIMIT 1
+Executed DbCommand (2ms) [Parameters=[@__id_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash", u."Role"
+FROM "Users" AS u
+WHERE u."Id" = @__id_0
+LIMIT 1
+Executed DbCommand (2ms) [Parameters=[@__authorId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT d."Id", d."AuthorId", d."AuthorName", d."CreationDateTime", d."Name"
+FROM "Documents" AS d
+WHERE d."AuthorId" = @__authorId_0
+Executed DbCommand (1ms) [Parameters=[@__id_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash", u."Role"
+FROM "Users" AS u
+WHERE u."Id" = @__id_0
+LIMIT 1
+Executed DbCommand (2ms) [Parameters=[@__authorId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT d."Id", d."AuthorId", d."AuthorName", d."CreationDateTime", d."Name"
+FROM "Documents" AS d
+INNER JOIN (
+    SELECT d0."DocumentId"
+    FROM "DocumentAccesses" AS d0
+    WHERE d0."UserId" = @__authorId_0
+) AS d1 ON d."Id" = d1."DocumentId"
+Application is shutting down...
+Now listening on: http://localhost:5163
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: D:\inf\clean-code\Markdown\WebApp\API
+Executed DbCommand (290ms) [Parameters=[@__id_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash", u."Role"
+FROM "Users" AS u
+WHERE u."Id" = @__id_0
+LIMIT 1
+Executed DbCommand (20ms) [Parameters=[@__authorId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT d."Id", d."AuthorId", d."AuthorName", d."CreationDateTime", d."Name"
+FROM "Documents" AS d
+WHERE d."AuthorId" = @__authorId_0
+Executed DbCommand (3ms) [Parameters=[@__id_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash", u."Role"
+FROM "Users" AS u
+WHERE u."Id" = @__id_0
+LIMIT 1
+Executed DbCommand (7ms) [Parameters=[@__authorId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT d."Id", d."AuthorId", d."AuthorName", d."CreationDateTime", d."Name"
+FROM "Documents" AS d
+INNER JOIN (
+    SELECT d0."DocumentId"
+    FROM "DocumentAccesses" AS d0
+    WHERE d0."UserId" = @__authorId_0
+) AS d1 ON d."Id" = d1."DocumentId"
+Executed DbCommand (8ms) [Parameters=[@__login_0='?'], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash", u."Role"
+FROM "Users" AS u
+WHERE u."Login" = @__login_0
+LIMIT 1
+Executed DbCommand (2ms) [Parameters=[@__id_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash", u."Role"
+FROM "Users" AS u
+WHERE u."Id" = @__id_0
+LIMIT 1
+Executed DbCommand (1ms) [Parameters=[@__authorId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT d."Id", d."AuthorId", d."AuthorName", d."CreationDateTime", d."Name"
+FROM "Documents" AS d
+WHERE d."AuthorId" = @__authorId_0
+Executed DbCommand (2ms) [Parameters=[@__id_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash", u."Role"
+FROM "Users" AS u
+WHERE u."Id" = @__id_0
+LIMIT 1
+Executed DbCommand (2ms) [Parameters=[@__authorId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT d."Id", d."AuthorId", d."AuthorName", d."CreationDateTime", d."Name"
+FROM "Documents" AS d
+INNER JOIN (
+    SELECT d0."DocumentId"
+    FROM "DocumentAccesses" AS d0
+    WHERE d0."UserId" = @__authorId_0
+) AS d1 ON d."Id" = d1."DocumentId"
+Executed DbCommand (2ms) [Parameters=[@__login_0='?'], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash", u."Role"
+FROM "Users" AS u
+WHERE u."Login" = @__login_0
+LIMIT 1
+Executed DbCommand (2ms) [Parameters=[@__id_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash", u."Role"
+FROM "Users" AS u
+WHERE u."Id" = @__id_0
+LIMIT 1
+Executed DbCommand (1ms) [Parameters=[@__authorId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT d."Id", d."AuthorId", d."AuthorName", d."CreationDateTime", d."Name"
+FROM "Documents" AS d
+WHERE d."AuthorId" = @__authorId_0
+Executed DbCommand (1ms) [Parameters=[@__id_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash", u."Role"
+FROM "Users" AS u
+WHERE u."Id" = @__id_0
+LIMIT 1
+Executed DbCommand (2ms) [Parameters=[@__authorId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT d."Id", d."AuthorId", d."AuthorName", d."CreationDateTime", d."Name"
+FROM "Documents" AS d
+INNER JOIN (
+    SELECT d0."DocumentId"
+    FROM "DocumentAccesses" AS d0
+    WHERE d0."UserId" = @__authorId_0
+) AS d1 ON d."Id" = d1."DocumentId"
+Executed DbCommand (2ms) [Parameters=[@__userId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash", u."Role"
+FROM "Users" AS u
+WHERE u."Id" = @__userId_0
+LIMIT 1
+Executed DbCommand (9ms) [Parameters=[@__userId_0='?' (DbType = Guid), @__documentId_1='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "DocumentAccesses" AS d
+    WHERE d."UserId" = @__userId_0 AND d."DocumentId" = @__documentId_1)
+Executed DbCommand (27ms) [Parameters=[@__documentId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+DELETE FROM "Documents" AS d
+WHERE d."Id" = @__documentId_0
+Executed DbCommand (2ms) [Parameters=[@__login_0='?'], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash", u."Role"
+FROM "Users" AS u
+WHERE u."Login" = @__login_0
+LIMIT 1
+Executed DbCommand (2ms) [Parameters=[@__id_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash", u."Role"
+FROM "Users" AS u
+WHERE u."Id" = @__id_0
+LIMIT 1
+Executed DbCommand (1ms) [Parameters=[@__authorId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT d."Id", d."AuthorId", d."AuthorName", d."CreationDateTime", d."Name"
+FROM "Documents" AS d
+WHERE d."AuthorId" = @__authorId_0
+Executed DbCommand (2ms) [Parameters=[@__id_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash", u."Role"
+FROM "Users" AS u
+WHERE u."Id" = @__id_0
+LIMIT 1
+Executed DbCommand (2ms) [Parameters=[@__authorId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT d."Id", d."AuthorId", d."AuthorName", d."CreationDateTime", d."Name"
+FROM "Documents" AS d
+INNER JOIN (
+    SELECT d0."DocumentId"
+    FROM "DocumentAccesses" AS d0
+    WHERE d0."UserId" = @__authorId_0
+) AS d1 ON d."Id" = d1."DocumentId"
+Application is shutting down...
+Now listening on: http://localhost:5163
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: D:\inf\clean-code\Markdown\WebApp\API
+Executed DbCommand (222ms) [Parameters=[@__id_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash", u."Role"
+FROM "Users" AS u
+WHERE u."Id" = @__id_0
+LIMIT 1
+Executed DbCommand (226ms) [Parameters=[@__id_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash", u."Role"
+FROM "Users" AS u
+WHERE u."Id" = @__id_0
+LIMIT 1
+Executed DbCommand (18ms) [Parameters=[@__authorId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT d."Id", d."AuthorId", d."AuthorName", d."CreationDateTime", d."Name"
+FROM "Documents" AS d
+WHERE d."AuthorId" = @__authorId_0
+Executed DbCommand (18ms) [Parameters=[@__authorId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT d."Id", d."AuthorId", d."AuthorName", d."CreationDateTime", d."Name"
+FROM "Documents" AS d
+WHERE d."AuthorId" = @__authorId_0
+Executed DbCommand (2ms) [Parameters=[@__authorId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT u."Login"
+FROM "Users" AS u
+WHERE u."Id" = @__authorId_0
+LIMIT 1
+Executed DbCommand (2ms) [Parameters=[@__authorId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT u."Login"
+FROM "Users" AS u
+WHERE u."Id" = @__authorId_0
+LIMIT 1
+Executed DbCommand (10ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = Guid), @p2='?', @p3='?' (DbType = DateTime), @p4='?', @p5='?' (DbType = Guid), @p6='?' (DbType = Guid), @p7='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+INSERT INTO "Documents" ("Id", "AuthorId", "AuthorName", "CreationDateTime", "Name")
+VALUES (@p0, @p1, @p2, @p3, @p4);
+INSERT INTO "DocumentAccesses" ("Id", "DocumentId", "UserId")
+VALUES (@p5, @p6, @p7);
+Executed DbCommand (10ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = Guid), @p2='?', @p3='?' (DbType = DateTime), @p4='?', @p5='?' (DbType = Guid), @p6='?' (DbType = Guid), @p7='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+INSERT INTO "Documents" ("Id", "AuthorId", "AuthorName", "CreationDateTime", "Name")
+VALUES (@p0, @p1, @p2, @p3, @p4);
+INSERT INTO "DocumentAccesses" ("Id", "DocumentId", "UserId")
+VALUES (@p5, @p6, @p7);
+Executed DbCommand (10ms) [Parameters=[@__id_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash", u."Role"
+FROM "Users" AS u
+WHERE u."Id" = @__id_0
+LIMIT 1
+Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash", u."Role"
+FROM "Users" AS u
+WHERE u."Id" = @__userId_0
+LIMIT 1
+Executed DbCommand (4ms) [Parameters=[@__userId_0='?' (DbType = Guid), @__documentId_1='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "DocumentAccesses" AS d
+    WHERE d."UserId" = @__userId_0 AND d."DocumentId" = @__documentId_1)
+Executed DbCommand (2ms) [Parameters=[@__id_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash", u."Role"
+FROM "Users" AS u
+WHERE u."Id" = @__id_0
+LIMIT 1
+Executed DbCommand (2ms) [Parameters=[@__authorId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT d."Id", d."AuthorId", d."AuthorName", d."CreationDateTime", d."Name"
+FROM "Documents" AS d
+WHERE d."AuthorId" = @__authorId_0
+Executed DbCommand (1ms) [Parameters=[@__id_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash", u."Role"
+FROM "Users" AS u
+WHERE u."Id" = @__id_0
+LIMIT 1
+Executed DbCommand (4ms) [Parameters=[@__authorId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT d."Id", d."AuthorId", d."AuthorName", d."CreationDateTime", d."Name"
+FROM "Documents" AS d
+INNER JOIN (
+    SELECT d0."DocumentId"
+    FROM "DocumentAccesses" AS d0
+    WHERE d0."UserId" = @__authorId_0
+) AS d1 ON d."Id" = d1."DocumentId"
+Executed DbCommand (2ms) [Parameters=[@__id_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash", u."Role"
+FROM "Users" AS u
+WHERE u."Id" = @__id_0
+LIMIT 1
+Executed DbCommand (3ms) [Parameters=[@__authorId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT d."Id", d."AuthorId", d."AuthorName", d."CreationDateTime", d."Name"
+FROM "Documents" AS d
+WHERE d."AuthorId" = @__authorId_0
+Executed DbCommand (1ms) [Parameters=[@__id_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash", u."Role"
+FROM "Users" AS u
+WHERE u."Id" = @__id_0
+LIMIT 1
+Executed DbCommand (2ms) [Parameters=[@__authorId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT d."Id", d."AuthorId", d."AuthorName", d."CreationDateTime", d."Name"
+FROM "Documents" AS d
+INNER JOIN (
+    SELECT d0."DocumentId"
+    FROM "DocumentAccesses" AS d0
+    WHERE d0."UserId" = @__authorId_0
+) AS d1 ON d."Id" = d1."DocumentId"
+Executed DbCommand (1ms) [Parameters=[@__id_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash", u."Role"
+FROM "Users" AS u
+WHERE u."Id" = @__id_0
+LIMIT 1
+Executed DbCommand (1ms) [Parameters=[@__authorId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT d."Id", d."AuthorId", d."AuthorName", d."CreationDateTime", d."Name"
+FROM "Documents" AS d
+WHERE d."AuthorId" = @__authorId_0
+Executed DbCommand (1ms) [Parameters=[@__id_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash", u."Role"
+FROM "Users" AS u
+WHERE u."Id" = @__id_0
+LIMIT 1
+Executed DbCommand (2ms) [Parameters=[@__authorId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT d."Id", d."AuthorId", d."AuthorName", d."CreationDateTime", d."Name"
+FROM "Documents" AS d
+INNER JOIN (
+    SELECT d0."DocumentId"
+    FROM "DocumentAccesses" AS d0
+    WHERE d0."UserId" = @__authorId_0
+) AS d1 ON d."Id" = d1."DocumentId"
+Executed DbCommand (2ms) [Parameters=[@__login_0='?'], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash", u."Role"
+FROM "Users" AS u
+WHERE u."Login" = @__login_0
+LIMIT 1
+Executed DbCommand (1ms) [Parameters=[@__id_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash", u."Role"
+FROM "Users" AS u
+WHERE u."Id" = @__id_0
+LIMIT 1
+Executed DbCommand (1ms) [Parameters=[@__authorId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT d."Id", d."AuthorId", d."AuthorName", d."CreationDateTime", d."Name"
+FROM "Documents" AS d
+WHERE d."AuthorId" = @__authorId_0
+Executed DbCommand (1ms) [Parameters=[@__id_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash", u."Role"
+FROM "Users" AS u
+WHERE u."Id" = @__id_0
+LIMIT 1
+Executed DbCommand (6ms) [Parameters=[@__authorId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT d."Id", d."AuthorId", d."AuthorName", d."CreationDateTime", d."Name"
+FROM "Documents" AS d
+INNER JOIN (
+    SELECT d0."DocumentId"
+    FROM "DocumentAccesses" AS d0
+    WHERE d0."UserId" = @__authorId_0
+) AS d1 ON d."Id" = d1."DocumentId"
+Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash", u."Role"
+FROM "Users" AS u
+WHERE u."Id" = @__userId_0
+LIMIT 1
+Executed DbCommand (2ms) [Parameters=[@__userId_0='?' (DbType = Guid), @__documentId_1='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "DocumentAccesses" AS d
+    WHERE d."UserId" = @__userId_0 AND d."DocumentId" = @__documentId_1)
+Executed DbCommand (9ms) [Parameters=[@__documentId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+DELETE FROM "Documents" AS d
+WHERE d."Id" = @__documentId_0
+Executed DbCommand (1ms) [Parameters=[@__id_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash", u."Role"
+FROM "Users" AS u
+WHERE u."Id" = @__id_0
+LIMIT 1
+Executed DbCommand (1ms) [Parameters=[@__authorId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT d."Id", d."AuthorId", d."AuthorName", d."CreationDateTime", d."Name"
+FROM "Documents" AS d
+WHERE d."AuthorId" = @__authorId_0
+Executed DbCommand (1ms) [Parameters=[@__id_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash", u."Role"
+FROM "Users" AS u
+WHERE u."Id" = @__id_0
+LIMIT 1
+Executed DbCommand (2ms) [Parameters=[@__authorId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT d."Id", d."AuthorId", d."AuthorName", d."CreationDateTime", d."Name"
+FROM "Documents" AS d
+INNER JOIN (
+    SELECT d0."DocumentId"
+    FROM "DocumentAccesses" AS d0
+    WHERE d0."UserId" = @__authorId_0
+) AS d1 ON d."Id" = d1."DocumentId"
+Executed DbCommand (2ms) [Parameters=[@__id_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash", u."Role"
+FROM "Users" AS u
+WHERE u."Id" = @__id_0
+LIMIT 1
+Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash", u."Role"
+FROM "Users" AS u
+WHERE u."Id" = @__userId_0
+LIMIT 1
+Executed DbCommand (2ms) [Parameters=[@__userId_0='?' (DbType = Guid), @__documentId_1='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "DocumentAccesses" AS d
+    WHERE d."UserId" = @__userId_0 AND d."DocumentId" = @__documentId_1)
+Executed DbCommand (3ms) [Parameters=[@__login_0='?'], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash", u."Role"
+FROM "Users" AS u
+WHERE u."Login" = @__login_0
+LIMIT 1
+Executed DbCommand (2ms) [Parameters=[@__userId_0='?' (DbType = Guid), @__documentId_1='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "DocumentAccesses" AS d
+    WHERE d."UserId" = @__userId_0 AND d."DocumentId" = @__documentId_1)
+Executed DbCommand (3ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = Guid), @p2='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+INSERT INTO "DocumentAccesses" ("Id", "DocumentId", "UserId")
+VALUES (@p0, @p1, @p2);
+Executed DbCommand (2ms) [Parameters=[@__login_0='?'], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash", u."Role"
+FROM "Users" AS u
+WHERE u."Login" = @__login_0
+LIMIT 1
+Executed DbCommand (1ms) [Parameters=[@__id_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash", u."Role"
+FROM "Users" AS u
+WHERE u."Id" = @__id_0
+LIMIT 1
+Executed DbCommand (2ms) [Parameters=[@__authorId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT d."Id", d."AuthorId", d."AuthorName", d."CreationDateTime", d."Name"
+FROM "Documents" AS d
+WHERE d."AuthorId" = @__authorId_0
+Executed DbCommand (2ms) [Parameters=[@__id_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash", u."Role"
+FROM "Users" AS u
+WHERE u."Id" = @__id_0
+LIMIT 1
+Executed DbCommand (2ms) [Parameters=[@__authorId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT d."Id", d."AuthorId", d."AuthorName", d."CreationDateTime", d."Name"
+FROM "Documents" AS d
+INNER JOIN (
+    SELECT d0."DocumentId"
+    FROM "DocumentAccesses" AS d0
+    WHERE d0."UserId" = @__authorId_0
+) AS d1 ON d."Id" = d1."DocumentId"
+Executed DbCommand (1ms) [Parameters=[@__id_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash", u."Role"
+FROM "Users" AS u
+WHERE u."Id" = @__id_0
+LIMIT 1
+Executed DbCommand (2ms) [Parameters=[@__authorId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT d."Id", d."AuthorId", d."AuthorName", d."CreationDateTime", d."Name"
+FROM "Documents" AS d
+WHERE d."AuthorId" = @__authorId_0
+Executed DbCommand (1ms) [Parameters=[@__authorId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT u."Login"
+FROM "Users" AS u
+WHERE u."Id" = @__authorId_0
+LIMIT 1
+Executed DbCommand (2ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = Guid), @p2='?', @p3='?' (DbType = DateTime), @p4='?', @p5='?' (DbType = Guid), @p6='?' (DbType = Guid), @p7='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+INSERT INTO "Documents" ("Id", "AuthorId", "AuthorName", "CreationDateTime", "Name")
+VALUES (@p0, @p1, @p2, @p3, @p4);
+INSERT INTO "DocumentAccesses" ("Id", "DocumentId", "UserId")
+VALUES (@p5, @p6, @p7);
+Executed DbCommand (1ms) [Parameters=[@__id_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash", u."Role"
+FROM "Users" AS u
+WHERE u."Id" = @__id_0
+LIMIT 1
+Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash", u."Role"
+FROM "Users" AS u
+WHERE u."Id" = @__userId_0
+LIMIT 1
+Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Guid), @__documentId_1='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "DocumentAccesses" AS d
+    WHERE d."UserId" = @__userId_0 AND d."DocumentId" = @__documentId_1)
+Executed DbCommand (1ms) [Parameters=[@__id_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash", u."Role"
+FROM "Users" AS u
+WHERE u."Id" = @__id_0
+LIMIT 1
+Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash", u."Role"
+FROM "Users" AS u
+WHERE u."Id" = @__userId_0
+LIMIT 1
+Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Guid), @__documentId_1='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "DocumentAccesses" AS d
+    WHERE d."UserId" = @__userId_0 AND d."DocumentId" = @__documentId_1)
+Application is shutting down...
+Now listening on: http://localhost:5163
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: D:\inf\clean-code\Markdown\WebApp\API
+Executed DbCommand (123ms) [Parameters=[@__id_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash", u."Role"
+FROM "Users" AS u
+WHERE u."Id" = @__id_0
+LIMIT 1
+Executed DbCommand (9ms) [Parameters=[@__userId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT u."Id", u."Login", u."PasswordHash", u."Role"
+FROM "Users" AS u
+WHERE u."Id" = @__userId_0
+LIMIT 1
+Executed DbCommand (5ms) [Parameters=[@__userId_0='?' (DbType = Guid), @__documentId_1='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "DocumentAccesses" AS d
+    WHERE d."UserId" = @__userId_0 AND d."DocumentId" = @__documentId_1)
+Application is shutting down...
+Now listening on: http://localhost:5163
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: D:\inf\clean-code\Markdown\WebApp\API
+Application is shutting down...

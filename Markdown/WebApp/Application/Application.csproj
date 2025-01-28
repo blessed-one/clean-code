@@ -8,16 +8,13 @@
 
     <ItemGroup>
       <ProjectReference Include="..\Core\Core.csproj" />
+      <ProjectReference Include="..\MdProcessor\MdProcessor.csproj" />
     </ItemGroup>
-
-    <ItemGroup>
-      <Reference Include="MarkdownProcessor">
-        <HintPath>..\..\MarkdownRealisation\MarkdownProcessor\bin\Debug\net8.0\MarkdownProcessor.dll</HintPath>
-      </Reference>
-    </ItemGroup>
+    
 
     <ItemGroup>
       <PackageReference Include="Minio" Version="6.0.4" />
     </ItemGroup>
+    
 
 </Project>

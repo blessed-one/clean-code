@@ -2,6 +2,7 @@ using Application.Interfaces.Auth;
 using Application.Interfaces.Repositories;
 using Application.Interfaces.Services;
 using Application.Utils;
+using Core.Models;
 
 namespace Application.Services;
 
@@ -50,5 +51,13 @@ public class UserService(
         var token = jwtProvider.GenerateToken(user);
 
         return Result<string>.Success(token);
+    }
+
+    public async Task<Result<User>> GetByLogin(string login)
+    {
+        var repositoryResult = await userRepository.GetByLogin(login);
+        return repositoryResult.IsFailure
+            ? Result<User>.Failure(repositoryResult.Message!)
+            : Result<User>.Success(repositoryResult.Data!);
     }
 }

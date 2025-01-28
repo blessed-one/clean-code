@@ -21,22 +21,9 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Reference Include="MarkdownProcessor">
-        <HintPath>..\..\MarkdownRealisation\MarkdownProcessor\bin\Debug\net8.0\MarkdownProcessor.dll</HintPath>
-      </Reference>
-      <Reference Include="MarkdownRealisation">
-        <HintPath>..\..\MarkdownRealisation\MarkdownProcessor\bin\Debug\net8.0\MarkdownProcessor.dll</HintPath>
-      </Reference>
-    </ItemGroup>
-
-    <ItemGroup>
       <ProjectReference Include="..\Application\Application.csproj" />
       <ProjectReference Include="..\Infrastructure\Infrastructure.csproj" />
       <ProjectReference Include="..\Persistence\Persistence.csproj" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <Folder Include="Validators\" />
     </ItemGroup>
 
     <ItemGroup>

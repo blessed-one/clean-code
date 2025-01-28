@@ -58,7 +58,7 @@ public class DocumentController(
         var createDocResult = await documentService.Create(documentName, (Guid)HttpContext.Items["UserId"]!);
         return createDocResult.IsFailure 
             ? Problem(createDocResult.Message) 
-            : Created();
+            : Ok(createDocResult.Data);
     }
     
     [RoleAuthorize("user")]

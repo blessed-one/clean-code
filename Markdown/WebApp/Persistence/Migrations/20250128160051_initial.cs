@@ -32,6 +32,7 @@ namespace Persistence.Migrations
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
                     Name = table.Column<string>(type: "character varying(255)", maxLength: 255, nullable: false),
                     AuthorId = table.Column<Guid>(type: "uuid", nullable: false),
+                    AuthorName = table.Column<string>(type: "character varying(255)", maxLength: 255, nullable: false),
                     CreationDateTime = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
                 },
                 constraints: table =>

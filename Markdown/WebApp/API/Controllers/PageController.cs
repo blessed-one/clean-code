@@ -10,14 +10,12 @@ public class PageController() : ControllerBase
     [HttpGet("")]
     public IActionResult Index()
     {
-        var htmlContent = "<html><body><h1>hello md processor</h1></body></html>";
-
-        return Content(htmlContent, "text/html");
+        return File("MainPage/index.html", "text/html");
     }
 
     [HttpGet("Convertor")]
     public IActionResult ShowConvertorPage()
     {
-        return File("ConvertorPage.html", "text/html");
+        return File("ConvertorPage/index.html", "text/html");
     }
 }

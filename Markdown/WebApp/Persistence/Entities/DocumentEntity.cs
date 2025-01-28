@@ -6,6 +6,7 @@ public class DocumentEntity
     public string Name { get; set; } = string.Empty;
     
     public Guid AuthorId { get; set; }
+    public string AuthorName { get; set; } = string.Empty;
     public UserEntity Author { get; set; }
     
     public DateTime CreationDateTime { get; set; }

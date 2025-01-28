@@ -13,6 +13,10 @@ public class DocumentConfiguration : IEntityTypeConfiguration<DocumentEntity>
         builder.Property(document => document.Name)
             .IsRequired()
             .HasMaxLength(255);
+        
+        builder.Property(document => document.AuthorName)
+            .IsRequired()
+            .HasMaxLength(255);
 
         builder.Property(document => document.CreationDateTime)
             .IsRequired();

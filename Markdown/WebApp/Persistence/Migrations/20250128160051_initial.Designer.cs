@@ -12,7 +12,7 @@ using Persistence;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250125230913_initial")]
+    [Migration("20250128160051_initial")]
     partial class initial
     {
         /// <inheritdoc />
@@ -55,6 +55,11 @@ namespace Persistence.Migrations
 
                     b.Property<Guid>("AuthorId")
                         .HasColumnType("uuid");
+
+                    b.Property<string>("AuthorName")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("character varying(255)");
 
                     b.Property<DateTime>("CreationDateTime")
                         .HasColumnType("timestamp with time zone");
