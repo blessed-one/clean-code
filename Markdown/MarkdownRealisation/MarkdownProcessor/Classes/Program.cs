@@ -7,7 +7,8 @@ public static class Program
         var md = new Md();
         try
         {
-            Console.WriteLine( md.RenderHtml("1. asd\n    2. asd\n    3. asd\n4. asd"));
+            Console.WriteLine( md.RenderHtml(
+                "1. Первый уровень\n    1. Второй уровень\n        1. Третий уровень\n    2. Второй элемент второго уровня"));
         }
         catch (Exception e)
         {

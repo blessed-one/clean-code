@@ -102,4 +102,22 @@ public class MarkdownTests
         string expected = "<h1>Заголовок <strong>с <em>разными</em> символами</strong></h1>";
         Assert.Equal(expected, md.RenderHtml(input));
     }
+    
+    [Fact]
+    public void MultipleParagraphsAndHeadings_RenderCorrectly()
+    {
+        var md = new Md();
+        string input = "Первая строка абзаца.\n\nВторая строка абзаца.\n\n# Первый заголовок\n## Второй заголовок\n### Третий заголовок";
+        string expected = "<p>Первая строка абзаца.</p><p>Вторая строка абзаца.</p><h1>Первый заголовок</h1><h2>Второй заголовок</h2><h3>Третий заголовок</h3>";
+        Assert.Equal(expected, md.RenderHtml(input));
+    }
+
+    [Fact]
+    public void ComplexOrderedList_RendersCorrectly()
+    {
+        var md = new Md();
+        string input = "1. Первый уровень\n    1. Второй уровень\n        1. Третий уровень\n    2. Второй элемент второго уровня";
+        string expected = "<ol><li>Первый уровень</li><ol><li>Второй уровень</li><ol><li>Третий уровень</li></ol><li>Второй элемент второго уровня</li></ol>";
+        Assert.Equal(expected, md.RenderHtml(input));
+    }
 }

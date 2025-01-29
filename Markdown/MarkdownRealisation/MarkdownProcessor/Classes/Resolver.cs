@@ -116,6 +116,11 @@ public class Resolver : ITagsResolver
         {
             if (_closedTagTokens.Contains(token)) continue;
 
+            if (token.Type is TagType.Paragraph or TagType.Header)
+            {
+                _closedTagTokens.Add(token);
+            }
+
             if (!tokenStack.Any())
             {
                 tokenStack.Push(token);
