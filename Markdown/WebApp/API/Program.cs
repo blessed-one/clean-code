@@ -3,6 +3,8 @@ using API.Filters;
 using Application.Interfaces.Services;
 using Application.Services;
 using Microsoft.AspNetCore.CookiePolicy;
+using Microsoft.EntityFrameworkCore;
+using Persistence;
 
 var builder = WebApplication.CreateBuilder(args);
 var services = builder.Services;
@@ -40,6 +42,22 @@ services.AddScoped<UserExistFilter>();
 services.AddAuthenticator(configuration);
 
 var app = builder.Build();
+
+using (var scope = app.Services.CreateScope())
+{
+    var serviceProvider = scope.ServiceProvider;
+    try
+    {
+        var context = serviceProvider.GetRequiredService<AppDbContext>();
+        context.Database.Migrate();
+    }
+    catch (Exception ex)
+    {
+        var logger = serviceProvider.GetRequiredService<ILogger<Program>>();
+        logger.LogError(ex, "Ошибка при применении миграций.");
+    }
+}
+
 
 if (app.Environment.IsDevelopment())
 {

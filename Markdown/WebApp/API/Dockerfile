@@ -8,11 +8,11 @@ FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 COPY ["API/API.csproj", "API/"]
-COPY ["MdProcessor/MdProcessor.csproj", "MdProcessor/"]
 COPY ["Application/Application.csproj", "Application/"]
 COPY ["Core/Core.csproj", "Core/"]
-COPY ["Persistence/Persistence.csproj", "Persistence/"]
+COPY ["MdProcessor/MdProcessor.csproj", "MdProcessor/"]
 COPY ["Infrastructure/Infrastructure.csproj", "Infrastructure/"]
+COPY ["Persistence/Persistence.csproj", "Persistence/"]
 RUN dotnet restore "API/API.csproj"
 COPY . .
 WORKDIR "/src/API"
