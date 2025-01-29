@@ -6,6 +6,6 @@ public enum TagType
     Bold,
     Header,
     Paragraph,
+    ListItem,
     OrderedList,
-    OrderedListItem
 }

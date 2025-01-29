@@ -9,5 +9,5 @@ public interface IParser
     /// </summary>
     /// <param name="text">Массив строк .md файла</param>
     /// <returns>Массив массивов токенов</returns>
-    public Token[][] Parse(string text);
+    public Token[] Parse(string text);
 }

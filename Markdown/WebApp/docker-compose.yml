@@ -7,35 +7,29 @@
     ports:
       - "5163:8080"
     container_name: md_web_api
-    environment:
-      ASPNETCORE_ENVIRONMENT: Development
-      MINIO_ENDPOINT: http://minio:9000
-      MINIO_ACCESS_KEY: OYV0rUm83HowwCx2y8db
-      MINIO_SECRET_KEY: agAPP4HxU3iT0xnmVO8bXNoX7ztDnWQNDCfCpIkb
-      POSTGRES_CONNECTION_STRING: Host=db;Username=postgres;Password=177013;Database=mdprocessordb;
+    env_file:
+      - "webapp.env"
     depends_on:
-      - db    
+      - db
       - minio
   
   db:
     image: postgres:latest
     container_name: postgres
     ports:
-      - "5432:5522"
-    environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: 177013
-      POSTGRES_DB: mdprocessordb
+      - "5433:5432"
+    env_file:
+      - "webapp.env"
     volumes:
       - postgres_data:/var/lib/postgresql/data
+      - ./migration.sql:/docker-entrypoint-initdb.d/init.sql
   
   minio:
     image: minio/minio
     container_name: minio
+    env_file:
+      - "webapp.env"
     command: server /data --console-address ":9001"
-    environment:
-      MINIO_ROOT_USER: minioadmin
-      MINIO_ROOT_PASSWORD: minioadmin
     ports:
       - "9000:9000"
       - "9001:9001"
@@ -45,4 +39,3 @@
 volumes:
   postgres_data:
   minio_data:
-    

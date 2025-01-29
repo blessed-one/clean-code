@@ -3,7 +3,6 @@ using API.Filters;
 using Application.Interfaces.Services;
 using Application.Services;
 using Microsoft.AspNetCore.CookiePolicy;
-using Minio;
 
 var builder = WebApplication.CreateBuilder(args);
 var services = builder.Services;
@@ -11,6 +10,9 @@ var configuration = builder.Configuration;
 
 // logging
 builder.Logging.AddFile("logs.txt");
+
+// settings
+builder.Configuration.AddEnvironmentVariables();
 
 // db
 services.AddPostgresDb(configuration);
@@ -25,7 +27,6 @@ services.AddSwaggerGen();
 services.AddScoped<IUserService, UserService>();
 services.AddScoped<IDocumentService, DocumentService>();
 services.AddScoped<IDocumentAccessService, DocumentAccessService>();
-
 
 // md
 services.AddMdProcessor();
@@ -60,4 +61,5 @@ app.UseCookiePolicy(new CookiePolicyOptions()
     Secure = CookieSecurePolicy.Always
 });
 
+app.MapGet("/", () => $"connection string: {configuration.GetConnectionString("AppDbContext")}");
 app.Run();

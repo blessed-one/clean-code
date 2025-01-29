@@ -10,7 +10,7 @@ public class MdService : IMdService
 
     public MdService(IRender markdownRenderer)
     {
-        _markdownRender = markdownRenderer;        
+        _markdownRender = markdownRenderer;
     }
 
     public async Task<Result<string>> RenderHtml(string markdown)

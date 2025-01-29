@@ -3,15 +3,14 @@ using MarkdownRealisation.Enums;
 
 namespace MarkdownRealisation.TagsAndTokens;
 
-public class ItalicToken : TagToken
+public class OrderedListToken : TagToken
 {
-    public override string HtmlTag => "em";
-    public override string MarkdownTag => "_";
-    public override TagType Type => TagType.Italic;
+    public override string HtmlTag => "ol";
+    public override string MarkdownTag => "";
+    public override TagType Type => TagType.OrderedList;
     public override TagPosition Position { get; set; }
     public override TagToken? Pair { get; set; }
-
-    public override object Clone() => new ItalicToken()
+    public override object Clone() => new OrderedListToken()
     {
         Pair = (TagToken?)Pair?.Clone()
     };

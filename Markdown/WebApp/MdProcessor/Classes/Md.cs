@@ -13,7 +13,7 @@ public class Md : IRender
     {
         var result = new StringBuilder();
             
-        var tokens = _resolver.ResolveTokensLines(_parser.Parse(text));
+        var tokens = _resolver.ResolveTokens(_parser.Parse(text));
             
         foreach ( var token in tokens )
         {

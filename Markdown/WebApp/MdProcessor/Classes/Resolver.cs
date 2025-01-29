@@ -17,6 +17,89 @@ public class Resolver : ITagsResolver
         _closedTagTokens.Add(firstToken.Pair);
     }
 
+    private Token[] ResolveOrderedLists(Token[] tokens)
+    {
+        if (tokens.Length == 0)
+            return tokens;
+        var openedCount = 0;
+        
+        var tokenList = new LinkedList<Token>(tokens);
+        
+        var current = tokenList.First;
+        while (current != null && current.Next != null)
+        {
+            var previous = current.Previous;
+            if (current.Value is ListToken listToken)
+            {
+                if (current == tokenList.First || previous!.Value is not ListToken)
+                {
+                    tokenList.AddBefore(current, new OrderedListToken()
+                    {
+                        Position = TagPosition.Start,
+                    });
+                    openedCount++;
+                }
+                else if (previous.Value is ListToken previousListToken)
+                {
+                    if (previousListToken.Offset < listToken.Offset)
+                    {
+                        var newOrderedToken = new OrderedListToken
+                        {
+                            Position = TagPosition.Start,
+                        };
+                        tokenList.AddBefore(current, newOrderedToken);
+                        openedCount++;
+                        
+                        _closedTagTokens.Add(newOrderedToken);
+                    }
+                    else if (previousListToken.Offset > listToken.Offset)
+                    {
+                        var newOrderedToken = new OrderedListToken()
+                        {
+                            Position = TagPosition.End,
+                        };
+                        tokenList.AddBefore(current, newOrderedToken);
+                        openedCount--;
+                        
+                        _closedTagTokens.Add(newOrderedToken);
+                    }
+                }
+                
+                current = tokenList.Find(listToken.Pair!)!.Next;
+                continue;
+            }
+        
+            // current.Value is not ListToken
+            if (current != tokenList.First && previous!.Value is ListToken)
+            {
+                for (var i = 0; i < openedCount; i++)
+                {
+                    tokenList.AddBefore(current, new OrderedListToken()
+                    {
+                        Position = TagPosition.End,
+                    });
+                }
+        
+                openedCount = 0;
+            }
+            
+            current = current.Next;
+        }
+        
+        if (openedCount != 0)
+        {
+            for (var i = 0; i < openedCount; i++)
+            {
+                tokenList.AddLast(new OrderedListToken()
+                {
+                    Position = TagPosition.End,
+                });
+            }
+        }
+
+        return tokenList.ToArray();
+    }
+
     /// <summary>
     /// Обозначает теги закрытыми если у них есть пара без пересечений
     /// </summary>
@@ -76,7 +159,7 @@ public class Resolver : ITagsResolver
         for (var i = 0; i < tokensToResolve.Count; i++)
         {
             var tokenA = tokensToResolve[i];
-            if (tokenA.Type == TagType.Header || tokenA.Type == TagType.Paragraph) continue;
+            if (tokenA.Type is TagType.Header or TagType.Paragraph or TagType.ListItem or TagType.OrderedList) continue;
 
             if (_closedTagTokens.Contains(tokenA) && tokenA.Position == TagPosition.Start)
             {
@@ -92,6 +175,8 @@ public class Resolver : ITagsResolver
                     _closedTagTokens.Remove(tokenB.Pair!);
                 }
             }
+            
+
         }
 
         return tokens;
@@ -118,7 +203,7 @@ public class Resolver : ITagsResolver
 
     public Token[] ResolveTokens(Token[] tokens)
     {
-        return OpenedTagsToText(ResolveTagsInteractions(ResolvePairs(tokens)));
+        return OpenedTagsToText(ResolveTagsInteractions(ResolvePairs(ResolveOrderedLists(ResolvePairs(tokens)))));
     }
 
     public Token[] ResolveTokensLines(Token[][] tokensLines)
