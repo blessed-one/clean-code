@@ -67,10 +67,21 @@ public class DocumentController(
     [HttpGet("Get/{documentId:guid}")]
     public async Task<IActionResult> GetDocById([FromRoute] Guid documentId)
     {
-        var docByIdResult = await documentService.GetContentById(documentId);
-        return docByIdResult.IsFailure
-            ? Problem(docByIdResult.Message)
-            : File(docByIdResult.Data!, "text/plain");
+        var docContentByIdResult = await documentService.GetContentById(documentId);
+        if (docContentByIdResult.IsFailure)
+        {
+            return Problem(docContentByIdResult.Message);
+        }
+        
+        var docByIdResult = await documentService.GetById(documentId);
+        if (docByIdResult.IsFailure)
+        {
+            return Problem(docByIdResult.Message);
+        }
+
+        
+        return File(docContentByIdResult.Data!, "text/plain", $"{docByIdResult.Data!.Name}.md");
+
     }
     
     [RoleAuthorize("user")]

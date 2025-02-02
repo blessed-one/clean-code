@@ -261,6 +261,13 @@ function createDocumentCard(doc, cardId) {
         window.location.href = `/Page/Convertor?documentId=${doc.id}`;
     };
 
+    const downloadButton = document.createElement('button');
+    downloadButton.className = 'download-button';
+    downloadButton.textContent = 'Скачать';
+    downloadButton.style.backgroundColor = "blue"
+    downloadButton.style.color = "white"
+    downloadButton.onclick = () => downloadDocument(doc.id);
+
     const deleteButton = document.createElement('button');
     deleteButton.className = 'delete-button';
     deleteButton.textContent = 'Удалить';
@@ -274,6 +281,7 @@ function createDocumentCard(doc, cardId) {
     documentActions.appendChild(openButton);
     documentActions.appendChild(deleteButton);
     documentActions.appendChild(renameButton);
+    documentActions.appendChild(downloadButton);
 
     card.appendChild(documentInfo);
     card.appendChild(documentActions);
@@ -516,4 +524,33 @@ function createAccessManagementForm(documentId, onClose) {
     });
 
     return form;
+}
+
+async function downloadDocument(documentId) {
+    try {
+        const response = await fetch(`/Document/Get/${documentId}`, { credentials: 'include' });
+        if (!response.ok) throw new Error(await response.text());
+
+        const blob = await response.blob();
+        const contentDisposition = response.headers.get('Content-Disposition');
+        let filename = `document_${documentId}.md`;
+
+        if (contentDisposition) {
+            const match = contentDisposition.match(/filename="(.+)"/);
+            if (match && match[1]) {
+                filename = match[1];
+            }
+        }
+
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = filename;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+    } catch (error) {
+        console.error('Ошибка при скачивании документа:', error);
+        alert('Не удалось скачать документ.');
+    }
 }

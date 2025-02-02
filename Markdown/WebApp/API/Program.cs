@@ -79,5 +79,5 @@ app.UseCookiePolicy(new CookiePolicyOptions()
     Secure = CookieSecurePolicy.Always
 });
 
-app.MapGet("/", () => $"connection string: {configuration.GetConnectionString("AppDbContext")}");
+app.MapGet("/", () => Results.Redirect("/Page"));
 app.Run();
