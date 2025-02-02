@@ -268,9 +268,12 @@ function createDocumentCard(doc, cardId) {
     deleteButton.style.color = 'white';
     deleteButton.onclick = () => removeCard(doc.id);
 
+    const renameButton = createRenameButton(doc.id);
+
     documentActions.appendChild(accessButton);
     documentActions.appendChild(openButton);
     documentActions.appendChild(deleteButton);
+    documentActions.appendChild(renameButton);
 
     card.appendChild(documentInfo);
     card.appendChild(documentActions);
@@ -358,6 +361,82 @@ function createNewDocumentForm(onClose) {
     });
 
     return form;
+}
+
+// Функция для создания кнопки переименования
+function createRenameButton(docId) {
+    const renameButton = document.createElement('button');
+    renameButton.className = 'rename-button';
+    renameButton.textContent = 'Переименовать';
+    renameButton.style.backgroundColor = 'purple';
+    renameButton.style.color = 'white';
+    renameButton.onclick = () => showRenameForm(docId);
+    return renameButton;
+}
+
+// Функция отображения формы переименования
+function showRenameForm(documentId) {
+    const overlay = createOverlay();
+    const popup = createPopup();
+    const form = createRenameForm(documentId, () => removeOverlay(overlay));
+
+    popup.appendChild(form);
+    overlay.appendChild(popup);
+    document.body.appendChild(overlay);
+}
+
+// Функция создания формы переименования документа
+function createRenameForm(documentId, onClose) {
+    const form = document.createElement('form');
+    form.className = 'rename-document-form';
+
+    const nameField = createInputField('text', 'newName', 'Новое имя документа');
+    const submitButton = createSubmitButton('Подтвердить');
+
+    form.appendChild(nameField);
+    form.appendChild(submitButton);
+
+    form.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        const formData = new FormData(form);
+        const { newName } = Object.fromEntries(formData.entries());
+
+        if (!newName) {
+            alert('Введите новое имя документа!');
+            return;
+        }
+
+        try {
+            const response = await fetch('/Document/Rename', {
+                method: 'PATCH',
+                credentials: 'include',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ documentId, text: newName }),
+            });
+
+            if (!response.ok) {
+                const errorText = await response.text();
+                throw new Error(errorText);
+            }
+
+            alert('Документ успешно переименован!');
+            updateDocumentName(documentId, newName);
+            onClose();
+        } catch (error) {
+            alert(`Ошибка: ${error.message}`);
+        }
+    });
+
+    return form;
+}
+
+// Функция обновления имени документа в карточке
+function updateDocumentName(documentId, newName) {
+    const card = document.getElementById(`pd_${documentId}`) || document.getElementById(`sd_${documentId}`);
+    if (card) {
+        const nameElement = card.querySelector('.document-name');
+        if (nameElement) nameElement.textContent = newName;
+    }
 }
 
 function showAccessManagementForm(documentId) {

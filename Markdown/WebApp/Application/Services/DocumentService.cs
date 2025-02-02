@@ -77,14 +77,13 @@ public class DocumentService(IDocumentRepository documentRepository, IMinioStora
         var documentId = createResult.Data;
         
         var minioResult = await minioStorage.UploadFile(documentId.ToString(), Encoding.UTF8.GetBytes(documentName));
+        
         if (minioResult.IsFailure)
         {
             var docDeletedResult = await documentRepository.Delete(documentId);
-            if (docDeletedResult.IsFailure)
-            {
-                return Result<Guid>.Failure("ДОКУМЕНТ БЫЛ СОЗДАН, НО НЕ УДАЛЁН!!! " + docDeletedResult.Message!);
-            }
-            return Result<Guid>.Failure(minioResult.Message);
+            return docDeletedResult.IsFailure 
+                ? Result<Guid>.Failure("ДОКУМЕНТ БЫЛ СОЗДАН, НО НЕ УДАЛЁН!!! " + docDeletedResult.Message!) 
+                : Result<Guid>.Failure(minioResult.Message);
         }
         
         return Result<Guid>.Success(documentId);
@@ -92,13 +91,20 @@ public class DocumentService(IDocumentRepository documentRepository, IMinioStora
 
     public async Task<Result> Update(Guid documentId, string documentText)
     {
-        var minioResult = await minioStorage.UploadFile(documentId.ToString(), Encoding.UTF8.GetBytes(documentText));
-        if (minioResult.IsFailure)
-        {
-            return Result.Failure(minioResult.Message);
-        }
         
-        return Result.Success();
+        var minioResult = await minioStorage.UploadFile(documentId.ToString(), Encoding.UTF8.GetBytes(documentText));
+        return minioResult.IsFailure 
+            ? Result.Failure(minioResult.Message) 
+            : Result.Success();
+    }
+
+    public async Task<Result> Rename(Guid documentId, string newName)
+    {
+        var repositoryResult = await documentRepository.Rename(documentId, newName);
+
+        return repositoryResult.IsFailure 
+            ? Result.Failure(repositoryResult.Message) 
+            : Result.Success();
     }
 
     public async Task<Result> Delete(Guid documentId)

@@ -12,6 +12,6 @@ public interface IDocumentRepository
     Task<Result<List<Document>>> GetByAuthorIdAccess(Guid authorId);
 
     Task<Result<Guid>> Create(string documentName, Guid authorId);
-    Task<Result> Update(Guid documentId, string documentName);
+    Task<Result> Rename(Guid documentId, string documentName);
     Task<Result> Delete(Guid documentId);
 }

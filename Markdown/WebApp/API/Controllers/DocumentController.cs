@@ -96,4 +96,16 @@ public class DocumentController(
             ? Problem(deleteDocResult.Message) 
             : Ok();
     }
+
+    [RoleAuthorize("user")]
+    [ServiceFilter(typeof(HasAccessFilter))]
+    [HttpPatch("Rename")]
+    public async Task<IActionResult> Rename([FromBody] DocumentUpdateRequest request)
+    {
+        var renameRequest = await documentService.Rename(request.DocumentId, request.Text);
+
+        return renameRequest.IsFailure
+            ? Problem(renameRequest.Message)
+            : Ok();
+    }
 }

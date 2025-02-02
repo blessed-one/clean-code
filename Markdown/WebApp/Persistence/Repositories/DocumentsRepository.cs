@@ -134,7 +134,7 @@ public class DocumentsRepository(AppDbContext dbContext) : IDocumentRepository
         }
     }
 
-    public async Task<Result> Update(Guid documentId, string documentName)
+    public async Task<Result> Rename(Guid documentId, string documentName)
     {
         try
         {
@@ -147,7 +147,7 @@ public class DocumentsRepository(AppDbContext dbContext) : IDocumentRepository
         }
         catch (Exception ex)
         {
-            return Result.Failure($"Failed to update document: {ex.Message}");
+            return Result.Failure($"Failed to rename document: {ex.Message}");
         }
     }
 
