@@ -68,7 +68,7 @@ header button:hover {
 }
 
 .scroll-container {
-    width: 48%;
+    width: 68%;
     height: 50vh;
     overflow-y: auto;
     border: 1px solid #ddd;
@@ -208,20 +208,20 @@ header button:hover {
     background-color: #0056b3;
 }
 
-.new-document-form {
+form {
     display: flex;
     flex-direction: column;
     gap: 10px;
 }
 
-.new-document-form input {
+form input {
     padding: 8px;
     font-size: 16px;
     border: 1px solid #ccc;
     border-radius: 5px;
 }
 
-.new-document-form button {
+form button {
     padding: 10px;
     font-size: 16px;
     background-color: #28a745;
@@ -231,6 +231,6 @@ header button:hover {
     cursor: pointer;
 }
 
-.new-document-form button:hover {
+form button:hover {
     background-color: #218838;
 }

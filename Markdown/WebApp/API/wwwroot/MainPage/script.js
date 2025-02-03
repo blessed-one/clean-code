@@ -264,9 +264,9 @@ function createDocumentCard(doc, cardId) {
     const downloadButton = document.createElement('button');
     downloadButton.className = 'download-button';
     downloadButton.textContent = 'Скачать';
-    downloadButton.style.backgroundColor = "blue"
-    downloadButton.style.color = "white"
-    downloadButton.onclick = () => downloadDocument(doc.id);
+    downloadButton.style.backgroundColor = "blue";
+    downloadButton.style.color = "white";
+    downloadButton.onclick = () => createDownloadPopup(doc.id);
 
     const deleteButton = document.createElement('button');
     deleteButton.className = 'delete-button';
@@ -300,7 +300,7 @@ async function removeCard(documentId) {
         });
 
         if (!response.ok) {
-            throw new Error('Ошибка при удалении документа');
+            throw new Error(await response.text());
         }
 
         // Удаляем карточки с указанным documentId
@@ -313,7 +313,7 @@ async function removeCard(documentId) {
         alert('Документ успешно удалён!');
     } catch (error) {
         console.error('Ошибка при удалении документа:', error);
-        alert('Не удалось удалить документ.');
+        alert(`Не удалось удалить документ: ${error.message}`);
     }
 }
 
@@ -471,15 +471,20 @@ function createAccessManagementForm(documentId, onClose) {
     accessOptionsField.name = 'accessOptions';
     accessOptionsField.className = 'access-options-field';
 
-    const grantOption = document.createElement('option');
-    grantOption.value = 'grant';
-    grantOption.textContent = 'Разрешить доступ';
-    accessOptionsField.appendChild(grantOption);
+    const viewerOption = document.createElement('option');
+    viewerOption.value = '1';
+    viewerOption.textContent = 'Читатель';
+    accessOptionsField.appendChild(viewerOption);
 
-    const denyOption = document.createElement('option');
-    denyOption.value = 'deny';
-    denyOption.textContent = 'Запретить доступ';
-    accessOptionsField.appendChild(denyOption);
+    const editorOption = document.createElement('option');
+    editorOption.value = '2';
+    editorOption.textContent = 'Редактор';
+    accessOptionsField.appendChild(editorOption);
+
+    const noneOption = document.createElement('option');
+    noneOption.value = '0';
+    noneOption.textContent = 'Запретить доступ';
+    accessOptionsField.appendChild(noneOption);
 
     form.appendChild(accessOptionsField);
 
@@ -491,16 +496,19 @@ function createAccessManagementForm(documentId, onClose) {
         event.preventDefault();
         const formData = new FormData(form);
         const { userLogin, accessOptions } = Object.fromEntries(formData.entries());
-
+        
         if (!userLogin) {
             alert('Введите логин пользователя!');
             return;
         }
+        
+        var accessLevel = Number(accessOptions)
 
-        const url = accessOptions === 'grant' ? '/Access/Give' : '/Access/Remove';
+        const url = '/Access/Change';
         const payload = {
             userLogin,
             documentId,
+            accessLevel
         };
 
         try {
@@ -526,14 +534,15 @@ function createAccessManagementForm(documentId, onClose) {
     return form;
 }
 
-async function downloadDocument(documentId) {
+async function downloadDocument(documentId, format) {
     try {
-        const response = await fetch(`/Document/Get/${documentId}`, { credentials: 'include' });
+        const endpoint = `/Document/Get/${format}/${documentId}`;
+        const response = await fetch(endpoint, { credentials: 'include' });
         if (!response.ok) throw new Error(await response.text());
 
         const blob = await response.blob();
         const contentDisposition = response.headers.get('Content-Disposition');
-        let filename = `document_${documentId}.md`;
+        let filename = `document_${documentId}.${format}`;
 
         if (contentDisposition) {
             const match = contentDisposition.match(/filename="(.+)"/);
@@ -551,6 +560,24 @@ async function downloadDocument(documentId) {
         document.body.removeChild(a);
     } catch (error) {
         console.error('Ошибка при скачивании документа:', error);
-        alert('Не удалось скачать документ.');
+        alert(`Не удалось скачать документ: ${error.message}`);
     }
+}
+
+function createDownloadPopup(documentId) {
+    const overlay = createOverlay();
+    const popup = createPopup();
+
+    const htmlButton = document.createElement('button');
+    htmlButton.textContent = 'HTML';
+    htmlButton.onclick = () => downloadDocument(documentId, 'html');
+
+    const mdButton = document.createElement('button');
+    mdButton.textContent = 'MD';
+    mdButton.onclick = () => downloadDocument(documentId, 'md');
+
+    popup.appendChild(htmlButton);
+    popup.appendChild(mdButton);
+    overlay.appendChild(popup);
+    document.body.appendChild(overlay);
 }

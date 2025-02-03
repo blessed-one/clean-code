@@ -24,6 +24,7 @@ public class DocumentAccessRepository(AppDbContext dbContext) : IDocumentAccessR
         var accessEntity = await dbContext.DocumentAccesses
             .FirstOrDefaultAsync(access => access.UserId == userId && access.DocumentId == documentId);
 
+        Console.WriteLine($"userId: {userId}, DocumentId: {documentId}");
         return accessEntity != null
             ? Result<DocumentAccessRoles>.Success(accessEntity.Role)
             : Result<DocumentAccessRoles>.Success(DocumentAccessRoles.None);

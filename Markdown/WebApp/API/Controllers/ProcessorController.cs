@@ -1,3 +1,4 @@
+using API.Filters;
 using Microsoft.AspNetCore.Mvc;
 using API.Requests;
 using Application.Interfaces.Services;
@@ -11,6 +12,7 @@ namespace API.Controllers;
 public class ProcessorController(IMdService mdService) : ControllerBase
 {
     [Authorize]
+    [ServiceFilter(typeof(UserExistFilter))]
     [HttpPost("Convert")]
     public async Task<IActionResult> Convert([FromBody] MdRequest request)
     {

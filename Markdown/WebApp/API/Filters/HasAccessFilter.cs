@@ -50,20 +50,23 @@ public class HasAccessFilter : IAsyncActionFilter
         else
         {
             documentId = request.DocumentId;
-            Console.WriteLine($"Request object: {System.Text.Json.JsonSerializer.Serialize(request)}");
-            Console.WriteLine($"Extracted DocumentId: {request.DocumentId}");
         }
 
         var accessRoleResult = await _accessService.GetAccessRole(userId, documentId);
         if (accessRoleResult.IsFailure)
         {
-            context.Result = new BadRequestObjectResult("Access role not found.");
+            context.Result = new BadRequestObjectResult(accessRoleResult.Message);
             return;
         }
 
-        Console.WriteLine(
-            $"required role: {_requiredRole}, user role: {accessRoleResult.Data}\ndocument ID: {documentId}, user ID: {userId}");
-
+        var userRole = accessRoleResult.Data;
+        Console.WriteLine($"user role: {userRole}, required role: {_requiredRole}");
+        if ((int)userRole < (int)_requiredRole)
+        {
+            context.Result = new UnauthorizedObjectResult("You have no permission to this operation");
+            return;
+        }
+        
         await next();
     }
 }
