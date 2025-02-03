@@ -7,11 +7,12 @@ function getQueryParam(param) {
 // При загрузке страницы
 window.addEventListener('DOMContentLoaded', async () => {
     const inputField = document.getElementById('input_text_field');
+    const outputField = document.getElementById('output_text_field');
     const documentId = getQueryParam('documentId');
 
     if (documentId) {
         try {
-            const response = await fetch(`http://localhost:5163/Document/Get/${documentId}`);
+            const response = await fetch(`http://localhost:5163/Document/Get/md/${documentId}`);
 
             if (!response.ok) {
                 const errorText = await response.text();
@@ -20,6 +21,20 @@ window.addEventListener('DOMContentLoaded', async () => {
 
             const text = await response.text();
             inputField.value = text;
+        } catch (error) {
+            alert(`Произошла ошибка при загрузке документа: ${error.message}`);
+        }
+
+        try {
+            const response = await fetch(`http://localhost:5163/Document/Get/html/${documentId}`);
+
+            if (!response.ok) {
+                const errorText = await response.text();
+                throw new Error(`Error ${response.status}: ${errorText}`);
+            }
+
+            const text = await response.text();
+            outputField.innerHTML = text;
         } catch (error) {
             alert(`Произошла ошибка при загрузке документа: ${error.message}`);
         }

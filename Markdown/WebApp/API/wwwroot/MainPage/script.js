@@ -542,12 +542,14 @@ async function downloadDocument(documentId, format) {
 
         const blob = await response.blob();
         const contentDisposition = response.headers.get('Content-Disposition');
-        let filename = `document_${documentId}.${format}`;
+        let filename = `document_${documentId}.${format}`; // Значение по умолчанию
 
-        if (contentDisposition) {
-            const match = contentDisposition.match(/filename="(.+)"/);
-            if (match && match[1]) {
-                filename = match[1];
+        if (contentDisposition && contentDisposition.includes('filename=')) {
+            // Извлекаем имя файла из заголовка
+            const filenameRegex = /filename[^;=\n]*=((['"]).*?\2|[^;\n]*)/;
+            const matches = filenameRegex.exec(contentDisposition);
+            if (matches != null && matches[1]) {
+                filename = matches[1].replace(/['"]/g, ''); // Убираем кавычки, если они есть
             }
         }
 

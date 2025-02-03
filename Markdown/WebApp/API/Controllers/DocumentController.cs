@@ -1,3 +1,4 @@
+using System.Text;
 using API.Attributes;
 using API.Filters;
 using API.Requests;
@@ -11,7 +12,8 @@ namespace API.Controllers;
 [ApiController]
 [Route("[controller]")]
 public class DocumentController(
-    IDocumentService documentService) : ControllerBase
+    IDocumentService documentService,
+    IMdService mdService) : ControllerBase
 {
     [RoleAuthorize("admin")]
     [HttpGet("All")]
@@ -66,7 +68,7 @@ public class DocumentController(
     [RoleAuthorize("user")]
     [ServiceFilter(typeof(UserExistFilter))]
     [HasAccess(DocumentAccessRoles.Viewer)]
-    [HttpGet("Get/{documentId:guid}")]
+    [HttpGet("Get/md/{documentId:guid}")]
     public async Task<IActionResult> GetDocById([FromRoute] Guid documentId)
     {
         var docContentByIdResult = await documentService.GetContentById(documentId);
@@ -83,7 +85,35 @@ public class DocumentController(
 
         
         return File(docContentByIdResult.Data!, "text/plain", $"{docByIdResult.Data!.Name}.md");
+    }
+    
+    [RoleAuthorize("user")]
+    [ServiceFilter(typeof(UserExistFilter))]
+    [HasAccess(DocumentAccessRoles.Viewer)]
+    [HttpGet("Get/html/{documentId:guid}")]
+    public async Task<IActionResult> GetDocHtmlById([FromRoute] Guid documentId)
+    {
+        var docContentByIdResult = await documentService.GetContentById(documentId);
+        if (docContentByIdResult.IsFailure)
+        {
+            return Problem(docContentByIdResult.Message);
+        }
+        var docContent = docContentByIdResult.Data!;
+        
+        var docByIdResult = await documentService.GetById(documentId);
+        if (docByIdResult.IsFailure)
+        {
+            return Problem(docByIdResult.Message);
+        }
 
+        var htmlRenderResult = await mdService.RenderHtml(Encoding.UTF8.GetString(docContent));
+        if (!htmlRenderResult.IsSuccess)
+        {
+            return BadRequest(htmlRenderResult.Message);
+        }
+        var htmlContent = htmlRenderResult.Data;
+        
+        return File(Encoding.UTF8.GetBytes(htmlContent!), "text/plain", $"{docByIdResult.Data!.Name}.html");
     }
     
     [RoleAuthorize("user")]
