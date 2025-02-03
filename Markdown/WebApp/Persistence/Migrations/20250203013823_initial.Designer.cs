@@ -12,7 +12,7 @@ using Persistence;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250129134908_initial")]
+    [Migration("20250203013823_initial")]
     partial class initial
     {
         /// <inheritdoc />
@@ -33,6 +33,10 @@ namespace Persistence.Migrations
 
                     b.Property<Guid>("DocumentId")
                         .HasColumnType("uuid");
+
+                    b.Property<string>("Role")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.Property<Guid>("UserId")
                         .HasColumnType("uuid");

@@ -2,6 +2,7 @@ using Core.Models;
 using Application;
 using Application.Interfaces.Repositories;
 using Application.Utils;
+using Core;
 using Microsoft.EntityFrameworkCore;
 using Persistence.Entities;
 
@@ -67,12 +68,13 @@ public class DocumentsRepository(AppDbContext dbContext) : IDocumentRepository
                 .ToList());
     }
 
-    public async Task<Result<List<Document>>> GetByAuthorIdAccess(Guid authorId)
+    public async Task<Result<List<Document>>> GetByUserIdWithAccess(Guid userId)
     {
         var documentEntities = await dbContext.Documents
             .AsNoTracking()
             .Join(
-                dbContext.DocumentAccesses.Where(access => access.UserId == authorId),
+                dbContext.DocumentAccesses.Where(access =>
+                    access.UserId == userId && access.Role != DocumentAccessRoles.None),
                 doc => doc.Id,
                 access => access.DocumentId,
                 (doc, access) => doc
@@ -104,7 +106,7 @@ public class DocumentsRepository(AppDbContext dbContext) : IDocumentRepository
             {
                 return Result<Guid>.Failure("Author not found.");
             }
-            
+
             var documentEntity = new DocumentEntity
             {
                 Id = newDocGuid,
@@ -119,6 +121,7 @@ public class DocumentsRepository(AppDbContext dbContext) : IDocumentRepository
                 Id = newAccessGuid,
                 UserId = authorId,
                 DocumentId = documentEntity.Id,
+                Role = DocumentAccessRoles.Author
             };
 
 

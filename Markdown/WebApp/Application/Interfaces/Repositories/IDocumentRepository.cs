@@ -9,7 +9,7 @@ public interface IDocumentRepository
     Task<Result<Document>> GetById(Guid id);
     Task<Result<List<Document>>> GetByAuthor(string author);
     Task<Result<List<Document>>> GetByAuthorId(Guid authorId);
-    Task<Result<List<Document>>> GetByAuthorIdAccess(Guid authorId);
+    Task<Result<List<Document>>> GetByUserIdWithAccess(Guid userId);
 
     Task<Result<Guid>> Create(string documentName, Guid authorId);
     Task<Result> Rename(Guid documentId, string documentName);

@@ -1,6 +1,8 @@
+using API.Attributes;
 using API.Filters;
 using API.Requests;
 using Application.Interfaces.Services;
+using Core;
 using Infrastructure.Auth;
 using Microsoft.AspNetCore.Mvc;
 
@@ -38,10 +40,10 @@ public class DocumentController(
     [HttpGet("Shared")]
     public async Task<IActionResult> GetUsersSharedDocs()
     {
-        var docsByAuthorAccessResult = await documentService.GetByAuthorIdAccess((Guid)HttpContext.Items["UserId"]!);
-        return docsByAuthorAccessResult.IsFailure 
-            ? Problem(docsByAuthorAccessResult.Message) 
-            : Ok(docsByAuthorAccessResult.Data);
+        var docsByUserAccessResult = await documentService.GetByUserIdWithAccess((Guid)HttpContext.Items["UserId"]!);
+        return docsByUserAccessResult.IsFailure 
+            ? Problem(docsByUserAccessResult.Message) 
+            : Ok(docsByUserAccessResult.Data);
     }
     
     [RoleAuthorize("user")]
@@ -63,7 +65,7 @@ public class DocumentController(
     
     [RoleAuthorize("user")]
     [ServiceFilter(typeof(UserExistFilter))]
-    [ServiceFilter(typeof(HasAccessFilter))]
+    [HasAccess(DocumentAccessRoles.Viewer)]
     [HttpGet("Get/{documentId:guid}")]
     public async Task<IActionResult> GetDocById([FromRoute] Guid documentId)
     {
@@ -86,7 +88,7 @@ public class DocumentController(
     
     [RoleAuthorize("user")]
     [ServiceFilter(typeof(UserExistFilter))]
-    [ServiceFilter(typeof(HasAccessFilter))]
+    [HasAccess(DocumentAccessRoles.Editor)]
     [HttpPut("Update")]
     public async Task<IActionResult> UpdateDoc([FromBody] DocumentUpdateRequest request)
     {
@@ -97,7 +99,8 @@ public class DocumentController(
     }
 
     [RoleAuthorize("user")]
-    [ServiceFilter(typeof(HasAccessFilter))]
+    [ServiceFilter(typeof(UserExistFilter))]
+    [HasAccess(DocumentAccessRoles.Author)]
     [HttpDelete("Delete")]
     public async Task<IActionResult> Delete([FromBody] DocumentIdRequest request)
     {
@@ -109,7 +112,7 @@ public class DocumentController(
     }
 
     [RoleAuthorize("user")]
-    [ServiceFilter(typeof(HasAccessFilter))]
+    [HasAccess(DocumentAccessRoles.Editor)]
     [HttpPatch("Rename")]
     public async Task<IActionResult> Rename([FromBody] DocumentUpdateRequest request)
     {

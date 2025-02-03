@@ -45,9 +45,9 @@ public class DocumentService(IDocumentRepository documentRepository, IMinioStora
             : Result<List<Document>>.Success(repositoryResult.Data!);
     }
 
-    public async Task<Result<List<Document>>> GetByAuthorIdAccess(Guid authorId)
+    public async Task<Result<List<Document>>> GetByUserIdWithAccess(Guid authorId)
     {
-        var repositoryResult = await documentRepository.GetByAuthorIdAccess(authorId);
+        var repositoryResult = await documentRepository.GetByUserIdWithAccess(authorId);
 
         return repositoryResult.IsFailure
             ? Result<List<Document>>.Failure(repositoryResult.Message!)
@@ -82,7 +82,7 @@ public class DocumentService(IDocumentRepository documentRepository, IMinioStora
         {
             var docDeletedResult = await documentRepository.Delete(documentId);
             return docDeletedResult.IsFailure 
-                ? Result<Guid>.Failure("ДОКУМЕНТ БЫЛ СОЗДАН, НО НЕ УДАЛЁН!!! " + docDeletedResult.Message!) 
+                ? Result<Guid>.Failure("ДОКУМЕНТ БЫЛ СОЗДАН, НО НЕ УДАЛЁН! " + docDeletedResult.Message!) 
                 : Result<Guid>.Failure(minioResult.Message);
         }
         

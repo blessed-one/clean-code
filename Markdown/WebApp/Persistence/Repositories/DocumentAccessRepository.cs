@@ -1,6 +1,7 @@
 using Application;
 using Application.Interfaces.Repositories;
 using Application.Utils;
+using Core;
 using Core.Models;
 using Microsoft.EntityFrameworkCore;
 using Persistence.Entities;
@@ -9,7 +10,7 @@ namespace Persistence.Repositories;
 
 public class DocumentAccessRepository(AppDbContext dbContext) : IDocumentAccessRepository
 {
-    public async Task<Result<bool>> HasAccess(Guid userId, Guid documentId)
+    public async Task<Result<DocumentAccessRoles>> GetAccess(Guid userId, Guid documentId)
     {
         var userEntity = await dbContext.Users
             .AsNoTracking()
@@ -17,42 +18,48 @@ public class DocumentAccessRepository(AppDbContext dbContext) : IDocumentAccessR
         
         if (userEntity!.Role == "admin")
         {
-            return Result<bool>.Success(true);
+            return Result<DocumentAccessRoles>.Success(DocumentAccessRoles.Author);
         }
         
-        var hasAccess = await dbContext.DocumentAccesses
-            .AnyAsync(access => access.UserId == userId && access.DocumentId == documentId);
+        var accessEntity = await dbContext.DocumentAccesses
+            .FirstOrDefaultAsync(access => access.UserId == userId && access.DocumentId == documentId);
 
-        return Result<bool>.Success(hasAccess);
+        return accessEntity != null
+            ? Result<DocumentAccessRoles>.Success(accessEntity.Role)
+            : Result<DocumentAccessRoles>.Success(DocumentAccessRoles.None);
     }
 
-    public async Task<Result> Create(Guid userId, Guid documentId)
+    public async Task<Result> CreateOrUpdate(Guid userId, Guid documentId, DocumentAccessRoles role)
     {
-        var exists = await dbContext.DocumentAccesses
-            .AnyAsync(access => access.UserId == userId && access.DocumentId == documentId);
+        var existingAccess = await dbContext.DocumentAccesses
+            .FirstOrDefaultAsync(access => access.UserId == userId && access.DocumentId == documentId);
 
-        if (exists)
+        if (existingAccess != null)
         {
-            return Result.Failure("Access already exists for the given user and document.");
+            existingAccess.Role = role;
         }
-
-        var documentAccess = new DocumentAccessEntity
+        else
         {
-            Id = Guid.NewGuid(),
-            UserId = userId,
-            DocumentId = documentId
-        };
+            var documentAccess = new DocumentAccessEntity
+            {
+                Id = Guid.NewGuid(),
+                UserId = userId,
+                DocumentId = documentId,
+                Role = role
+            };
+            
+            await dbContext.DocumentAccesses.AddAsync(documentAccess);
+        }
         
         try
         {
-            await dbContext.DocumentAccesses.AddAsync(documentAccess);
             await dbContext.SaveChangesAsync();
 
             return Result.Success();
         }
         catch (Exception ex)
         {
-            return Result.Failure($"Failed to create document access: {ex.Message}");
+            return Result.Failure($"Failed to create or update document access: {ex.Message}");
         }
     }
 
@@ -78,7 +85,7 @@ public class DocumentAccessRepository(AppDbContext dbContext) : IDocumentAccessR
         {
             var accessibleDocuments = await dbContext.DocumentAccesses
                 .Where(access => access.UserId == userId)
-                .Select(access => DocumentAccess.Create(access.Id, access.UserId, access.DocumentId))
+                .Select(access => DocumentAccess.Create(access.Id, access.UserId, access.DocumentId, access.Role))
                 .ToListAsync();
 
             return Result<List<DocumentAccess>>.Success(accessibleDocuments);

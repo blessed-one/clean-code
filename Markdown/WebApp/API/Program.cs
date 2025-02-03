@@ -10,6 +10,14 @@ var builder = WebApplication.CreateBuilder(args);
 var services = builder.Services;
 var configuration = builder.Configuration;
 
+// secrets
+builder.Configuration
+    .SetBasePath(Directory.GetCurrentDirectory())
+    .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+    .AddJsonFile("appsettings.Secrets.json", optional: true, reloadOnChange: true)
+    .AddEnvironmentVariables()
+    .AddCommandLine(args);
+
 // logging
 builder.Logging.AddFile("logs.txt");
 
@@ -46,15 +54,28 @@ var app = builder.Build();
 using (var scope = app.Services.CreateScope())
 {
     var serviceProvider = scope.ServiceProvider;
-    try
+    var logger = serviceProvider.GetRequiredService<ILogger<Program>>();
+    var retryCount = 5;
+
+    for (int i = 0; i < retryCount; i++)
     {
-        var context = serviceProvider.GetRequiredService<AppDbContext>();
-        context.Database.Migrate();
-    }
-    catch (Exception ex)
-    {
-        var logger = serviceProvider.GetRequiredService<ILogger<Program>>();
-        logger.LogError(ex, "Ошибка при применении миграций.");
+        try
+        {
+            var context = serviceProvider.GetRequiredService<AppDbContext>();
+            logger.LogInformation($"Попытка {i+1} применить миграции...");
+            context.Database.Migrate();
+            logger.LogInformation("Миграции успешно применены.");
+            break;
+        }
+        catch (Exception ex)
+        {
+            logger.LogError(ex, $"Ошибка при применении миграций. Попытка {i+1} из {retryCount}.");
+            if (i == retryCount - 1)
+            {
+                throw;
+            }
+            Thread.Sleep(TimeSpan.FromSeconds(5));
+        }
     }
 }
 

@@ -1,6 +1,9 @@
+using API.Attributes;
 using API.Filters;
 using API.Requests;
 using Application.Interfaces.Services;
+using Core;
+using Core.Models;
 using Infrastructure;
 using Infrastructure.Auth;
 using Microsoft.AspNetCore.Mvc;
@@ -12,10 +15,9 @@ namespace API.Controllers;
 public class AccessController(IDocumentAccessService accessService, IUserService userService) : ControllerBase
 {
     [RoleAuthorize("user")]
-    [ServiceFilter(typeof(UserExistFilter))]
-    [ServiceFilter(typeof(HasAccessFilter))]
-    [HttpPost("Give")]
-    public async Task<IActionResult> Give([FromBody] ManageAccessRequest request)
+    [HasAccess(DocumentAccessRoles.Author)]
+    [HttpPost("Change")]
+    public async Task<IActionResult> Change([FromBody] ManageAccessRequest request)
     {
         var userResult = await userService.GetByLogin(request.UserLogin);
         if (userResult.IsFailure)
@@ -24,8 +26,9 @@ public class AccessController(IDocumentAccessService accessService, IUserService
         }
 
         var user = userResult.Data;
-        
-        var addAccessResult = await accessService.AddAccess(user!.Id, request.DocumentId);
+
+        var addAccessResult =
+            await accessService.AddAccess(user!.Id, request.DocumentId, (DocumentAccessRoles)request.AccessLevel);
         if (addAccessResult.IsFailure)
         {
             return BadRequest(addAccessResult.Message);
@@ -36,7 +39,7 @@ public class AccessController(IDocumentAccessService accessService, IUserService
 
     [RoleAuthorize("user")]
     [ServiceFilter(typeof(UserExistFilter))]
-    [ServiceFilter(typeof(HasAccessFilter))]
+    [HasAccess(DocumentAccessRoles.Author)]
     [HttpDelete("Remove")]
     public async Task<IActionResult> Remove([FromBody] ManageAccessRequest request)
     {
@@ -45,8 +48,9 @@ public class AccessController(IDocumentAccessService accessService, IUserService
         {
             BadRequest(userResult.Message);
         }
+
         var user = userResult.Data;
-        
+
         var deleteAccessResult = await accessService.DeleteAccess(user!.Id, request.DocumentId);
         if (deleteAccessResult.IsFailure)
         {

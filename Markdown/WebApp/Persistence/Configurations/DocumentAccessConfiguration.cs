@@ -10,6 +10,10 @@ public class DocumentAccessConfiguration : IEntityTypeConfiguration<DocumentAcce
     {
         builder.HasKey(access => access.Id);
         
+        builder.Property(docAccess => docAccess.Role)
+            .HasConversion<string>()
+            .IsRequired();
+        
         builder
             .HasOne(access => access.User)
             .WithMany(user => user.DocumentAccesses)

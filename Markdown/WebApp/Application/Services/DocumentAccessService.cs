@@ -1,15 +1,16 @@
 using Application.Interfaces.Repositories;
 using Application.Interfaces.Services;
 using Application.Utils;
+using Core;
 using Core.Models;
 
 namespace Application.Services;
 
 public class DocumentAccessService(IDocumentAccessRepository accessRepository) : IDocumentAccessService
 {
-    public async Task<Result> AddAccess(Guid userId, Guid documentId)
+    public async Task<Result> AddAccess(Guid userId, Guid documentId, DocumentAccessRoles role)
     {
-        var repositoryResult = await accessRepository.Create(userId, documentId);
+        var repositoryResult = await accessRepository.CreateOrUpdate(userId, documentId, role);
 
         return repositoryResult.IsFailure
             ? Result.Failure(repositoryResult.Message!)
@@ -25,13 +26,14 @@ public class DocumentAccessService(IDocumentAccessRepository accessRepository) :
             : Result.Success();
     }
 
-    public async Task<Result<bool>> ValidateAccess(Guid userId, Guid documentId)
+    public async Task<Result<DocumentAccessRoles>> GetAccessRole(Guid userId, Guid documentId)
     {
-        var repositoryResult = await accessRepository.HasAccess(userId, documentId);
+
+        var repositoryResult = await accessRepository.GetAccess(userId, documentId);
 
         return repositoryResult.IsFailure
-            ? Result<bool>.Failure(repositoryResult.Message!)
-            : Result<bool>.Success(repositoryResult.Data!);
+            ? Result<DocumentAccessRoles>.Failure(repositoryResult.Message!)
+            : Result<DocumentAccessRoles>.Success(repositoryResult.Data);
     }
 
     public async Task<Result<List<DocumentAccess>>> GetUsersAccesses(Guid userId)
