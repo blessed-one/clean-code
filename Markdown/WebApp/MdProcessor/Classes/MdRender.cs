@@ -5,15 +5,11 @@ using MdProcessor.Interfaces;
 
 namespace MdProcessor.Classes;
 
-public class Md : IRender
+public class MdRender : IRender
 {
-    private readonly Parser _parser = new();
-    private readonly Resolver _resolver = new();
-    public string RenderHtml(string text)
+    public string RenderTokens(Token[] tokens)
     {
         var result = new StringBuilder();
-            
-        var tokens = _resolver.ResolveTokens(_parser.Parse(text));
             
         foreach ( var token in tokens )
         {

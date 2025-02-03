@@ -6,18 +6,18 @@ namespace Application.Services;
 
 public class MdService : IMdService
 {
-    private readonly IRender _markdownRender;
+    private readonly IMdProcessor _markdownProcessor;
 
-    public MdService(IRender markdownRenderer)
+    public MdService(IMdProcessor mdProcessor)
     {
-        _markdownRender = markdownRenderer;
+        _markdownProcessor = mdProcessor;
     }
 
     public async Task<Result<string>> RenderHtml(string markdown)
     {
         try
         {
-            return Result<string>.Success(_markdownRender.RenderHtml(markdown));
+            return Result<string>.Success(_markdownProcessor.Process(markdown));
         }
         catch
         {

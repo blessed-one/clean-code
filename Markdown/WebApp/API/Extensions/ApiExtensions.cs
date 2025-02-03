@@ -23,7 +23,8 @@ public static class ApiExtensions
     {
         services.AddSingleton<IParser, Parser>();
         services.AddSingleton<ITagsResolver, Resolver>();
-        services.AddSingleton<IRender, Md>();
+        services.AddSingleton<IRender, MdRender>();
+        services.AddSingleton<IMdProcessor, MdProcessor.Classes.MdProcessor>();
 
         services.AddSingleton<IMdService, MdService>();
     }
